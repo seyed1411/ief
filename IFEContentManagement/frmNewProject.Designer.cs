@@ -30,11 +30,11 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.txtLocation = new System.Windows.Forms.TextBox();
             this.btnBrowse = new System.Windows.Forms.Button();
             this.btnImportBrowse = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.txtImportedLoc = new System.Windows.Forms.TextBox();
             this.chbImportProjData = new System.Windows.Forms.CheckBox();
             this.btnCreate = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
@@ -60,22 +60,21 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Location:";
             // 
-            // textBox1
+            // txtTitle
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.textBox1.Location = new System.Drawing.Point(73, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(451, 22);
-            this.textBox1.TabIndex = 2;
+            this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.txtTitle.Location = new System.Drawing.Point(73, 23);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(451, 22);
+            this.txtTitle.TabIndex = 2;
             // 
-            // textBox2
+            // txtLocation
             // 
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.textBox2.Location = new System.Drawing.Point(73, 55);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(367, 22);
-            this.textBox2.TabIndex = 3;
-            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
+            this.txtLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.txtLocation.Location = new System.Drawing.Point(73, 55);
+            this.txtLocation.Name = "txtLocation";
+            this.txtLocation.Size = new System.Drawing.Size(367, 22);
+            this.txtLocation.TabIndex = 3;
             // 
             // btnBrowse
             // 
@@ -85,9 +84,11 @@
             this.btnBrowse.TabIndex = 4;
             this.btnBrowse.Text = "Browse";
             this.btnBrowse.UseVisualStyleBackColor = true;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnImportBrowse
             // 
+            this.btnImportBrowse.Enabled = false;
             this.btnImportBrowse.Location = new System.Drawing.Point(446, 136);
             this.btnImportBrowse.Name = "btnImportBrowse";
             this.btnImportBrowse.Size = new System.Drawing.Size(78, 22);
@@ -95,13 +96,14 @@
             this.btnImportBrowse.Text = "Browse";
             this.btnImportBrowse.UseVisualStyleBackColor = true;
             // 
-            // textBox3
+            // txtImportedLoc
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.textBox3.Location = new System.Drawing.Point(15, 136);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(425, 22);
-            this.textBox3.TabIndex = 5;
+            this.txtImportedLoc.Enabled = false;
+            this.txtImportedLoc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.txtImportedLoc.Location = new System.Drawing.Point(15, 136);
+            this.txtImportedLoc.Name = "txtImportedLoc";
+            this.txtImportedLoc.Size = new System.Drawing.Size(425, 22);
+            this.txtImportedLoc.TabIndex = 5;
             // 
             // chbImportProjData
             // 
@@ -113,6 +115,7 @@
             this.chbImportProjData.TabIndex = 7;
             this.chbImportProjData.Text = "Import another project data in new project";
             this.chbImportProjData.UseVisualStyleBackColor = true;
+            this.chbImportProjData.CheckedChanged += new System.EventHandler(this.chbImportProjData_CheckedChanged);
             // 
             // btnCreate
             // 
@@ -132,6 +135,7 @@
             this.btnBack.TabIndex = 9;
             this.btnBack.Text = "Back";
             this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
             // frmNewProject
             // 
@@ -142,14 +146,19 @@
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.chbImportProjData);
             this.Controls.Add(this.btnImportBrowse);
-            this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.txtImportedLoc);
             this.Controls.Add(this.btnBrowse);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtLocation);
+            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmNewProject";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New Project";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmNewProject_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -159,11 +168,11 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtTitle;
+        private System.Windows.Forms.TextBox txtLocation;
         private System.Windows.Forms.Button btnBrowse;
         private System.Windows.Forms.Button btnImportBrowse;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox txtImportedLoc;
         private System.Windows.Forms.CheckBox chbImportProjData;
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.Button btnBack;

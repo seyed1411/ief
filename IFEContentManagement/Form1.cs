@@ -33,9 +33,25 @@ namespace IFEContentManagement
 
         private void btnNewProject_Click(object sender, EventArgs e)
         {
-            frmNewProject newProgWin = new frmNewProject();
-            newProgWin.Show();
-            this.Hide();
+            frmNewProject newProjWin = new frmNewProject();
+            var res = newProjWin.ShowDialog(this);
+            if (res == DialogResult.OK)
+            {
+                try
+                {
+                    Program.currentProject = new ProjectFolder(newProjWin.SelectedTitle, newProjWin.SeletedFolder);
+                }
+                catch
+                {
+                    MessageBox.Show("Can not create new project. Please review location and title parameters", "Creation Error");
+                }
+            }
+            
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

@@ -9,6 +9,7 @@ namespace IFEContentManagement
     
     static class Program
     {
+        public static ProjectFolder currentProject;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

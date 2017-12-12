@@ -12,12 +12,17 @@ namespace IFEContentManagement
         AudioFolder playlists;
         VideoFolder movies;
         PDFFolder articles;
+        AnnouncFolder announces;
         string title;
         string location;
 
-        public ProjectFolder()
+        public ProjectFolder(string _title, string _location)
         {
             playlists = new AudioFolder();
+            movies = new VideoFolder();
+            articles = new PDFFolder();
+            this.title = _title;
+            this.location = _location;
         }
 
         

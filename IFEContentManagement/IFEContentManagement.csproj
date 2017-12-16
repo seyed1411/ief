@@ -60,6 +60,7 @@
     <Compile Include="AnnouncFolder.cs" />
     <Compile Include="ArticleFile.cs" />
     <Compile Include="AudioFolder.cs" />
+    <Compile Include="DiskIO.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +79,7 @@
     <Compile Include="PDFFolder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectFolder.cs" />
+    <Compile Include="ProjectMethadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

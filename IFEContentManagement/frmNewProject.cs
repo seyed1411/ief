@@ -31,18 +31,20 @@ namespace IFEContentManagement
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-            strTit = txtTitle.Text;
-            strLoc = txtLocation.Text;
-            
+            SelectedTitle = txtTitle.Text;
+            SeletedFolder = txtLocation.Text;
+            Program.currentProject = new ProjectFolder(strTit, strLoc);
+            Program.currentProject.CreateNewProjectDirectories();
             this.DialogResult = DialogResult.OK;
         }
 
         private void btnBrowse_Click(object sender, EventArgs e)
         {
             var dlgCreate = new FolderBrowserDialog();
-            if(dlgCreate.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(dlgCreate.SelectedPath))
+            if (dlgCreate.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(dlgCreate.SelectedPath))
             {
-                txtLocation.Text = dlgCreate.SelectedPath;
+                strLoc = dlgCreate.SelectedPath;
+                txtLocation.Text = strLoc;                
             }
         }
 
@@ -61,12 +63,34 @@ namespace IFEContentManagement
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
-            this.Dispose();
+            //this.Dispose();
         }
 
         private void frmNewProject_FormClosed(object sender, FormClosedEventArgs e)
         {
             btnBack_Click(sender,e);
+        }
+
+        private void frmNewProject_Load(object sender, EventArgs e)
+        {
+            strLoc = Program.latestPath;            
+            txtTitle.Text = string.Empty;
+            txtLocation.Text = strLoc;
+            txtTitle.Focus();
+        }
+
+        private void txtTitle_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void txtLocation_Leave(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void txtLocation_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

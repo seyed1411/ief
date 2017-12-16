@@ -67,6 +67,7 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(451, 22);
             this.txtTitle.TabIndex = 2;
+            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // txtLocation
             // 
@@ -75,6 +76,8 @@
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(367, 22);
             this.txtLocation.TabIndex = 3;
+            this.txtLocation.TextChanged += new System.EventHandler(this.txtLocation_TextChanged);
+            this.txtLocation.Leave += new System.EventHandler(this.txtLocation_Leave);
             // 
             // btnBrowse
             // 
@@ -159,6 +162,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "New Project";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmNewProject_FormClosed);
+            this.Load += new System.EventHandler(this.frmNewProject_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -5,7 +5,10 @@ using System.Text;
 
 namespace IFEContentManagement
 {
-    class AnnouncFolder: VideoFolder
+    class AnnouncFolder : VideoFolder
     {
+        public AnnouncFolder(string _location, string _title) : base(_location, _title) { }
+
+
     }
 }

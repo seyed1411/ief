@@ -39,7 +39,7 @@ namespace IFEContentManagement
             {
                 try
                 {
-                    Program.currentProject = new ProjectFolder(newProjWin.SelectedTitle, newProjWin.SeletedFolder);
+                    
                 }
                 catch
                 {

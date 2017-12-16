@@ -9,7 +9,9 @@ namespace IFEContentManagement
     
     static class Program
     {
+        
         public static ProjectFolder currentProject;
+        public static string latestPath;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -18,6 +20,7 @@ namespace IFEContentManagement
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            latestPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             Form1 firstWin = new Form1();
             firstWin.Show();
             Application.Run();

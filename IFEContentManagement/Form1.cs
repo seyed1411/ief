@@ -36,15 +36,19 @@ namespace IFEContentManagement
             frmNewProject newProjWin = new frmNewProject();
             var res = newProjWin.ShowDialog(this);
             if (res == DialogResult.OK)
-            {
+            {                
+                Program.currentProject = new ProjectFolder(newProjWin.SelectedTitle, newProjWin.SeletedFolder);
                 try
-                {
-                    
+                {                   
+                    Program.currentProject.CreateNewProjectDirectories();                    
                 }
-                catch
+                catch(Exception exp)
                 {
-                    MessageBox.Show("Can not create new project. Please review location and title parameters", "Creation Error");
+                    MessageBox.Show("Can not create new project. Please review location and title parameters.\n"+"Details: "+exp.Message, "Creation Error");
                 }
+                frmSenarioMaker workDlg = new frmSenarioMaker(this);
+                this.Hide();
+                workDlg.Show();
             }
             
         }
@@ -52,6 +56,30 @@ namespace IFEContentManagement
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnOpenProject_Click(object sender, EventArgs e)
+        {
+            var dlgOpen = new OpenFileDialog();
+            dlgOpen.Filter = "Mahan Content Management Files | *.mcm";
+            if (dlgOpen.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(dlgOpen.FileName))
+            {
+                if(ProjectFolder.IsValidProjectDirectory(DiskIO.GetDirectoryName(dlgOpen.FileName)))
+                {
+                    //MessageBox.Show("sdadada");
+                    try
+                    {
+                         Program.currentProject = new ProjectFolder(dlgOpen.FileName);
+                    }
+                    catch (Exception exp)
+                    {
+                        MessageBox.Show("Can not load existed project. Please review directory and .mcm file.\n" + "Details: " + exp.Message);
+                    }
+                    frmSenarioMaker workDlg = new frmSenarioMaker(this);
+                    this.Hide();
+                    workDlg.Show();
+                }
+            }
         }
     }
 }

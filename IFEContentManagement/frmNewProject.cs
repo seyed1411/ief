@@ -31,10 +31,16 @@ namespace IFEContentManagement
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            if (ProjectFolder.IsValidProjectDirectory(txtLocation.Text + "\\" + txtTitle.Text))
+            {
+                if (MessageBox.Show("Folder with this name alredy exist in the path. Do you want to replace it?\nNote:All files and sub-folders will be deleted.", "Warning", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
             SelectedTitle = txtTitle.Text;
             SeletedFolder = txtLocation.Text;
-            Program.currentProject = new ProjectFolder(strTit, strLoc);
-            Program.currentProject.CreateNewProjectDirectories();
+            
             this.DialogResult = DialogResult.OK;
         }
 
@@ -68,7 +74,7 @@ namespace IFEContentManagement
 
         private void frmNewProject_FormClosed(object sender, FormClosedEventArgs e)
         {
-            btnBack_Click(sender,e);
+            //btnBack_Click(sender,e);
         }
 
         private void frmNewProject_Load(object sender, EventArgs e)

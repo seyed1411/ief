@@ -17,6 +17,21 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -67,6 +82,24 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmPlaylistMoreInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlaylistMoreInfo.Designer.cs">
+      <DependentUpon>frmPlaylistMoreInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmAddPlaylist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddPlaylist.Designer.cs">
+      <DependentUpon>frmAddPlaylist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSenarioMaker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSenarioMaker.Designer.cs">
+      <DependentUpon>frmSenarioMaker.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmNewProject.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +117,15 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlaylistMoreInfo.resx">
+      <DependentUpon>frmPlaylistMoreInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAddPlaylist.resx">
+      <DependentUpon>frmAddPlaylist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSenarioMaker.resx">
+      <DependentUpon>frmSenarioMaker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewProject.resx">
       <DependentUpon>frmNewProject.cs</DependentUpon>
@@ -109,6 +151,21 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="VideoFolder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

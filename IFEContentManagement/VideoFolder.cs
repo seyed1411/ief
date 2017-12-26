@@ -18,9 +18,15 @@ namespace IFEContentManagement
             location = _location;            
         }
 
+        private string ContentLocation
+        {
+            get { return location + "\\" + title; }
+        }
+
         public void CreateNewVideoDirectory()
         {
             DiskIO.CreateDirectory(location, title);
+            DiskIO.DeleteFile(ContentLocation, "index.en.json");
         }
     }
 }

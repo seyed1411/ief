@@ -67,6 +67,7 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(451, 22);
             this.txtTitle.TabIndex = 2;
+            this.txtTitle.Text = "mahan";
             this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // txtLocation

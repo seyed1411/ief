@@ -30,7 +30,7 @@
         {
             this.lblSoftName = new System.Windows.Forms.Label();
             this.btnNewProject = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnOpenProject = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblSoftName
@@ -54,21 +54,22 @@
             this.btnNewProject.UseVisualStyleBackColor = true;
             this.btnNewProject.Click += new System.EventHandler(this.btnNewProject_Click);
             // 
-            // button1
+            // btnOpenProject
             // 
-            this.button1.Location = new System.Drawing.Point(17, 309);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(283, 47);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Open Existing Project";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnOpenProject.Location = new System.Drawing.Point(17, 309);
+            this.btnOpenProject.Name = "btnOpenProject";
+            this.btnOpenProject.Size = new System.Drawing.Size(283, 47);
+            this.btnOpenProject.TabIndex = 2;
+            this.btnOpenProject.Text = "Open Existing Project";
+            this.btnOpenProject.UseVisualStyleBackColor = true;
+            this.btnOpenProject.Click += new System.EventHandler(this.btnOpenProject_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(312, 375);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnOpenProject);
             this.Controls.Add(this.btnNewProject);
             this.Controls.Add(this.lblSoftName);
             this.HelpButton = true;
@@ -87,7 +88,7 @@
 
         private System.Windows.Forms.Label lblSoftName;
         private System.Windows.Forms.Button btnNewProject;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOpenProject;
     }
 }
 

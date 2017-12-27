@@ -60,16 +60,27 @@ namespace IFEContentManagement
 
         private void UpdatePlaylistTreePresentation()
         {
-            //treeProject.BeginUpdate();
-            treeProject.Nodes.Clear();
+            // update playlists
+            treePlaylists.Nodes.Clear();
             TreeNode root = new TreeNode("Playlists");
             foreach (MusicPlaylist x in Program.currentProject.GetPlaylistsCollection())
             {
                 TreeNode child = new TreeNode(x.id.ToString());
                 root.Nodes.Add(child);
             }
-            treeProject.Nodes.Add(root);
-            treeProject.ExpandAll();
+            treePlaylists.Nodes.Add(root);
+            treePlaylists.ExpandAll();
+
+            // update movies
+            treeMovies.Nodes.Clear();
+            root = new TreeNode("Movies");
+            foreach (MovieFile x in Program.currentProject.GetMoviesCollection())
+            {
+                TreeNode child = new TreeNode(x.id.ToString());
+                root.Nodes.Add(child);
+            }
+            treeMovies.Nodes.Add(root);
+            treeMovies.ExpandAll();
             //treeProject.EndUpdate();
         }
 
@@ -86,12 +97,61 @@ namespace IFEContentManagement
 
         private void treeProject_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-
+            if (e.Node.Level == 1)
+            {
+                int id = Convert.ToInt32(e.Node.Text);
+                MusicPlaylist existPlaylist = Program.currentProject.FindPlaylistWithID(id);
+                frmAddPlaylist newPllstDlg = new frmAddPlaylist(existPlaylist, false);
+                if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
+                    //Program.currentProject.AddPlaylist(existPlaylist);
+                    if (newPllstDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SavePlaylistsNonEnglishData(newPllstDlg.nonEngAdditionalData);
+                    Program.currentProject.ApplyChangesOnHardDrive();
+                }
+                this.UpdatePlaylistTreePresentation();
+            }
         }
 
         private void frmSenarioMaker_FormClosed(object sender, FormClosedEventArgs e)
         {
             toolStripButton9_Click(sender, e);
+        }
+
+        private void btnAddMovie_Click(object sender, EventArgs e)
+        {
+            int id = Program.currentProject.FindLastMovieID();
+            MovieFile newMovie = new MovieFile(id);
+            frmAddMovie newPllstDlg = new frmAddMovie(newMovie, true);
+            if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
+            {
+                //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
+                Program.currentProject.AddMovie(newMovie);
+                if (newPllstDlg.nonEngAdditionalData.Count > 0)
+                    Program.currentProject.SaveMoviesNonEnglishData(newPllstDlg.nonEngAdditionalData);
+                Program.currentProject.ApplyChangesOnHardDrive();
+            }
+            this.UpdatePlaylistTreePresentation();
+        }
+
+        private void treeMovies_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Level == 1)
+            {
+                int id = Convert.ToInt32(e.Node.Text);
+                MovieFile existMovie = Program.currentProject.FindMovieWithID(id);
+                frmAddMovie newPllstDlg = new frmAddMovie(existMovie, false);
+                if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
+                    //Program.currentProject.AddMovie(existMovie);
+                    if (newPllstDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SaveMoviesNonEnglishData(newPllstDlg.nonEngAdditionalData);
+                    Program.currentProject.ApplyChangesOnHardDrive();
+                }
+                this.UpdatePlaylistTreePresentation();
+            }
         }
         
     }

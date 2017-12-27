@@ -51,7 +51,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(14, 18);
+            this.label1.Location = new System.Drawing.Point(12, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 13);
             this.label1.TabIndex = 0;
@@ -60,7 +60,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 47);
+            this.label2.Location = new System.Drawing.Point(12, 47);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 1;
@@ -69,7 +69,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 74);
+            this.label3.Location = new System.Drawing.Point(12, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 2;
@@ -78,7 +78,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 103);
+            this.label4.Location = new System.Drawing.Point(12, 103);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 3;
@@ -87,7 +87,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(14, 133);
+            this.label5.Location = new System.Drawing.Point(12, 133);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 4;
@@ -95,7 +95,7 @@
             // 
             // txtDirectory
             // 
-            this.txtDirectory.Location = new System.Drawing.Point(72, 15);
+            this.txtDirectory.Location = new System.Drawing.Point(70, 15);
             this.txtDirectory.Name = "txtDirectory";
             this.txtDirectory.ReadOnly = true;
             this.txtDirectory.Size = new System.Drawing.Size(246, 20);
@@ -103,7 +103,7 @@
             // 
             // btnBrowseDir
             // 
-            this.btnBrowseDir.Location = new System.Drawing.Point(324, 15);
+            this.btnBrowseDir.Location = new System.Drawing.Point(322, 15);
             this.btnBrowseDir.Name = "btnBrowseDir";
             this.btnBrowseDir.Size = new System.Drawing.Size(75, 21);
             this.btnBrowseDir.TabIndex = 6;
@@ -113,7 +113,7 @@
             // 
             // btnBrowseCov
             // 
-            this.btnBrowseCov.Location = new System.Drawing.Point(324, 42);
+            this.btnBrowseCov.Location = new System.Drawing.Point(322, 42);
             this.btnBrowseCov.Name = "btnBrowseCov";
             this.btnBrowseCov.Size = new System.Drawing.Size(75, 21);
             this.btnBrowseCov.TabIndex = 8;
@@ -123,7 +123,7 @@
             // 
             // txtCover
             // 
-            this.txtCover.Location = new System.Drawing.Point(72, 42);
+            this.txtCover.Location = new System.Drawing.Point(70, 42);
             this.txtCover.Name = "txtCover";
             this.txtCover.ReadOnly = true;
             this.txtCover.Size = new System.Drawing.Size(246, 20);
@@ -131,7 +131,7 @@
             // 
             // txtYear
             // 
-            this.txtYear.Location = new System.Drawing.Point(72, 71);
+            this.txtYear.Location = new System.Drawing.Point(70, 71);
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(327, 20);
             this.txtYear.TabIndex = 9;
@@ -144,7 +144,7 @@
             "Under 13",
             "Between 13 and 17",
             "Above 18"});
-            this.cmbAge.Location = new System.Drawing.Point(72, 100);
+            this.cmbAge.Location = new System.Drawing.Point(70, 100);
             this.cmbAge.Name = "cmbAge";
             this.cmbAge.Size = new System.Drawing.Size(327, 21);
             this.cmbAge.TabIndex = 10;
@@ -165,7 +165,7 @@
             "Rock",
             "Folk",
             "Hip-Hop"});
-            this.lstGenres.Location = new System.Drawing.Point(72, 133);
+            this.lstGenres.Location = new System.Drawing.Point(70, 133);
             this.lstGenres.Name = "lstGenres";
             this.lstGenres.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
             this.lstGenres.Size = new System.Drawing.Size(327, 173);
@@ -174,7 +174,7 @@
             // label6
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(12, 324);
+            this.label6.Location = new System.Drawing.Point(10, 324);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(388, 2);
             this.label6.TabIndex = 12;
@@ -182,7 +182,7 @@
             // lblAdditionalExisted
             // 
             this.lblAdditionalExisted.AutoSize = true;
-            this.lblAdditionalExisted.Location = new System.Drawing.Point(14, 338);
+            this.lblAdditionalExisted.Location = new System.Drawing.Point(12, 338);
             this.lblAdditionalExisted.Name = "lblAdditionalExisted";
             this.lblAdditionalExisted.Size = new System.Drawing.Size(191, 13);
             this.lblAdditionalExisted.TabIndex = 13;
@@ -192,14 +192,14 @@
             // label7
             // 
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(12, 363);
+            this.label7.Location = new System.Drawing.Point(10, 363);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(388, 2);
             this.label7.TabIndex = 14;
             // 
             // btnNewLang
             // 
-            this.btnNewLang.Location = new System.Drawing.Point(211, 328);
+            this.btnNewLang.Location = new System.Drawing.Point(209, 328);
             this.btnNewLang.Name = "btnNewLang";
             this.btnNewLang.Size = new System.Drawing.Size(188, 32);
             this.btnNewLang.TabIndex = 15;
@@ -209,7 +209,7 @@
             // 
             // btnInsert
             // 
-            this.btnInsert.Location = new System.Drawing.Point(211, 375);
+            this.btnInsert.Location = new System.Drawing.Point(209, 375);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(188, 32);
             this.btnInsert.TabIndex = 16;
@@ -219,7 +219,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(17, 375);
+            this.btnCancel.Location = new System.Drawing.Point(15, 375);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(188, 32);
             this.btnCancel.TabIndex = 17;
@@ -231,7 +231,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(412, 416);
+            this.ClientSize = new System.Drawing.Size(409, 416);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.btnNewLang);
@@ -251,8 +251,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(425, 455);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(428, 455);
+            this.MinimumSize = new System.Drawing.Size(425, 455);
             this.Name = "frmAddPlaylist";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Add Playlist";

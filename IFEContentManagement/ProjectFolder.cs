@@ -42,6 +42,7 @@ namespace IFEContentManagement
             playlists = new AudioFolder(ContentLocation, AUDIO_FOLDER_NAME);
             playlists = AudioFolder.SerializeFromJSON(ContentLocation,AUDIO_FOLDER_NAME, "index.en.json");
             movies = new VideoFolder(ContentLocation, VIDEO_FOLDER_NAME);
+            movies = VideoFolder.SerializeFromJSON(ContentLocation, VIDEO_FOLDER_NAME, "index.en.json");
             articles = new PDFFolder(ContentLocation, PDF_FOLDER_NAME);
             announces = new AnnouncFolder(ContentLocation, ANNOUNC_FOLDER_NAME);
         }
@@ -89,6 +90,9 @@ namespace IFEContentManagement
         {
             // save current state of playlists
             this.playlists.SavePlaylistLibrary();
+
+            // save current state of movies
+            this.movies.SaveMoviesLibrary();
         }
 
         internal MusicPlaylist[] GetPlaylistsCollection()
@@ -131,6 +135,42 @@ namespace IFEContentManagement
         internal string GetTitle()
         {
             return string.Copy(this.title);
+        }
+
+        internal int FindLastMovieID()
+        {
+            return this.movies.library.Count + 1;
+        }
+
+        internal void AddMovie(MovieFile _newMovie)
+        {
+            this.movies.library.Add(_newMovie);
+        }
+
+        internal void SaveMoviesNonEnglishData(Dictionary<string, MovieFile> _dictionary)
+        {
+            this.movies.SaveMoviesNonEnglishLibrary(_dictionary);
+        }
+
+        internal MovieFile[] GetMoviesCollection()
+        {
+            MovieFile[] retVal = new  MovieFile[this.movies.library.Count];
+            this.movies.library.CopyTo(retVal);
+            return retVal;
+        }
+
+        internal MovieFile FindMovieWithID(int _id)
+        {
+            MovieFile retval = null;
+            foreach (MovieFile x in this.movies.library)
+            {
+                if (x.id == _id)
+                {
+                    retval = x;
+                    break;
+                }
+            }
+            return retval;
         }
     }
 }

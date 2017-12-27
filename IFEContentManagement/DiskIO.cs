@@ -91,5 +91,23 @@ namespace IFEContentManagement
                 return true;
             return false;
         }
+
+        internal static bool IsVideoFile(string _filePath)
+        {
+            FileInfo info = new FileInfo(_filePath);
+            string extension = info.Extension.ToLower();
+            if (extension == ".mp4" || extension == ".wmv" ||
+                extension == ".mkv" || extension == ".avi" ||
+                extension == ".mov")
+                return true;
+            return false;
+        }
+
+        internal static VideoFolder DeserializeVideoFolderFromFile(string _path, string _name)
+        {
+            string content = File.ReadAllText(_path + "\\" + _name);
+            VideoFolder obj = JsonConvert.DeserializeObject<VideoFolder>(content);
+            return obj;
+        }
     }
 }

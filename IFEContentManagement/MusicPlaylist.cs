@@ -32,7 +32,6 @@ namespace IFEContentManagement
     public class MusicPlaylist
     {
         List<MusicFile> musicFiles;
-        string directoryPath;
 
         //uniq id of each playlist that enable us to integrate different langs of one playlist
         public int id;

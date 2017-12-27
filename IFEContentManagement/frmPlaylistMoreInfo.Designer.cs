@@ -156,7 +156,7 @@
             this.MinimumSize = new System.Drawing.Size(361, 342);
             this.Name = "frmPlaylistMoreInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Playlist Additional Data";
+            this.Text = "Additional Data";
             this.Load += new System.EventHandler(this.frmAdditionalLang__Load);
             this.ResumeLayout(false);
             this.PerformLayout();

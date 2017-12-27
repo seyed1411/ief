@@ -79,10 +79,15 @@ namespace IFEContentManagement
                         {
                             temp.RemovePlaylistWithID(_dictionary[item.ToString()].id);
                         }
+                        temp.library.Add(_dictionary[item.ToString()]);
+                        temp.SavePlaylistLibrary(fileName);
                     }
-                    temp.library = new List<MusicPlaylist>();
-                    temp.library.Add(_dictionary[item.ToString()]);
-                    temp.SavePlaylistLibrary(fileName);
+                    else
+                    {
+                        temp.library = new List<MusicPlaylist>();
+                        temp.library.Add(_dictionary[item.ToString()]);
+                        temp.SavePlaylistLibrary(fileName);
+                    }
                 }
             }
         }

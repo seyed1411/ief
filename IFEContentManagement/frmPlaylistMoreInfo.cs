@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace IFEContentManagement
 {
-    public partial class frmPlaylistMoreInfo : Form
+    public partial class frmAddQuestion : Form
     {
         bool justEn;
         string language;
@@ -17,12 +17,12 @@ namespace IFEContentManagement
         string artist;
         string description;
 
-        public frmPlaylistMoreInfo(bool _justEN)
+        public frmAddQuestion(bool _justEN)
         {
             InitializeComponent();
             justEn = _justEN;
         }
-        public frmPlaylistMoreInfo(bool _justEN, Languages _lang, string _tit, string[] _artist, string _desc)
+        public frmAddQuestion(bool _justEN, Languages _lang, string _tit, string[] _artist, string _desc)
         {
             InitializeComponent();
             justEn = _justEN;

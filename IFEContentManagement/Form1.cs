@@ -19,7 +19,15 @@ namespace IFEContentManagement
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           /* ProjectFolder p = new ProjectFolder();
+          /*  SurveyFolder f = new SurveyFolder();
+            QuestionCollection q = new QuestionCollection();
+            string[] ansnsn = new string[]{"good","bad"};
+            q.questions.Add(new Question("enum",ansnsn,"How was food?"));
+            q.questions.Add(new Question("enum",ansnsn,"How was larg monarch?"));
+            s.questions.Add("en",q);
+            f.surveys.Add(s);
+            MessageBox.Show(JsonConvert.SerializeObject(f));
+           ProjectFolder p = new ProjectFolder();
             lblSoftName.Text = p.SerializeJSON();//JsonConvert.SerializeObject(p);
             
             p.Deser();

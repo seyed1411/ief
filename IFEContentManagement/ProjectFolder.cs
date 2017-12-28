@@ -14,12 +14,14 @@ namespace IFEContentManagement
         public const string VIDEO_FOLDER_NAME = "movies";
         public const string PDF_FOLDER_NAME = "articles";
         public const string ANNOUNC_FOLDER_NAME = "announcements";
+        public const string SURVEY_FOLDER_NAME = "surveys";
 
         // variables and members
         AudioFolder playlists;
         VideoFolder movies;
         PDFFolder articles;
-        AnnouncFolder announces;
+        VideoFolder announces;
+        SurveyFolder questions;
         string title;
         string location;
 
@@ -30,7 +32,8 @@ namespace IFEContentManagement
             playlists = new AudioFolder(ContentLocation, AUDIO_FOLDER_NAME);
             movies = new VideoFolder(ContentLocation, VIDEO_FOLDER_NAME);
             articles = new PDFFolder(ContentLocation, PDF_FOLDER_NAME);
-            announces = new AnnouncFolder(ContentLocation, ANNOUNC_FOLDER_NAME);            
+            announces = new VideoFolder(ContentLocation, ANNOUNC_FOLDER_NAME);
+            questions = new SurveyFolder(ContentLocation,SURVEY_FOLDER_NAME);
         }
 
         public ProjectFolder(string _mcmFilePath)
@@ -43,8 +46,13 @@ namespace IFEContentManagement
             playlists = AudioFolder.SerializeFromJSON(ContentLocation,AUDIO_FOLDER_NAME, "index.en.json");
             movies = new VideoFolder(ContentLocation, VIDEO_FOLDER_NAME);
             movies = VideoFolder.SerializeFromJSON(ContentLocation, VIDEO_FOLDER_NAME, "index.en.json");
+            announces = new VideoFolder(ContentLocation, ANNOUNC_FOLDER_NAME);
+            announces = VideoFolder.SerializeFromJSON(ContentLocation, ANNOUNC_FOLDER_NAME, "index.en.json");
             articles = new PDFFolder(ContentLocation, PDF_FOLDER_NAME);
-            announces = new AnnouncFolder(ContentLocation, ANNOUNC_FOLDER_NAME);
+            articles = PDFFolder.SerializeFromJSON(ContentLocation, PDF_FOLDER_NAME, "index.en.json");
+            questions = new SurveyFolder(ContentLocation, SURVEY_FOLDER_NAME);
+            questions = SurveyFolder.SerializeFromJSON(ContentLocation, SURVEY_FOLDER_NAME, "index.en.json");
+            
         }
 
         public string ContentLocation
@@ -64,6 +72,8 @@ namespace IFEContentManagement
             movies.CreateNewVideoDirectory();
             articles.CreateNewPDFDirectory();
             announces.CreateNewVideoDirectory();
+            questions.CreateNewSurveyDirectory();
+
         }
 
         private void CreateNewProjetFiles()
@@ -93,6 +103,15 @@ namespace IFEContentManagement
 
             // save current state of movies
             this.movies.SaveMoviesLibrary();
+
+            // save current state of announces
+            this.announces.SaveMoviesLibrary();
+
+            // save current state of articles and pdfs
+            this.articles.SaveArticleLibrary();
+
+            // save current state of surveys
+            this.questions.SaveSurveysLibrary();
         }
 
         internal MusicPlaylist[] GetPlaylistsCollection()
@@ -171,6 +190,95 @@ namespace IFEContentManagement
                 }
             }
             return retval;
+        }
+
+        internal int FindLastAnnouncID()
+        {
+            return this.announces.library.Count + 1;
+        }
+
+        internal void AddAnnouncement(MovieFile _newMovie)
+        {
+            this.announces.library.Add(_newMovie);
+        }
+
+        internal void SaveAnnouncesNonEnglishData(Dictionary<string, MovieFile> _dictionary)
+        {
+            this.announces.SaveMoviesNonEnglishLibrary(_dictionary);
+        }
+
+        internal MovieFile[] GetAnnouncesCollection()
+        {
+            MovieFile[] retVal = new MovieFile[this.announces.library.Count];
+            this.announces.library.CopyTo(retVal);
+            return retVal;
+        }
+
+        internal MovieFile FindAnnouncWithID(int _id)
+        {
+            MovieFile retval = null;
+            foreach (MovieFile x in this.announces.library)
+            {
+                if (x.id == _id)
+                {
+                    retval = x;
+                    break;
+                }
+            }
+            return retval;
+        }
+
+        // Article Methodes
+
+        internal int FindLastArticleID()
+        {
+            return this.articles.library.Count + 1;
+        }
+
+        internal void AddArticle(ArticleFile _newArticle)
+        {
+            this.articles.library.Add(_newArticle);
+        }
+
+        internal void SaveArticlesNonEnglishData(Dictionary<string, ArticleFile> _dictionary)
+        {
+            this.articles.SaveArticlesNonEnglishData(_dictionary);
+        }
+
+        internal ArticleFile[] GetArticlesCollection()
+        {
+            ArticleFile[] retVal = new ArticleFile[this.articles.library.Count];
+            this.articles.library.CopyTo(retVal);
+            return retVal;
+        }
+
+        internal ArticleFile FindArticleWithID(int _id)
+        {
+            ArticleFile retval = null;
+            foreach (ArticleFile x in this.articles.library)
+            {
+                if (x.id == _id)
+                {
+                    retval = x;
+                    break;
+                }
+            }
+            return retval;
+        }
+
+        internal void AddSurvey(Dictionary<string, QuestionCollection> _dictionary)
+        {
+            this.questions.surveys.Add(_dictionary);
+        }
+
+        internal Dictionary<string, QuestionCollection>[] GetSurveysCollection()
+        {
+            return this.questions.surveys.ToArray();
+        }
+
+        internal Dictionary<string, QuestionCollection> GetSurvey(int index)
+        {
+            return this.questions.surveys[index];
         }
     }
 }

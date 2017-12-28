@@ -1,6 +1,6 @@
 ﻿namespace IFEContentManagement
 {
-    partial class frmPlaylistMoreInfo
+    partial class frmAddQuestion
     {
         /// <summary>
         /// Required designer variable.
@@ -33,7 +33,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.txtArtists = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblArtist = new System.Windows.Forms.Label();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -88,12 +88,12 @@
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Artist(s):";
+            this.lblArtist.AutoSize = true;
+            this.lblArtist.Location = new System.Drawing.Point(12, 74);
+            this.lblArtist.Name = "label3";
+            this.lblArtist.Size = new System.Drawing.Size(44, 13);
+            this.lblArtist.TabIndex = 4;
+            this.lblArtist.Text = "Artist(s):";
             // 
             // txtDescription
             // 
@@ -146,7 +146,7 @@
             this.Controls.Add(this.txtDescription);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtArtists);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblArtist);
             this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbLang);
@@ -170,7 +170,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtTitle;
         private System.Windows.Forms.TextBox txtArtists;
-        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label lblArtist;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnCancel;

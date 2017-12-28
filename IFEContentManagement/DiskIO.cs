@@ -109,5 +109,28 @@ namespace IFEContentManagement
             VideoFolder obj = JsonConvert.DeserializeObject<VideoFolder>(content);
             return obj;
         }
+
+        internal static bool IsArticleFile(string _filePath)
+        {
+            FileInfo info = new FileInfo(_filePath);
+            string extension = info.Extension.ToLower();
+            if (extension == ".pdf")
+                return true;
+            return false;
+        }
+
+        internal static PDFFolder DeserializePDFFolderFromFile(string _path, string _name)
+        {
+            string content = File.ReadAllText(_path + "\\" + _name);
+            PDFFolder obj = JsonConvert.DeserializeObject<PDFFolder>(content);
+            return obj;
+        }
+
+        internal static SurveyFolder DeserializeSurveyFolderFromFile(string _path, string _name)
+        {
+            string content = File.ReadAllText(_path + "\\" + _name);
+            SurveyFolder obj = JsonConvert.DeserializeObject<SurveyFolder>(content);
+            return obj;
+        }
     }
 }

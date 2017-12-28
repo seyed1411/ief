@@ -45,7 +45,7 @@ namespace IFEContentManagement
             {
                 if (isNewPlaylist)
                 {
-                    frmPlaylistMoreInfo frmNewDlg = new frmPlaylistMoreInfo(true, Languages.English, playlistToComplete.title, playlistToComplete.artist, playlistToComplete.description);
+                    frmAddQuestion frmNewDlg = new frmAddQuestion(true, Languages.English, playlistToComplete.title, playlistToComplete.artist, playlistToComplete.description);
                     if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
                     {
                         this.playlistToComplete.title = frmNewDlg.InsertedTitle;
@@ -55,7 +55,7 @@ namespace IFEContentManagement
                 }
                 else
                 {
-                    frmPlaylistMoreInfo frmNewDlg = new frmPlaylistMoreInfo(false, Languages.English, playlistToComplete.title, playlistToComplete.artist, playlistToComplete.description);
+                    frmAddQuestion frmNewDlg = new frmAddQuestion(false, Languages.English, playlistToComplete.title, playlistToComplete.artist, playlistToComplete.description);
                     if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
                     {
                         if (frmNewDlg.SelectedLanguage == "English")

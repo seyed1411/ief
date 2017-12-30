@@ -40,6 +40,10 @@ namespace IFEContentManagement
         {
             DiskIO.SaveAsJSONFile(this, this.ContentLocation, _fileName);
         }
+        private void SaveArticleLibraryAtLocation(string _fullPath, string _fileName)
+        {
+            DiskIO.SaveAsJSONFile(this, _fullPath, _fileName);
+        }
 
         internal static PDFFolder SerializeFromJSON(string _pdfLocation, string _pdfFolderName, string _fileName)
         {
@@ -104,6 +108,50 @@ namespace IFEContentManagement
                 if (p.id == _id) return true;
             }
             return false;
+        }
+
+        internal FileCopier[] ExportFilesTo(string contentLoc, string[] _languages)
+        {
+            string newWorkArea = contentLoc + "\\" + title;
+            List<FileCopier> allFilesToCopy = new List<FileCopier>();
+
+            // create root folder
+            DiskIO.CreateDirectory(newWorkArea);
+            foreach (ArticleFile p in this.library)
+            {
+                // create each pdf folder
+                string pdfNewLocation = newWorkArea + "\\" + p.id;
+                DiskIO.CreateDirectory(pdfNewLocation);
+                // add pdf files to copy                
+                allFilesToCopy.Add(new FileCopier(p.file, pdfNewLocation + "\\" + DiskIO.GetFileTitle(p.file)));
+                // change the file path to the new path for further library json saving
+                p.file = p.id + "\\" + DiskIO.GetFileTitle(p.file);
+
+                // add video cover to copy
+                allFilesToCopy.Add(new FileCopier(p.cover, pdfNewLocation + "\\cover.jpg"));
+                // change the cover path to the new path for further library json saving
+                p.cover = p.id + "\\cover.jpg";
+            }
+            // save changed paths and music files into exported location
+            this.SaveArticleLibraryAtLocation(newWorkArea, "index.en.json");
+
+            // copy all requested non-English langs
+            foreach (string lang in _languages)
+            {
+                string abbriv = "index." + lang.Substring(0, 2).ToLower() + ".json";
+                if (DiskIO.IsFileExist(ContentLocation, abbriv))
+                {
+                    PDFFolder temp = DiskIO.DeserializePDFFolderFromFile(ContentLocation, abbriv);
+                    foreach (ArticleFile p in temp.library)
+                    {
+                        p.file = p.id + "\\" + DiskIO.GetFileTitle(p.file);
+                        p.cover = p.id + "\\cover.jpg";
+
+                    }
+                    DiskIO.SaveAsJSONFile(temp, newWorkArea, abbriv);
+                }
+            }
+            return allFilesToCopy.ToArray();
         }
     }
 }

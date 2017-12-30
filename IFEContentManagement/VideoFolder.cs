@@ -37,6 +37,10 @@ namespace IFEContentManagement
         {
             DiskIO.SaveAsJSONFile(this, this.ContentLocation, _fileName);
         }
+        private void SaveMovieLibraryAtLocation(string _fullPath, string _fileName)
+        {
+            DiskIO.SaveAsJSONFile(this, _fullPath, _fileName);
+        }
 
         internal static VideoFolder SerializeFromJSON(string _videoLocation, string _videoFolderName, string _fileName)
         {
@@ -101,6 +105,56 @@ namespace IFEContentManagement
                 if (p.id == _id) return true;
             }
             return false;
+        }
+
+        internal FileCopier[] ExportFilesTo(string contentLoc, string[] _languages)
+        {
+            string newWorkArea = contentLoc + "\\" + title;
+            List<FileCopier> allFilesToCopy = new List<FileCopier>();
+
+            // create root folder
+            DiskIO.CreateDirectory(newWorkArea);
+            foreach (MovieFile p in this.library)
+            {
+                // create each movie folder
+                string movieNewLocation = newWorkArea + "\\" + p.id;
+                DiskIO.CreateDirectory(movieNewLocation);
+                // add video files to copy                
+                allFilesToCopy.Add(new FileCopier(p.video.path, movieNewLocation + "\\" + DiskIO.GetFileTitle(p.video.path)));
+                // change the file path to the new path for further library json saving
+                p.video.path = p.id + "\\" + DiskIO.GetFileTitle(p.video.path);
+                // add trailer if exist
+                if (!string.IsNullOrEmpty(p.trailer.path))
+                {
+                    allFilesToCopy.Add(new FileCopier(p.trailer.path, movieNewLocation + "\\" + DiskIO.GetFileTitle(p.trailer.path)));
+                    p.trailer.path = p.id + "\\" + DiskIO.GetFileTitle(p.trailer.path);
+                }
+                // add video cover to copy
+                allFilesToCopy.Add(new FileCopier(p.cover, movieNewLocation + "\\cover.jpg"));
+                // change the cover path to the new path for further library json saving
+                p.cover = p.id + "\\cover.jpg";
+            }
+            // save changed paths and music files into exported location
+            this.SaveMovieLibraryAtLocation(newWorkArea, "index.en.json");
+
+            // copy all requested non-English langs
+            foreach (string lang in _languages)
+            {
+                string abbriv = "index." + lang.Substring(0, 2).ToLower() + ".json";
+                if (DiskIO.IsFileExist(ContentLocation, abbriv))
+                {
+                    VideoFolder temp = DiskIO.DeserializeVideoFolderFromFile(ContentLocation, abbriv);
+                    foreach (MovieFile p in temp.library)
+                    {
+                        p.video.path = p.id + "\\" + DiskIO.GetFileTitle(p.video.path);
+                        p.trailer.path = p.id + "\\" + DiskIO.GetFileTitle(p.trailer.path);
+                        p.cover = p.id + "\\cover.jpg";
+
+                    }
+                    DiskIO.SaveAsJSONFile(temp, newWorkArea, abbriv);
+                }
+            }
+            return allFilesToCopy.ToArray();
         }
     }
 }

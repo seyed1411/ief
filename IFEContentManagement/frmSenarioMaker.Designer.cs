@@ -44,7 +44,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
+            this.btnExport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCloseProject = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -125,12 +125,12 @@
             this.toolStripSeparator3,
             this.toolStripButton7,
             this.toolStripSeparator4,
-            this.toolStripButton8,
+            this.btnExport,
             this.toolStripSeparator5,
             this.btnCloseProject});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(778, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(820, 38);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
@@ -247,14 +247,15 @@
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 38);
             // 
-            // toolStripButton8
+            // btnExport
             // 
-            this.toolStripButton8.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton8.Image")));
-            this.toolStripButton8.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton8.Name = "toolStripButton8";
-            this.toolStripButton8.Size = new System.Drawing.Size(44, 35);
-            this.toolStripButton8.Text = "Export";
-            this.toolStripButton8.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExport.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.Image")));
+            this.btnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(44, 35);
+            this.btnExport.Text = "Export";
+            this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
             // toolStripSeparator5
             // 
@@ -275,7 +276,7 @@
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 419);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(778, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(820, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -293,7 +294,7 @@
             this.tabs.Name = "tabs";
             this.tabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(754, 355);
+            this.tabs.Size = new System.Drawing.Size(796, 355);
             this.tabs.TabIndex = 2;
             // 
             // tabPlaylists
@@ -303,7 +304,7 @@
             this.tabPlaylists.Location = new System.Drawing.Point(4, 22);
             this.tabPlaylists.Name = "tabPlaylists";
             this.tabPlaylists.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaylists.Size = new System.Drawing.Size(746, 329);
+            this.tabPlaylists.Size = new System.Drawing.Size(788, 329);
             this.tabPlaylists.TabIndex = 0;
             this.tabPlaylists.Text = "Playlists";
             this.tabPlaylists.UseVisualStyleBackColor = true;
@@ -394,7 +395,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(746, 329);
+            this.tabPage2.Size = new System.Drawing.Size(788, 329);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Movies";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -484,7 +485,7 @@
             this.tabPage3.Controls.Add(this.groupBox6);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(746, 329);
+            this.tabPage3.Size = new System.Drawing.Size(788, 329);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Announcements";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -574,7 +575,7 @@
             this.tabPage4.Controls.Add(this.groupBox8);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(746, 329);
+            this.tabPage4.Size = new System.Drawing.Size(788, 329);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Articles";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -664,7 +665,7 @@
             this.tabPage1.Controls.Add(this.groupBox10);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(746, 329);
+            this.tabPage1.Size = new System.Drawing.Size(788, 329);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Surveys";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -678,7 +679,7 @@
             this.groupBox9.Location = new System.Drawing.Point(7, 70);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox9.Size = new System.Drawing.Size(733, 253);
+            this.groupBox9.Size = new System.Drawing.Size(775, 253);
             this.groupBox9.TabIndex = 9;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Working Stage";
@@ -691,7 +692,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeQuestions.Location = new System.Drawing.Point(7, 37);
             this.treeQuestions.Name = "treeQuestions";
-            this.treeQuestions.Size = new System.Drawing.Size(720, 210);
+            this.treeQuestions.Size = new System.Drawing.Size(762, 210);
             this.treeQuestions.TabIndex = 0;
             this.treeQuestions.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeQuestions_NodeMouseDoubleClick);
             // 
@@ -706,7 +707,7 @@
             this.groupBox10.Location = new System.Drawing.Point(7, 6);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox10.Size = new System.Drawing.Size(733, 57);
+            this.groupBox10.Size = new System.Drawing.Size(775, 57);
             this.groupBox10.TabIndex = 8;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Search";
@@ -716,7 +717,7 @@
             // 
             this.comboBox5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(664, 22);
+            this.comboBox5.Location = new System.Drawing.Point(706, 22);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(63, 21);
             this.comboBox5.TabIndex = 3;
@@ -725,7 +726,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(639, 25);
+            this.label9.Location = new System.Drawing.Point(681, 25);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(19, 13);
             this.label9.TabIndex = 2;
@@ -736,7 +737,7 @@
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox5.Location = new System.Drawing.Point(65, 22);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(568, 20);
+            this.textBox5.Size = new System.Drawing.Size(610, 20);
             this.textBox5.TabIndex = 1;
             // 
             // label10
@@ -752,7 +753,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 441);
+            this.ClientSize = new System.Drawing.Size(820, 441);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.toolStrip1);
@@ -805,7 +806,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton7;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        private System.Windows.Forms.ToolStripButton toolStripButton8;
+        private System.Windows.Forms.ToolStripButton btnExport;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton btnCloseProject;
         private System.Windows.Forms.StatusStrip statusStrip1;

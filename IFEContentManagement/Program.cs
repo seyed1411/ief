@@ -12,6 +12,7 @@ namespace IFEContentManagement
         
         public static ProjectFolder currentProject;
         public static string latestPath;
+        public static string mcmFile;
         public static bool StatusSaved = true;
         /// <summary>
         /// The main entry point for the application.

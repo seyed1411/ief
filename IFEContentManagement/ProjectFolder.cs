@@ -83,7 +83,7 @@ namespace IFEContentManagement
             ProjectMethadata toFile = new ProjectMethadata(this.ContentLocation);            
             DiskIO.SaveAsJSONFile(toFile, path, "index.json");
             string mcmFileContent = string.Join(";",new string[2]{title,location});
-            DiskIO.SaveAsTextFile(mcmFileContent, path, title + ".mcm");
+            DiskIO.SaveAsTextFile(mcmFileContent, path, title + ".mcm");            
         }
 
         internal int FindLastPlaylistID()
@@ -279,6 +279,22 @@ namespace IFEContentManagement
         internal Dictionary<string, QuestionCollection> GetSurvey(int index)
         {
             return this.questions.surveys[index];
+        }
+
+        internal FileCopier[] ExportTo(string _selectedExportPath, string[] _languages)
+        {
+            List<FileCopier> allFilesToCopy = new List<FileCopier>();
+            DiskIO.CreateDirectory(_selectedExportPath + "\\output");
+            DiskIO.CreateDirectory(_selectedExportPath + "\\output"+"\\files");
+            string contentLoc = _selectedExportPath + "\\output"+"\\files";
+            allFilesToCopy.AddRange(this.playlists.ExportFilesTo(contentLoc, _languages));
+            allFilesToCopy.AddRange(this.movies.ExportFilesTo(contentLoc, _languages));
+            allFilesToCopy.AddRange(this.announces.ExportFilesTo(contentLoc, _languages));
+            allFilesToCopy.AddRange(this.articles.ExportFilesTo(contentLoc, _languages));
+            this.questions.ExportFilesTo(contentLoc);
+
+
+            return allFilesToCopy.ToArray();
         }
     }
 }

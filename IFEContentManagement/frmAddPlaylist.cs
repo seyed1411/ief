@@ -95,7 +95,7 @@ namespace IFEContentManagement
             if (this.FormCompleted())
             {
 
-                this.playlistToComplete.playlist = txtDirectory.Text;
+                this.playlistToComplete.SetPlaylist(txtDirectory.Text);
                 this.playlistToComplete.cover = txtCover.Text;
                 this.playlistToComplete.year = Convert.ToInt32(txtYear.Text);
                 this.playlistToComplete.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
@@ -109,7 +109,7 @@ namespace IFEContentManagement
                 foreach (KeyValuePair<string, MusicPlaylist> x in this.nonEngAdditionalData)
                 {
                     x.Value.id = this.playlistToComplete.id;
-                    x.Value.playlist = txtDirectory.Text;
+                    x.Value.SetPlaylist(txtDirectory.Text);
                     x.Value.cover = txtCover.Text;
                     x.Value.year = Convert.ToInt32(txtYear.Text);
                     x.Value.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();

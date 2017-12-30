@@ -66,6 +66,11 @@ namespace IFEContentManagement
             foreach (MusicPlaylist x in Program.currentProject.GetPlaylistsCollection())
             {
                 TreeNode child = new TreeNode(x.id.ToString());
+                foreach(MusicFile y in x.GetMusicFilesInfo())
+                {
+                    TreeNode child2 = new TreeNode(y.title);
+                    child.Nodes.Add(child2);
+                }
                 root.Nodes.Add(child);
             }
             treePlaylists.Nodes.Add(root);
@@ -296,6 +301,15 @@ namespace IFEContentManagement
                 this.UpdateTreesPresentation();
             }
         }
-        
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            frmExport newExport = new frmExport();
+            if(newExport.ShowDialog(this)==DialogResult.OK)
+            {
+                Program.currentProject = new ProjectFolder(Program.mcmFile);
+            }
+        }
+
     }
 }

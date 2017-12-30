@@ -46,6 +46,7 @@ namespace IFEContentManagement
             if (res == DialogResult.OK)
             {                
                 Program.currentProject = new ProjectFolder(newProjWin.SelectedTitle, newProjWin.SeletedFolder);
+                Program.mcmFile = newProjWin.SeletedFolder + "\\" + newProjWin.SelectedTitle + "\\.mcm";
                 try
                 {                   
                     Program.currentProject.CreateNewProjectDirectories();                    
@@ -75,14 +76,15 @@ namespace IFEContentManagement
                 if(ProjectFolder.IsValidProjectDirectory(DiskIO.GetDirectoryName(dlgOpen.FileName)))
                 {
                     //MessageBox.Show("sdadada");
-                    try
-                    {
+                    //try
+                    //{
                          Program.currentProject = new ProjectFolder(dlgOpen.FileName);
-                    }
-                    catch (Exception exp)
-                    {
-                        MessageBox.Show("Can not load existed project. Please review directory and .mcm file.\n" + "Details: " + exp.Message);
-                    }
+                         Program.mcmFile = dlgOpen.FileName;
+                    //}
+                    //catch (Exception exp)
+                    //{
+                      //  MessageBox.Show("Can not load existed project. Please review directory and .mcm file.\n" + "Details: " + exp.Message);
+                    //}
                     frmSenarioMaker workDlg = new frmSenarioMaker(this);
                     this.Hide();
                     workDlg.Show();

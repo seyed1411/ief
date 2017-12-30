@@ -24,7 +24,7 @@ namespace IFEContentManagement
 
         internal static void SaveAsJSONFile(object obj, string _path, string _name)
         {
-            string str = JsonConvert.SerializeObject(obj);
+            string str = JsonConvert.SerializeObject(obj,Formatting.Indented);
             File.WriteAllText(_path + "\\" + _name, str);
         }
         internal static string GetDirectoryName(string _filePath)
@@ -131,6 +131,29 @@ namespace IFEContentManagement
             string content = File.ReadAllText(_path + "\\" + _name);
             SurveyFolder obj = JsonConvert.DeserializeObject<SurveyFolder>(content);
             return obj;
+        }
+
+        internal static List<MusicFile> GetMusicFiles(string _playlistFolderPath)
+        {
+            string[] fileEntries = Directory.GetFiles(_playlistFolderPath, "*.mp3");
+            List<MusicFile> retVal = new List<MusicFile>();
+            foreach(string x in fileEntries)
+            {
+                retVal.Add(new MusicFile(x, Path.GetFileName(x),0));
+            }
+            return retVal;
+        }
+
+        internal static Dictionary<string, List<MusicFile>> DeserializeTracksFromFile(string _fullPath, string _fileName)
+        {
+            string content = File.ReadAllText(_fullPath + "\\" + _fileName);
+            Dictionary<string, List<MusicFile>> retVal = JsonConvert.DeserializeObject<Dictionary<string, List<MusicFile>>>(content);
+            return retVal;
+        }
+
+        internal static string GetFileTitle(string _path)
+        {
+            return Path.GetFileName(_path);
         }
     }
 }

@@ -9,29 +9,36 @@ using System.Windows.Forms;
 
 namespace IFEContentManagement
 {
-    public partial class frmAddQuestion : Form
+    public partial class frmAddNewLanguage : Form
     {
         bool justEn;
+        bool isNew;
         string language;
+        string[] removedLangs;
         string title;
         string artist;
         string description;
 
-        public frmAddQuestion(bool _justEN)
+        //constructores
+        public frmAddNewLanguage(bool _justEN, string[] _removedLang)
         {
             InitializeComponent();
             justEn = _justEN;
+            isNew = true;
+            removedLangs = _removedLang;
         }
-        public frmAddQuestion(bool _justEN, Languages _lang, string _tit, string[] _artist, string _desc)
+        public frmAddNewLanguage(string _lang, string _tit, string[] _artist, string _desc)
         {
             InitializeComponent();
-            justEn = _justEN;
-            language = Convert.ToString(_lang);
+            justEn = false;
+            isNew = false;            
+            language = _lang;
             title = _tit;
             artist = _artist == null ? "" : string.Join(";", _artist);
             description = _desc;
         }
 
+        // properties
         public string SelectedLanguage
         {
             get { return language; }
@@ -48,17 +55,40 @@ namespace IFEContentManagement
         {
             get { return this.description; }
         }
+
+        // events
         private void frmAdditionalLang__Load(object sender, EventArgs e)
         {
+            // add all languages to combo list
+            cmbLang.Items.Clear();
             foreach (var item in Enum.GetValues(typeof(Languages)))
             {
                 cmbLang.Items.Add(item);
             }
-            int index = cmbLang.FindString(language);
-            cmbLang.SelectedIndex = index;
-            if(justEn == true)            
-                cmbLang.Enabled = false;
 
+            // decide based on calling situation
+            if(!isNew)
+            {
+                int index = cmbLang.FindString(language);
+                cmbLang.SelectedIndex = index;
+                cmbLang.Enabled = false;
+            }
+            else
+            {
+                if (justEn)
+                {
+                    int index = cmbLang.FindString("English");
+                    cmbLang.SelectedIndex = index;
+                    cmbLang.Enabled = false;
+                }
+                else
+                {
+                    foreach (var item in Enum.GetValues(typeof(Languages)))
+                        if (removedLangs.Contains<string>(item.ToString()))
+                            cmbLang.Items.Remove(item);
+                    cmbLang.SelectedIndex = 0;
+                }
+            }
             txtArtists.Text = artist;
             txtTitle.Text = title;
             txtDescription.Text = description;
@@ -71,9 +101,11 @@ namespace IFEContentManagement
 
         private void btnInsertAdditionalPlylistData_Click(object sender, EventArgs e)
         {
-            if (!this.justEn)
-                if (MessageBox.Show("If you enter new data in non-English languages, old data will be overwritten!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    return;
+            if(txtArtists.Text==""&&txtTitle.Text==""&&txtDescription.Text=="")
+            {
+                MessageBox.Show("Please fill at least one of filds to create new record.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             language = cmbLang.Items[cmbLang.SelectedIndex].ToString();
             artist = txtArtists.Text;
             title = txtTitle.Text;
@@ -83,19 +115,9 @@ namespace IFEContentManagement
 
         private void cmbLang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = cmbLang.FindString("English");
-            if (cmbLang.SelectedIndex != index)
-            {
-                txtArtists.Text = "";
-                txtTitle.Text = "";
-                txtDescription.Text = "";
-            }
-            else
-            {
-                txtArtists.Text = artist;
-                txtTitle.Text = title;
-                txtDescription.Text = description;
-            }
+            txtArtists.Text = "";
+            txtTitle.Text = "";
+            txtDescription.Text = "";
         }
     }
 }

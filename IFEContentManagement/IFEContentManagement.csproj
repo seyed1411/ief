@@ -76,6 +76,12 @@
     <Compile Include="ArticleFile.cs" />
     <Compile Include="AudioFolder.cs" />
     <Compile Include="DiskIO.cs" />
+    <Compile Include="EditRemoveAdditional.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EditRemoveAdditional.Designer.cs">
+      <DependentUpon>EditRemoveAdditional.cs</DependentUpon>
+    </Compile>
     <Compile Include="FileCopier.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -156,6 +162,9 @@
     <Compile Include="SurveysFolder.cs" />
     <Compile Include="VideoLanguages.cs" />
     <Compile Include="VideoPathQual.cs" />
+    <EmbeddedResource Include="EditRemoveAdditional.resx">
+      <DependentUpon>EditRemoveAdditional.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -265,6 +274,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\7051.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\del.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

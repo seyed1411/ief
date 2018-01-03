@@ -49,7 +49,7 @@ namespace IFEContentManagement
         {
             int id = Program.currentProject.FindLastPlaylistID();
             MusicPlaylist newPlaylist = new MusicPlaylist(id);
-            frmAddPlaylist newPllstDlg = new frmAddPlaylist(newPlaylist, true);
+            frmAddPlaylist newPllstDlg = new frmAddPlaylist(newPlaylist, true, null);
             if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
             {
                 //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
@@ -189,8 +189,11 @@ namespace IFEContentManagement
             if (e.Node.Level == 1)
             {
                 int id = Convert.ToInt32(e.Node.Text);
+                // find current playist in memory
                 MusicPlaylist existPlaylist = Program.currentProject.FindPlaylistWithID(id);
-                frmAddPlaylist newPllstDlg = new frmAddPlaylist(existPlaylist, false);
+                //find all additional data for the given playlist id
+                Dictionary<string, MusicPlaylist> nonEngData = Program.currentProject.ReadPlaylistNonEnglishData(id);
+                frmAddPlaylist newPllstDlg = new frmAddPlaylist(existPlaylist, false,nonEngData);
                 newPllstDlg.Text = "Edit Playlist";
                 if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
                 {

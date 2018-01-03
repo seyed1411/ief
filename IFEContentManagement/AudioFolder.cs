@@ -117,6 +117,40 @@ namespace IFEContentManagement
                 }
             }
         }
+        internal Dictionary<string, MusicPlaylist> ReadNonEnglishDataLibrary(int _id)
+        {
+            Dictionary<string, MusicPlaylist> retVal = new Dictionary<string, MusicPlaylist>();
+            AudioFolder temp = new AudioFolder(this.location, this.title);
+            foreach (var item in Enum.GetValues(typeof(Languages)))
+            {
+                string header = item.ToString().Substring(0, 2);
+                string fileName = "index." + header + ".json";
+                if (DiskIO.IsFileExist(ContentLocation, fileName))
+                {
+                    temp = DiskIO.DeserializeAudioFolderFromFile(ContentLocation, fileName);
+                    temp.SetLocationTitle(this.location, this.title);
+                    if (temp.HasPlaylistWithID(_id))
+                    {
+                        retVal.Add(item.ToString(), temp.FindPlaylistWithID(_id));
+                    }
+                }
+            }
+            return retVal;
+        }
+
+        internal MusicPlaylist FindPlaylistWithID(int _id)
+        {
+            MusicPlaylist retval = null;
+            foreach (MusicPlaylist x in this.library)
+            {
+                if (x.id == _id)
+                {
+                    retval = x;
+                    break;
+                }
+            }
+            return retval;
+        }
 
         private void RemovePlaylistWithID(int _id)
         {
@@ -159,9 +193,12 @@ namespace IFEContentManagement
                     file.file = p.id+ "\\" + file.title;
                 }
                 // add playlist cover to copy
-                allFilesToCopy.Add(new FileCopier(p.cover, playlistNewLocation + "\\cover.jpg"));
-                // change the cover path to the new path for further library json saving
-                p.cover = p.id + "\\cover.jpg";
+                if (p.cover != "")
+                {
+                    allFilesToCopy.Add(new FileCopier(p.cover, playlistNewLocation + "\\cover.jpg"));
+                    // change the cover path to the new path for further library json saving
+                    p.cover = p.id + "\\cover.jpg";
+                }
                 p.playlist = p.id + "\\index.m3u";
             }
             // save changed paths and music files into exported location
@@ -177,7 +214,8 @@ namespace IFEContentManagement
                     foreach(MusicPlaylist x in temp.library)
                     {
                         x.playlist = x.id + "\\index.m3u";
-                        x.cover = x.id + "\\cover.jpg";
+                        if (x.cover != "")
+                            x.cover = x.id + "\\cover.jpg";
                     }
                     DiskIO.SaveAsJSONFile(temp, newWorkArea, abbriv);
                 }
@@ -196,11 +234,16 @@ namespace IFEContentManagement
                     retval += DiskIO.GetFileSize(file.file);
                     numFiles++;
                 }
-                retval += DiskIO.GetFileSize(p.cover);
-                numFiles++;
+                if (p.cover != "")
+                {
+                    retval += DiskIO.GetFileSize(p.cover);
+                    numFiles++;
+                }
             }
             _numberOfFiles = numFiles;
             return retval;
         }
+
+        
     }
 }

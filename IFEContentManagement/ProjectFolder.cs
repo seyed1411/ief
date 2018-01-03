@@ -331,5 +331,10 @@ namespace IFEContentManagement
 
             return retVal;
         }
+
+        internal Dictionary<string, MusicPlaylist> ReadPlaylistNonEnglishData(int _id)
+        {
+            return this.playlists.ReadNonEnglishDataLibrary(_id);
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace IFEContentManagement
             {
                 if (isNewMovie)
                 {
-                    frmAddQuestion frmNewDlg = new frmAddQuestion(true, Languages.English, movieToComplete.title, movieToComplete.artist, movieToComplete.description);
+                    frmAddNewLanguage frmNewDlg = new frmAddNewLanguage("English", movieToComplete.title, movieToComplete.artist, movieToComplete.description);
                     if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
                     {
                         this.movieToComplete.title = frmNewDlg.InsertedTitle;
@@ -56,7 +56,7 @@ namespace IFEContentManagement
                 }
                 else
                 {
-                    frmAddQuestion frmNewDlg = new frmAddQuestion(false, Languages.English, movieToComplete.title, movieToComplete.artist, movieToComplete.description);
+                    frmAddNewLanguage frmNewDlg = new frmAddNewLanguage("English", movieToComplete.title, movieToComplete.artist, movieToComplete.description);
                     if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
                     {
                         if (frmNewDlg.SelectedLanguage == "English")

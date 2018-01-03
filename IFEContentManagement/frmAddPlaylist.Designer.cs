@@ -42,11 +42,11 @@
             this.cmbAge = new System.Windows.Forms.ComboBox();
             this.lstGenres = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.lblAdditionalExisted = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnNewLang = new System.Windows.Forms.Button();
             this.btnInsert = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.panelLangs = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // label1
@@ -175,34 +175,24 @@
             // label6
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(10, 324);
+            this.label6.Location = new System.Drawing.Point(10, 313);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(388, 2);
             this.label6.TabIndex = 12;
             // 
-            // lblAdditionalExisted
-            // 
-            this.lblAdditionalExisted.AutoSize = true;
-            this.lblAdditionalExisted.Location = new System.Drawing.Point(12, 338);
-            this.lblAdditionalExisted.Name = "lblAdditionalExisted";
-            this.lblAdditionalExisted.Size = new System.Drawing.Size(191, 13);
-            this.lblAdditionalExisted.TabIndex = 13;
-            this.lblAdditionalExisted.Text = "No Additional Language Data Inserted.";
-            this.lblAdditionalExisted.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label7
             // 
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(10, 363);
+            this.label7.Location = new System.Drawing.Point(11, 558);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(388, 2);
             this.label7.TabIndex = 14;
             // 
             // btnNewLang
             // 
-            this.btnNewLang.Location = new System.Drawing.Point(209, 328);
+            this.btnNewLang.Location = new System.Drawing.Point(10, 523);
             this.btnNewLang.Name = "btnNewLang";
-            this.btnNewLang.Size = new System.Drawing.Size(188, 32);
+            this.btnNewLang.Size = new System.Drawing.Size(387, 32);
             this.btnNewLang.TabIndex = 15;
             this.btnNewLang.Text = "New Language";
             this.btnNewLang.UseVisualStyleBackColor = true;
@@ -210,7 +200,7 @@
             // 
             // btnInsert
             // 
-            this.btnInsert.Location = new System.Drawing.Point(209, 375);
+            this.btnInsert.Location = new System.Drawing.Point(210, 562);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(188, 32);
             this.btnInsert.TabIndex = 16;
@@ -220,7 +210,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(15, 375);
+            this.btnCancel.Location = new System.Drawing.Point(10, 562);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(188, 32);
             this.btnCancel.TabIndex = 17;
@@ -228,16 +218,27 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // panelLangs
+            // 
+            this.panelLangs.AutoScroll = true;
+            this.panelLangs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelLangs.Location = new System.Drawing.Point(70, 319);
+            this.panelLangs.Name = "panelLangs";
+            this.panelLangs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panelLangs.Size = new System.Drawing.Size(327, 198);
+            this.panelLangs.TabIndex = 18;
+            this.panelLangs.WrapContents = false;
+            // 
             // frmAddPlaylist
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 416);
+            this.ClientSize = new System.Drawing.Size(409, 606);
+            this.Controls.Add(this.btnNewLang);
+            this.Controls.Add(this.panelLangs);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnInsert);
-            this.Controls.Add(this.btnNewLang);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.lblAdditionalExisted);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lstGenres);
             this.Controls.Add(this.cmbAge);
@@ -253,9 +254,7 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(425, 455);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(425, 455);
             this.Name = "frmAddPlaylist";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Playlist";
@@ -280,10 +279,10 @@
         private System.Windows.Forms.ComboBox cmbAge;
         private System.Windows.Forms.ListBox lstGenres;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lblAdditionalExisted;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnNewLang;
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.FlowLayoutPanel panelLangs;
     }
 }

@@ -11,8 +11,8 @@ namespace IFEContentManagement
 {
     public partial class frmSenarioMaker : Form
     {
-        Form parent;
-        public frmSenarioMaker(Form _parent)
+        Form1 parent;
+        public frmSenarioMaker(Form1 _parent)
         {
             parent = _parent;
             InitializeComponent();
@@ -30,9 +30,13 @@ namespace IFEContentManagement
 
         private void toolStripButton9_Click(object sender, EventArgs e)
         {
-            if(MessageBox.Show("Are you sure you want to close project: "+Program.currentProject.GetTitle()+"?","Warning",MessageBoxButtons.YesNo)==DialogResult.Yes)
+            if(MessageBox.Show("Are you sure you want to close project:  "+Program.currentProject.GetTitle()+"  ?","Warning",MessageBoxButtons.YesNo,MessageBoxIcon.Question)==DialogResult.Yes)
             {
-                Application.Restart();
+                this.parent.Show();
+                this.Hide();
+                Program.currentProject = null;
+                Program.mcmFile = null;
+                this.Dispose();
             }
         }
 
@@ -52,10 +56,38 @@ namespace IFEContentManagement
                 Program.currentProject.AddPlaylist(newPlaylist);
                 if (newPllstDlg.nonEngAdditionalData.Count > 0)
                     Program.currentProject.SavePlaylistsNonEnglishData(newPllstDlg.nonEngAdditionalData);
-                Program.currentProject.ApplyChangesOnHardDrive();
+                this.ApplyChangesOnHardDrive();
             }
             this.UpdateTreesPresentation();
 
+        }
+
+        private void ApplyChangesOnHardDrive()
+        {
+            
+
+            lblStatus.Text = "Saving Playlists...";
+            Program.currentProject.SavePlaylistData();
+            progBar.PerformStep();
+
+            lblStatus.Text = "Saving Movies...";
+            Program.currentProject.SaveMoviesData();
+            progBar.PerformStep();
+
+            lblStatus.Text = "Saving Announcements...";
+            Program.currentProject.SaveAnnouncData();
+            progBar.PerformStep();
+
+            lblStatus.Text = "Saving Articles...";
+            Program.currentProject.SaveArticleData();
+            progBar.PerformStep();
+
+            lblStatus.Text = "Saving Surveys...";
+            Program.currentProject.SaveSurveyData();
+            progBar.PerformStep();
+
+            lblStatus.Text = "Ready";
+            progBar.Value = 0;
         }
 
         private void UpdateTreesPresentation()
@@ -140,7 +172,16 @@ namespace IFEContentManagement
 
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            MessageBox.Show(Program.currentProject.FindLastPlaylistID().ToString());
+            if (MessageBox.Show("Are you sure you want to close project:  " + Program.currentProject.GetTitle() + "  ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                this.parent.Show();
+                this.Hide();
+                Program.currentProject = null;
+                Program.mcmFile = null;
+                parent.btnNewProject_Click(sender, e);
+                this.Dispose();
+            }
+           // MessageBox.Show(Program.currentProject.FindLastPlaylistID().ToString());
         }
 
         private void treeProject_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -150,13 +191,14 @@ namespace IFEContentManagement
                 int id = Convert.ToInt32(e.Node.Text);
                 MusicPlaylist existPlaylist = Program.currentProject.FindPlaylistWithID(id);
                 frmAddPlaylist newPllstDlg = new frmAddPlaylist(existPlaylist, false);
+                newPllstDlg.Text = "Edit Playlist";
                 if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
                     //Program.currentProject.AddPlaylist(existPlaylist);
                     if (newPllstDlg.nonEngAdditionalData.Count > 0)
                         Program.currentProject.SavePlaylistsNonEnglishData(newPllstDlg.nonEngAdditionalData);
-                    Program.currentProject.ApplyChangesOnHardDrive();
+                    this.ApplyChangesOnHardDrive();
                 }
                 this.UpdateTreesPresentation();
             }
@@ -178,7 +220,7 @@ namespace IFEContentManagement
                 Program.currentProject.AddMovie(newMovie);
                 if (newPllstDlg.nonEngAdditionalData.Count > 0)
                     Program.currentProject.SaveMoviesNonEnglishData(newPllstDlg.nonEngAdditionalData);
-                Program.currentProject.ApplyChangesOnHardDrive();
+                this.ApplyChangesOnHardDrive();
             }
             this.UpdateTreesPresentation();
         }
@@ -190,13 +232,14 @@ namespace IFEContentManagement
                 int id = Convert.ToInt32(e.Node.Text);
                 MovieFile existMovie = Program.currentProject.FindMovieWithID(id);
                 frmAddMovie newMovDlg = new frmAddMovie(existMovie, false);
+                newMovDlg.Text = "Edit Movie";
                 if (newMovDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
                     //Program.currentProject.AddMovie(existMovie);
                     if (newMovDlg.nonEngAdditionalData.Count > 0)
                         Program.currentProject.SaveMoviesNonEnglishData(newMovDlg.nonEngAdditionalData);
-                    Program.currentProject.ApplyChangesOnHardDrive();
+                    this.ApplyChangesOnHardDrive();
                 }
                 this.UpdateTreesPresentation();
             }
@@ -214,7 +257,7 @@ namespace IFEContentManagement
                 Program.currentProject.AddAnnouncement(newMovie);
                 if (newAnnDlg.nonEngAdditionalData.Count > 0)
                     Program.currentProject.SaveAnnouncesNonEnglishData(newAnnDlg.nonEngAdditionalData);
-                Program.currentProject.ApplyChangesOnHardDrive();
+                this.ApplyChangesOnHardDrive();
             }
             this.UpdateTreesPresentation();
         }
@@ -226,13 +269,14 @@ namespace IFEContentManagement
                 int id = Convert.ToInt32(e.Node.Text);
                 MovieFile existMovie = Program.currentProject.FindAnnouncWithID(id);
                 frmAddMovie existMovDlg = new frmAddMovie(existMovie, false);
+                existMovDlg.Text = "Edit Announcement";
                 if (existMovDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
                     //Program.currentProject.AddMovie(existMovie);
                     if (existMovDlg.nonEngAdditionalData.Count > 0)
                         Program.currentProject.SaveAnnouncesNonEnglishData(existMovDlg.nonEngAdditionalData);
-                    Program.currentProject.ApplyChangesOnHardDrive();
+                    this.ApplyChangesOnHardDrive(); ;
                 }
                 this.UpdateTreesPresentation();
             }
@@ -250,7 +294,7 @@ namespace IFEContentManagement
                 Program.currentProject.AddArticle(newArticle);
                 if (newArtDlg.nonEngAdditionalData.Count > 0)
                     Program.currentProject.SaveArticlesNonEnglishData(newArtDlg.nonEngAdditionalData);
-                Program.currentProject.ApplyChangesOnHardDrive();
+                this.ApplyChangesOnHardDrive();
             }
             this.UpdateTreesPresentation();
         }
@@ -262,13 +306,14 @@ namespace IFEContentManagement
                 int id = Convert.ToInt32(e.Node.Text);
                 ArticleFile existArt = Program.currentProject.FindArticleWithID(id);
                 frmAddArticle existArtDlg = new frmAddArticle(existArt, false);
+                existArtDlg.Text = "Edit Article";
                 if (existArtDlg.ShowDialog(this) == DialogResult.OK)
                 {
                     //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
                     //Program.currentProject.AddMovie(existMovie);
                     if (existArtDlg.nonEngAdditionalData.Count > 0)
                         Program.currentProject.SaveArticlesNonEnglishData(existArtDlg.nonEngAdditionalData);
-                    Program.currentProject.ApplyChangesOnHardDrive();
+                   this.ApplyChangesOnHardDrive();
                 }
                 this.UpdateTreesPresentation();
             }
@@ -280,7 +325,7 @@ namespace IFEContentManagement
             if (newAddServey.ShowDialog(this) == DialogResult.OK)
             {
                 Program.currentProject.AddSurvey(newAddServey.QuestionCollection);
-                Program.currentProject.ApplyChangesOnHardDrive();
+                this.ApplyChangesOnHardDrive();
             }
             this.UpdateTreesPresentation();
             
@@ -293,10 +338,11 @@ namespace IFEContentManagement
                 int index = e.Node.Index;
                 Dictionary<string, QuestionCollection> toEdit = Program.currentProject.GetSurvey(index);
                 frmAddSurvey newAddServey = new frmAddSurvey(toEdit);
+                newAddServey.Text = "Edit Survey";
                 if (newAddServey.ShowDialog(this) == DialogResult.OK)
                 {
                     //Program.currentProject.AddSurvey(newAddServey.QuestionCollection);
-                    Program.currentProject.ApplyChangesOnHardDrive();
+                    this.ApplyChangesOnHardDrive();
                 }
                 this.UpdateTreesPresentation();
             }
@@ -309,6 +355,11 @@ namespace IFEContentManagement
             {
                 Program.currentProject = new ProjectFolder(Program.mcmFile);
             }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
 
     }

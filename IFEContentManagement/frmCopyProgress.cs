@@ -117,6 +117,14 @@ namespace IFEContentManagement
             if (docopy) mCopier.RunWorkerAsync();
             else mCopier.CancelAsync();
         }
+
+        private void frmCopyProgress_Load(object sender, EventArgs e)
+        {
+            bool docopy = button1.Text == "Start";
+            ChangeUI(docopy);
+            if (docopy) mCopier.RunWorkerAsync();
+            else mCopier.CancelAsync();
+        }
     }
 
 }

@@ -39,7 +39,7 @@ namespace IFEContentManagement
 
         }
 
-        private void btnNewProject_Click(object sender, EventArgs e)
+        public void btnNewProject_Click(object sender, EventArgs e)
         {
             frmNewProject newProjWin = new frmNewProject();
             var res = newProjWin.ShowDialog(this);
@@ -53,7 +53,7 @@ namespace IFEContentManagement
                 }
                 catch(Exception exp)
                 {
-                    MessageBox.Show("Can not create new project. Please review location and title parameters.\n"+"Details: "+exp.Message, "Creation Error");
+                    MessageBox.Show("Can not create new project. Please review location and title parameters.\n"+"Details: "+exp.Message, "Creation Error",MessageBoxButtons.OK,MessageBoxIcon.Error);
                 }
                 frmSenarioMaker workDlg = new frmSenarioMaker(this);
                 this.Hide();

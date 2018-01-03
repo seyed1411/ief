@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddSurvey));
             this.lstQuestions = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnAddQuestion = new System.Windows.Forms.Button();
@@ -116,9 +117,13 @@
             this.Controls.Add(this.btnAddQuestion);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lstQuestions);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(398, 345);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(398, 345);
             this.Name = "frmAddSurvey";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Survey";
             this.Load += new System.EventHandler(this.frmAddSurvey_Load);
             this.ResumeLayout(false);

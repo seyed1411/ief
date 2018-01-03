@@ -225,7 +225,46 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Title.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\project.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\music.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\video.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\announc.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\article.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\survey.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trash - Full.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0458.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\04581.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5376.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7051.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

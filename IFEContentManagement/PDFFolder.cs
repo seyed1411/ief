@@ -153,5 +153,20 @@ namespace IFEContentManagement
             }
             return allFilesToCopy.ToArray();
         }
+
+        internal long GetFilesVolume(out int _numOfFiles)
+        {
+            long retval = 0;
+            int numFiles=0;
+            foreach (ArticleFile a in this.library)
+            {
+                retval += DiskIO.GetFileSize(a.file);
+                retval += DiskIO.GetFileSize(a.cover);
+                numFiles += 2;
+            }
+            _numOfFiles = numFiles;
+            return retval;
+
+        }
     }
 }

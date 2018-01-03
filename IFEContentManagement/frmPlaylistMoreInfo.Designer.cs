@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddQuestion));
             this.label1 = new System.Windows.Forms.Label();
             this.cmbLang = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -86,11 +87,11 @@
             this.txtArtists.Size = new System.Drawing.Size(252, 20);
             this.txtArtists.TabIndex = 5;
             // 
-            // label3
+            // lblArtist
             // 
             this.lblArtist.AutoSize = true;
             this.lblArtist.Location = new System.Drawing.Point(12, 74);
-            this.lblArtist.Name = "label3";
+            this.lblArtist.Name = "lblArtist";
             this.lblArtist.Size = new System.Drawing.Size(44, 13);
             this.lblArtist.TabIndex = 4;
             this.lblArtist.Text = "Artist(s):";
@@ -136,7 +137,7 @@
             this.btnInsertAdditionalPlylistData.UseVisualStyleBackColor = true;
             this.btnInsertAdditionalPlylistData.Click += new System.EventHandler(this.btnInsertAdditionalPlylistData_Click);
             // 
-            // frmPlaylistMoreInfo
+            // frmAddQuestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -151,10 +152,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbLang);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(361, 342);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(361, 342);
-            this.Name = "frmPlaylistMoreInfo";
+            this.Name = "frmAddQuestion";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Additional Data";
             this.Load += new System.EventHandler(this.frmAdditionalLang__Load);

@@ -71,12 +71,13 @@ namespace IFEContentManagement
 
         private void btnInsertAdditionalPlylistData_Click(object sender, EventArgs e)
         {
+            if (!this.justEn)
+                if (MessageBox.Show("If you enter new data in non-English languages, old data will be overwritten!", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    return;
             language = cmbLang.Items[cmbLang.SelectedIndex].ToString();
             artist = txtArtists.Text;
             title = txtTitle.Text;
-            description = txtDescription.Text;
-            if (!this.justEn)
-                MessageBox.Show("If you enter new data in non-English languages, old data will be overwritten!", "Non-English Data Change Alert");
+            description = txtDescription.Text;            
             this.DialogResult = DialogResult.OK;
         }
 

@@ -80,7 +80,7 @@ namespace IFEContentManagement
                 }
             }
             else
-                MessageBox.Show("Please fill all of information filds.");
+                MessageBox.Show("Please fill all of information filds.", "Warning",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private bool FormCompleted()
@@ -123,7 +123,7 @@ namespace IFEContentManagement
                 this.DialogResult = DialogResult.OK;
             }
             else
-                MessageBox.Show("Please fill all of information filds.");
+                MessageBox.Show("Please fill all of information filds.","Warning",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -139,7 +139,7 @@ namespace IFEContentManagement
                 if (DiskIO.DirectoryHasMusicFile(dlgBrowse.SelectedPath))
                     break;
                 else
-                    MessageBox.Show("This folder contains no music file. Please Select another.", "Warning", MessageBoxButtons.OK);
+                    MessageBox.Show("This folder contains no music file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
             txtDirectory.Text = dlgBrowse.SelectedPath;
@@ -153,7 +153,7 @@ namespace IFEContentManagement
                 if (DiskIO.IsImageFile(dlgOpen.FileName))
                     break;
                 else
-                    MessageBox.Show("This file is not an image file. Please Select another.", "Warning", MessageBoxButtons.OK);
+                    MessageBox.Show("This file is not an image file. Please Select another.", "Warning", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
             }
             txtCover.Text = dlgOpen.FileName;
 

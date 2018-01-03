@@ -40,6 +40,25 @@ namespace IFEContentManagement
             }
             chkLstLanguages.SetItemChecked(0, true);
             txtCurrentLoc.Text = Program.currentProject.ContentLocation;
+
+            int numOfFiles = 0;
+            long filesVolume = Program.currentProject.GetAllFilesVolume(out numOfFiles);
+            string volStr = HumanPresentVolume(filesVolume);
+            lblSize.Text = numOfFiles.ToString() + "  files (About " + volStr + " ) must be copied.";
+        }
+
+        private string HumanPresentVolume(long _volToByte)
+        {
+            string retVal = "";
+            if (_volToByte < 1024)
+                retVal = Convert.ToString(_volToByte) + " bytes";
+            else if (_volToByte >= 1024 && _volToByte < 1048576)
+                retVal = (_volToByte / 1024).ToString("0.0") + " KiloBytes";
+            else if(_volToByte >= 1048576 && _volToByte < 1073741824)
+                retVal = (_volToByte / 1048576).ToString("0.0") + " MegaBytes";
+            else if(_volToByte >= 1073741824)
+                retVal = (_volToByte / 1073741824).ToString("0.0") + " GigaBytes";
+            return retVal;
         }
 
         private void btnExport_Click(object sender, EventArgs e)

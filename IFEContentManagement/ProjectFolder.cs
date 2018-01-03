@@ -98,20 +98,7 @@ namespace IFEContentManagement
 
         internal void ApplyChangesOnHardDrive()
         {
-            // save current state of playlists
-            this.playlists.SavePlaylistLibrary();
-
-            // save current state of movies
-            this.movies.SaveMoviesLibrary();
-
-            // save current state of announces
-            this.announces.SaveMoviesLibrary();
-
-            // save current state of articles and pdfs
-            this.articles.SaveArticleLibrary();
-
-            // save current state of surveys
-            this.questions.SaveSurveysLibrary();
+            
         }
 
         internal MusicPlaylist[] GetPlaylistsCollection()
@@ -295,6 +282,54 @@ namespace IFEContentManagement
 
 
             return allFilesToCopy.ToArray();
+        }
+
+        internal void SavePlaylistData()
+        {
+            // save current state of playlists
+            this.playlists.SavePlaylistLibrary();
+        }
+
+        internal void SaveMoviesData()
+        {
+            // save current state of movies
+            this.movies.SaveMoviesLibrary();
+
+        }
+
+        internal void SaveAnnouncData()
+        {
+            // save current state of announces
+            this.announces.SaveMoviesLibrary();
+        }
+
+        internal void SaveArticleData()
+        {
+            // save current state of articles and pdfs
+            this.articles.SaveArticleLibrary();
+        }
+
+        internal void SaveSurveyData()
+        {
+            // save current state of surveys
+            this.questions.SaveSurveysLibrary();
+        }
+
+        internal long GetAllFilesVolume(out int _numberOfFiles)
+        {
+            long retVal=0;
+            int numFiles = 0;
+            _numberOfFiles = 0;
+            retVal += playlists.GetFilesVolume(out numFiles);
+            _numberOfFiles += numFiles;
+            retVal += movies.GetFilesVolume(out numFiles);
+            _numberOfFiles += numFiles;
+            retVal += announces.GetFilesVolume(out numFiles);
+            _numberOfFiles += numFiles;
+            retVal += articles.GetFilesVolume(out numFiles);
+            _numberOfFiles += numFiles;
+
+            return retVal;
         }
     }
 }

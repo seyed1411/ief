@@ -42,12 +42,12 @@
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.btnExport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCloseProject = new System.Windows.Forms.ToolStripButton();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.strip = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.progBar = new System.Windows.Forms.ToolStripProgressBar();
             this.tabs = new System.Windows.Forms.TabControl();
             this.tabPlaylists = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -90,6 +90,7 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
+            this.strip.SuspendLayout();
             this.tabs.SuspendLayout();
             this.tabPlaylists.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -123,24 +124,24 @@
             this.toolStripButton5,
             this.toolStripButton6,
             this.toolStripSeparator3,
-            this.toolStripButton7,
-            this.toolStripSeparator4,
             this.btnExport,
             this.toolStripSeparator5,
             this.btnCloseProject});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(820, 38);
+            this.toolStrip1.Size = new System.Drawing.Size(820, 54);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripButton1.Image = global::IFEContentManagement.Properties.Resources.project;
+            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(75, 35);
+            this.toolStripButton1.Size = new System.Drawing.Size(75, 51);
             this.toolStripButton1.Text = "New Project";
             this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click_1);
@@ -148,44 +149,52 @@
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 54);
             // 
             // btnAddPlaylist
             // 
-            this.btnAddPlaylist.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPlaylist.Image")));
-            this.btnAddPlaylist.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnAddPlaylist.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddPlaylist.Image = global::IFEContentManagement.Properties.Resources.music;
+            this.btnAddPlaylist.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnAddPlaylist.ImageTransparentColor = System.Drawing.Color.Maroon;
             this.btnAddPlaylist.Name = "btnAddPlaylist";
-            this.btnAddPlaylist.Size = new System.Drawing.Size(73, 35);
+            this.btnAddPlaylist.Size = new System.Drawing.Size(73, 51);
             this.btnAddPlaylist.Text = "Add Playlist";
             this.btnAddPlaylist.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAddPlaylist.Click += new System.EventHandler(this.btnAddPlaylist_Click);
             // 
             // btnAddMovie
             // 
-            this.btnAddMovie.Image = ((System.Drawing.Image)(resources.GetObject("btnAddMovie.Image")));
+            this.btnAddMovie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddMovie.Image = global::IFEContentManagement.Properties.Resources.video;
+            this.btnAddMovie.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAddMovie.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddMovie.Name = "btnAddMovie";
-            this.btnAddMovie.Size = new System.Drawing.Size(69, 35);
+            this.btnAddMovie.Size = new System.Drawing.Size(69, 51);
             this.btnAddMovie.Text = "Add Movie";
             this.btnAddMovie.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAddMovie.Click += new System.EventHandler(this.btnAddMovie_Click);
             // 
             // btnAddAnnounc
             // 
-            this.btnAddAnnounc.Image = ((System.Drawing.Image)(resources.GetObject("btnAddAnnounc.Image")));
+            this.btnAddAnnounc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddAnnounc.Image = global::IFEContentManagement.Properties.Resources.announc;
+            this.btnAddAnnounc.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAddAnnounc.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddAnnounc.Name = "btnAddAnnounc";
-            this.btnAddAnnounc.Size = new System.Drawing.Size(119, 35);
+            this.btnAddAnnounc.Size = new System.Drawing.Size(119, 51);
             this.btnAddAnnounc.Text = "Add Announcement";
             this.btnAddAnnounc.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAddAnnounc.Click += new System.EventHandler(this.btnAddAnnounc_Click);
             // 
             // btnAddArticle
             // 
-            this.btnAddArticle.Image = ((System.Drawing.Image)(resources.GetObject("btnAddArticle.Image")));
+            this.btnAddArticle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddArticle.Image = global::IFEContentManagement.Properties.Resources.article;
+            this.btnAddArticle.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAddArticle.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddArticle.Name = "btnAddArticle";
-            this.btnAddArticle.Size = new System.Drawing.Size(70, 35);
+            this.btnAddArticle.Size = new System.Drawing.Size(70, 51);
             this.btnAddArticle.Text = "Add Article";
             this.btnAddArticle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAddArticle.Click += new System.EventHandler(this.btnAddArticle_Click);
@@ -193,14 +202,16 @@
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 54);
             // 
             // btnAddSurvey
             // 
-            this.btnAddSurvey.Image = ((System.Drawing.Image)(resources.GetObject("btnAddSurvey.Image")));
+            this.btnAddSurvey.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnAddSurvey.Image = global::IFEContentManagement.Properties.Resources.survey;
+            this.btnAddSurvey.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnAddSurvey.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnAddSurvey.Name = "btnAddSurvey";
-            this.btnAddSurvey.Size = new System.Drawing.Size(71, 35);
+            this.btnAddSurvey.Size = new System.Drawing.Size(71, 51);
             this.btnAddSurvey.Text = "Add Survey";
             this.btnAddSurvey.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAddSurvey.Click += new System.EventHandler(this.btnAddSurvey_Click);
@@ -208,51 +219,43 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 54);
             // 
             // toolStripButton5
             // 
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripButton5.Image = global::IFEContentManagement.Properties.Resources._04581;
+            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(49, 35);
+            this.toolStripButton5.Size = new System.Drawing.Size(49, 51);
             this.toolStripButton5.Text = "Modify";
             this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripButton6
             // 
-            this.toolStripButton6.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton6.Image")));
+            this.toolStripButton6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripButton6.Image = global::IFEContentManagement.Properties.Resources.Trash___Full;
+            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(54, 35);
+            this.toolStripButton6.Size = new System.Drawing.Size(54, 51);
             this.toolStripButton6.Text = "Remove";
             this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 38);
-            // 
-            // toolStripButton7
-            // 
-            this.toolStripButton7.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton7.Image")));
-            this.toolStripButton7.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton7.Name = "toolStripButton7";
-            this.toolStripButton7.Size = new System.Drawing.Size(47, 35);
-            this.toolStripButton7.Text = "Genres";
-            this.toolStripButton7.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 54);
             // 
             // btnExport
             // 
-            this.btnExport.Image = ((System.Drawing.Image)(resources.GetObject("btnExport.Image")));
+            this.btnExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnExport.Image = global::IFEContentManagement.Properties.Resources._5376;
+            this.btnExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(44, 35);
+            this.btnExport.Size = new System.Drawing.Size(44, 51);
             this.btnExport.Text = "Export";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
@@ -260,25 +263,45 @@
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 38);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 54);
             // 
             // btnCloseProject
             // 
-            this.btnCloseProject.Image = ((System.Drawing.Image)(resources.GetObject("btnCloseProject.Image")));
+            this.btnCloseProject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnCloseProject.Image = global::IFEContentManagement.Properties.Resources._7051;
+            this.btnCloseProject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCloseProject.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCloseProject.Name = "btnCloseProject";
-            this.btnCloseProject.Size = new System.Drawing.Size(80, 35);
+            this.btnCloseProject.Size = new System.Drawing.Size(80, 51);
             this.btnCloseProject.Text = "Close Project";
             this.btnCloseProject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnCloseProject.Click += new System.EventHandler(this.toolStripButton9_Click);
             // 
-            // statusStrip1
+            // strip
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 419);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(820, 22);
-            this.statusStrip1.TabIndex = 1;
-            this.statusStrip1.Text = "statusStrip1";
+            this.strip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus,
+            this.progBar});
+            this.strip.Location = new System.Drawing.Point(0, 459);
+            this.strip.Name = "strip";
+            this.strip.Size = new System.Drawing.Size(820, 22);
+            this.strip.TabIndex = 1;
+            this.strip.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = false;
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(400, 17);
+            this.lblStatus.Text = "Ready";
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // progBar
+            // 
+            this.progBar.Maximum = 5;
+            this.progBar.Name = "progBar";
+            this.progBar.Size = new System.Drawing.Size(100, 16);
+            this.progBar.Step = 1;
             // 
             // tabs
             // 
@@ -294,7 +317,7 @@
             this.tabs.Name = "tabs";
             this.tabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.tabs.SelectedIndex = 0;
-            this.tabs.Size = new System.Drawing.Size(796, 355);
+            this.tabs.Size = new System.Drawing.Size(796, 395);
             this.tabs.TabIndex = 2;
             // 
             // tabPlaylists
@@ -304,7 +327,7 @@
             this.tabPlaylists.Location = new System.Drawing.Point(4, 22);
             this.tabPlaylists.Name = "tabPlaylists";
             this.tabPlaylists.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPlaylists.Size = new System.Drawing.Size(788, 329);
+            this.tabPlaylists.Size = new System.Drawing.Size(788, 369);
             this.tabPlaylists.TabIndex = 0;
             this.tabPlaylists.Text = "Playlists";
             this.tabPlaylists.UseVisualStyleBackColor = true;
@@ -318,7 +341,7 @@
             this.groupBox2.Location = new System.Drawing.Point(7, 70);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox2.Size = new System.Drawing.Size(745, 253);
+            this.groupBox2.Size = new System.Drawing.Size(770, 293);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Working Stage";
@@ -331,7 +354,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treePlaylists.Location = new System.Drawing.Point(7, 37);
             this.treePlaylists.Name = "treePlaylists";
-            this.treePlaylists.Size = new System.Drawing.Size(726, 210);
+            this.treePlaylists.Size = new System.Drawing.Size(757, 250);
             this.treePlaylists.TabIndex = 0;
             this.treePlaylists.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeProject_NodeMouseClick);
             // 
@@ -346,17 +369,18 @@
             this.groupBox1.Location = new System.Drawing.Point(7, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(745, 57);
+            this.groupBox1.Size = new System.Drawing.Size(770, 57);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             this.groupBox1.UseCompatibleTextRendering = true;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // comboBox1
             // 
             this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(676, 22);
+            this.comboBox1.Location = new System.Drawing.Point(701, 22);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(63, 21);
             this.comboBox1.TabIndex = 3;
@@ -365,7 +389,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(651, 25);
+            this.label2.Location = new System.Drawing.Point(676, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(19, 13);
             this.label2.TabIndex = 2;
@@ -376,7 +400,7 @@
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(65, 22);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(580, 20);
+            this.textBox1.Size = new System.Drawing.Size(605, 20);
             this.textBox1.TabIndex = 1;
             // 
             // label1
@@ -395,7 +419,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(788, 329);
+            this.tabPage2.Size = new System.Drawing.Size(788, 369);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Movies";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -409,7 +433,7 @@
             this.groupBox3.Location = new System.Drawing.Point(7, 70);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox3.Size = new System.Drawing.Size(733, 253);
+            this.groupBox3.Size = new System.Drawing.Size(770, 253);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Working Stage";
@@ -422,7 +446,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeMovies.Location = new System.Drawing.Point(7, 37);
             this.treeMovies.Name = "treeMovies";
-            this.treeMovies.Size = new System.Drawing.Size(720, 210);
+            this.treeMovies.Size = new System.Drawing.Size(757, 210);
             this.treeMovies.TabIndex = 0;
             this.treeMovies.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMovies_NodeMouseDoubleClick);
             // 
@@ -437,7 +461,7 @@
             this.groupBox4.Location = new System.Drawing.Point(7, 6);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox4.Size = new System.Drawing.Size(733, 57);
+            this.groupBox4.Size = new System.Drawing.Size(770, 57);
             this.groupBox4.TabIndex = 2;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Search";
@@ -447,7 +471,7 @@
             // 
             this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(664, 22);
+            this.comboBox2.Location = new System.Drawing.Point(701, 22);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(63, 21);
             this.comboBox2.TabIndex = 3;
@@ -456,7 +480,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(639, 25);
+            this.label3.Location = new System.Drawing.Point(676, 25);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(19, 13);
             this.label3.TabIndex = 2;
@@ -467,7 +491,7 @@
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(65, 22);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(568, 20);
+            this.textBox2.Size = new System.Drawing.Size(605, 20);
             this.textBox2.TabIndex = 1;
             // 
             // label4
@@ -485,7 +509,7 @@
             this.tabPage3.Controls.Add(this.groupBox6);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(788, 329);
+            this.tabPage3.Size = new System.Drawing.Size(788, 369);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Announcements";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -499,7 +523,7 @@
             this.groupBox5.Location = new System.Drawing.Point(7, 70);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox5.Size = new System.Drawing.Size(733, 253);
+            this.groupBox5.Size = new System.Drawing.Size(770, 253);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Working Stage";
@@ -512,7 +536,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeAnnounc.Location = new System.Drawing.Point(7, 37);
             this.treeAnnounc.Name = "treeAnnounc";
-            this.treeAnnounc.Size = new System.Drawing.Size(720, 210);
+            this.treeAnnounc.Size = new System.Drawing.Size(757, 210);
             this.treeAnnounc.TabIndex = 0;
             this.treeAnnounc.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeAnnounc_NodeMouseDoubleClick);
             // 
@@ -527,7 +551,7 @@
             this.groupBox6.Location = new System.Drawing.Point(7, 6);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox6.Size = new System.Drawing.Size(733, 57);
+            this.groupBox6.Size = new System.Drawing.Size(770, 57);
             this.groupBox6.TabIndex = 4;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "Search";
@@ -537,7 +561,7 @@
             // 
             this.comboBox3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(664, 22);
+            this.comboBox3.Location = new System.Drawing.Point(701, 22);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(63, 21);
             this.comboBox3.TabIndex = 3;
@@ -546,7 +570,7 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(639, 25);
+            this.label5.Location = new System.Drawing.Point(676, 25);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(19, 13);
             this.label5.TabIndex = 2;
@@ -557,7 +581,7 @@
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(65, 22);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(568, 20);
+            this.textBox3.Size = new System.Drawing.Size(605, 20);
             this.textBox3.TabIndex = 1;
             // 
             // label6
@@ -575,7 +599,7 @@
             this.tabPage4.Controls.Add(this.groupBox8);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(788, 329);
+            this.tabPage4.Size = new System.Drawing.Size(788, 369);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "Articles";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -589,7 +613,7 @@
             this.groupBox7.Location = new System.Drawing.Point(7, 70);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox7.Size = new System.Drawing.Size(733, 253);
+            this.groupBox7.Size = new System.Drawing.Size(770, 253);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Working Stage";
@@ -602,7 +626,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeArticle.Location = new System.Drawing.Point(7, 37);
             this.treeArticle.Name = "treeArticle";
-            this.treeArticle.Size = new System.Drawing.Size(720, 210);
+            this.treeArticle.Size = new System.Drawing.Size(757, 210);
             this.treeArticle.TabIndex = 0;
             this.treeArticle.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeArticle_NodeMouseDoubleClick);
             // 
@@ -617,7 +641,7 @@
             this.groupBox8.Location = new System.Drawing.Point(7, 6);
             this.groupBox8.Name = "groupBox8";
             this.groupBox8.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox8.Size = new System.Drawing.Size(733, 57);
+            this.groupBox8.Size = new System.Drawing.Size(770, 57);
             this.groupBox8.TabIndex = 6;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Search";
@@ -627,7 +651,7 @@
             // 
             this.comboBox4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(664, 22);
+            this.comboBox4.Location = new System.Drawing.Point(701, 22);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(63, 21);
             this.comboBox4.TabIndex = 3;
@@ -636,7 +660,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(639, 25);
+            this.label7.Location = new System.Drawing.Point(676, 25);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(19, 13);
             this.label7.TabIndex = 2;
@@ -647,7 +671,7 @@
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(65, 22);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(568, 20);
+            this.textBox4.Size = new System.Drawing.Size(605, 20);
             this.textBox4.TabIndex = 1;
             // 
             // label8
@@ -665,7 +689,7 @@
             this.tabPage1.Controls.Add(this.groupBox10);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(788, 329);
+            this.tabPage1.Size = new System.Drawing.Size(788, 369);
             this.tabPage1.TabIndex = 4;
             this.tabPage1.Text = "Surveys";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -679,7 +703,7 @@
             this.groupBox9.Location = new System.Drawing.Point(7, 70);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox9.Size = new System.Drawing.Size(775, 253);
+            this.groupBox9.Size = new System.Drawing.Size(770, 253);
             this.groupBox9.TabIndex = 9;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Working Stage";
@@ -692,7 +716,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeQuestions.Location = new System.Drawing.Point(7, 37);
             this.treeQuestions.Name = "treeQuestions";
-            this.treeQuestions.Size = new System.Drawing.Size(762, 210);
+            this.treeQuestions.Size = new System.Drawing.Size(757, 210);
             this.treeQuestions.TabIndex = 0;
             this.treeQuestions.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeQuestions_NodeMouseDoubleClick);
             // 
@@ -707,7 +731,7 @@
             this.groupBox10.Location = new System.Drawing.Point(7, 6);
             this.groupBox10.Name = "groupBox10";
             this.groupBox10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox10.Size = new System.Drawing.Size(775, 57);
+            this.groupBox10.Size = new System.Drawing.Size(770, 57);
             this.groupBox10.TabIndex = 8;
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Search";
@@ -717,7 +741,7 @@
             // 
             this.comboBox5.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(706, 22);
+            this.comboBox5.Location = new System.Drawing.Point(701, 22);
             this.comboBox5.Name = "comboBox5";
             this.comboBox5.Size = new System.Drawing.Size(63, 21);
             this.comboBox5.TabIndex = 3;
@@ -726,7 +750,7 @@
             // 
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(681, 25);
+            this.label9.Location = new System.Drawing.Point(676, 25);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(19, 13);
             this.label9.TabIndex = 2;
@@ -737,7 +761,7 @@
             this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox5.Location = new System.Drawing.Point(65, 22);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(610, 20);
+            this.textBox5.Size = new System.Drawing.Size(605, 20);
             this.textBox5.TabIndex = 1;
             // 
             // label10
@@ -753,11 +777,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(820, 441);
+            this.ClientSize = new System.Drawing.Size(820, 481);
             this.Controls.Add(this.tabs);
-            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.strip);
             this.Controls.Add(this.toolStrip1);
-            this.MinimumSize = new System.Drawing.Size(640, 480);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(836, 520);
             this.Name = "frmSenarioMaker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Senario Maker";
@@ -766,6 +791,8 @@
             this.Load += new System.EventHandler(this.frmSenarioMaker_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.strip.ResumeLayout(false);
+            this.strip.PerformLayout();
             this.tabs.ResumeLayout(false);
             this.tabPlaylists.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -804,12 +831,10 @@
         private System.Windows.Forms.ToolStripButton toolStripButton5;
         private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton toolStripButton7;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton btnExport;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.ToolStripButton btnCloseProject;
-        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.StatusStrip strip;
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.TabPage tabPlaylists;
         private System.Windows.Forms.TabPage tabPage2;
@@ -854,6 +879,8 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.ToolStripProgressBar progBar;
 
     }
 }

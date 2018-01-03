@@ -33,7 +33,7 @@ namespace IFEContentManagement
         {
             if (ProjectFolder.IsValidProjectDirectory(txtLocation.Text + "\\" + txtTitle.Text))
             {
-                if (MessageBox.Show("Folder with this name alredy exist in the path. Do you want to replace it?\nNote:All files and sub-folders will be deleted.", "Warning", MessageBoxButtons.YesNo) != DialogResult.Yes)
+                if (MessageBox.Show("Folder with this name alredy exist in the path. Do you want to replace it?\nNote:All files and sub-folders will be deleted.", "Warning", MessageBoxButtons.YesNo,MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     return;
                 }

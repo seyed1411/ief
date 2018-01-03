@@ -139,7 +139,7 @@ namespace IFEContentManagement
             List<MusicFile> retVal = new List<MusicFile>();
             foreach(string x in fileEntries)
             {
-                retVal.Add(new MusicFile(x, Path.GetFileName(x),0));
+                retVal.Add(new MusicFile(x, DiskIO.GetFileTitle(x),0));
             }
             return retVal;
         }
@@ -153,7 +153,13 @@ namespace IFEContentManagement
 
         internal static string GetFileTitle(string _path)
         {
-            return Path.GetFileName(_path);
+            return Path.GetFileNameWithoutExtension(_path);
+        }
+
+        internal static long GetFileSize(string _fullPath)
+        {
+            FileInfo file = new FileInfo(_fullPath);
+            return file.Length;
         }
     }
 }

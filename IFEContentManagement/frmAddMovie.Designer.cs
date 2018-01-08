@@ -33,7 +33,6 @@
             this.btnInsert = new System.Windows.Forms.Button();
             this.btnNewLang = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblAdditionalExisted = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lstGenres = new System.Windows.Forms.ListBox();
             this.cmbAge = new System.Windows.Forms.ComboBox();
@@ -50,13 +49,14 @@
             this.button1 = new System.Windows.Forms.Button();
             this.txtTrailerFie = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.panelLangs = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(15, 400);
+            this.btnCancel.Location = new System.Drawing.Point(10, 562);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(188, 32);
+            this.btnCancel.Size = new System.Drawing.Size(193, 32);
             this.btnCancel.TabIndex = 35;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -64,9 +64,9 @@
             // 
             // btnInsert
             // 
-            this.btnInsert.Location = new System.Drawing.Point(209, 400);
+            this.btnInsert.Location = new System.Drawing.Point(209, 562);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(188, 32);
+            this.btnInsert.Size = new System.Drawing.Size(189, 32);
             this.btnInsert.TabIndex = 34;
             this.btnInsert.Text = "Insert";
             this.btnInsert.UseVisualStyleBackColor = true;
@@ -74,9 +74,9 @@
             // 
             // btnNewLang
             // 
-            this.btnNewLang.Location = new System.Drawing.Point(209, 353);
+            this.btnNewLang.Location = new System.Drawing.Point(10, 519);
             this.btnNewLang.Name = "btnNewLang";
-            this.btnNewLang.Size = new System.Drawing.Size(188, 32);
+            this.btnNewLang.Size = new System.Drawing.Size(388, 32);
             this.btnNewLang.TabIndex = 33;
             this.btnNewLang.Text = "New Language";
             this.btnNewLang.UseVisualStyleBackColor = true;
@@ -85,25 +85,15 @@
             // label7
             // 
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(10, 388);
+            this.label7.Location = new System.Drawing.Point(10, 556);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(388, 2);
             this.label7.TabIndex = 32;
             // 
-            // lblAdditionalExisted
-            // 
-            this.lblAdditionalExisted.AutoSize = true;
-            this.lblAdditionalExisted.Location = new System.Drawing.Point(12, 363);
-            this.lblAdditionalExisted.Name = "lblAdditionalExisted";
-            this.lblAdditionalExisted.Size = new System.Drawing.Size(191, 13);
-            this.lblAdditionalExisted.TabIndex = 31;
-            this.lblAdditionalExisted.Text = "No Additional Language Data Inserted.";
-            this.lblAdditionalExisted.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // label6
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(10, 349);
+            this.label6.Location = new System.Drawing.Point(10, 343);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(388, 2);
             this.label6.TabIndex = 30;
@@ -271,11 +261,23 @@
             this.label8.TabIndex = 36;
             this.label8.Text = "Trailer:";
             // 
+            // panelLangs
+            // 
+            this.panelLangs.AutoScroll = true;
+            this.panelLangs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelLangs.Location = new System.Drawing.Point(70, 353);
+            this.panelLangs.Name = "panelLangs";
+            this.panelLangs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panelLangs.Size = new System.Drawing.Size(327, 160);
+            this.panelLangs.TabIndex = 39;
+            this.panelLangs.WrapContents = false;
+            // 
             // frmAddMovie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(409, 441);
+            this.ClientSize = new System.Drawing.Size(409, 606);
+            this.Controls.Add(this.panelLangs);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtTrailerFie);
             this.Controls.Add(this.label8);
@@ -283,7 +285,6 @@
             this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.btnNewLang);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.lblAdditionalExisted);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lstGenres);
             this.Controls.Add(this.cmbAge);
@@ -299,9 +300,9 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(425, 480);
+            this.MaximumSize = new System.Drawing.Size(425, 645);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(425, 480);
+            this.MinimumSize = new System.Drawing.Size(425, 645);
             this.Name = "frmAddMovie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Movie";
@@ -317,7 +318,6 @@
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Button btnNewLang;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblAdditionalExisted;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox lstGenres;
         private System.Windows.Forms.ComboBox cmbAge;
@@ -334,5 +334,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtTrailerFie;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.FlowLayoutPanel panelLangs;
     }
 }

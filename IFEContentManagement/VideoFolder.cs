@@ -129,10 +129,13 @@ namespace IFEContentManagement
                     allFilesToCopy.Add(new FileCopier(p.trailer.path, movieNewLocation + "\\" + DiskIO.GetFileTitle(p.trailer.path)));
                     p.trailer.path = p.id + "\\" + DiskIO.GetFileTitle(p.trailer.path);
                 }
-                // add video cover to copy
-                allFilesToCopy.Add(new FileCopier(p.cover, movieNewLocation + "\\cover.jpg"));
-                // change the cover path to the new path for further library json saving
-                p.cover = p.id + "\\cover.jpg";
+                if (!string.IsNullOrEmpty(p.cover))
+                {
+                    // add video cover to copy
+                    allFilesToCopy.Add(new FileCopier(p.cover, movieNewLocation + "\\cover.jpg"));
+                    // change the cover path to the new path for further library json saving
+                    p.cover = p.id + "\\cover.jpg";
+                }
             }
             // save changed paths and music files into exported location
             this.SaveMovieLibraryAtLocation(newWorkArea, "index.en.json");
@@ -147,8 +150,10 @@ namespace IFEContentManagement
                     foreach (MovieFile p in temp.library)
                     {
                         p.video.path = p.id + "\\" + DiskIO.GetFileTitle(p.video.path);
-                        p.trailer.path = p.id + "\\" + DiskIO.GetFileTitle(p.trailer.path);
-                        p.cover = p.id + "\\cover.jpg";
+                        if (!string.IsNullOrEmpty(p.trailer.path))
+                            p.trailer.path = p.id + "\\" + DiskIO.GetFileTitle(p.trailer.path);
+                        if (!string.IsNullOrEmpty(p.cover))
+                            p.cover = p.id + "\\cover.jpg";
 
                     }
                     DiskIO.SaveAsJSONFile(temp, newWorkArea, abbriv);
@@ -164,11 +169,48 @@ namespace IFEContentManagement
             foreach (MovieFile m in this.library)
             {
                 retval += DiskIO.GetFileSize(m.video.path);
-                retval += DiskIO.GetFileSize(m.trailer.path);
-                retval += DiskIO.GetFileSize(m.cover);
-                numFiles += 3;
+                numFiles++;
+                if (!string.IsNullOrEmpty(m.trailer.path))
+                { retval += DiskIO.GetFileSize(m.trailer.path); numFiles++; }
+                if (!string.IsNullOrEmpty(m.cover))
+                { retval += DiskIO.GetFileSize(m.cover); numFiles++; }
             }
             _numOfFiles = numFiles;
+            return retval;
+        }
+
+        internal Dictionary<string, MovieFile> ReadNonEnglishDataLibrary(int _id)
+        {
+            Dictionary<string, MovieFile> retVal = new Dictionary<string, MovieFile>();
+            VideoFolder temp = new VideoFolder(this.location, this.title);
+            foreach (var item in Enum.GetValues(typeof(Languages)))
+            {
+                string header = item.ToString().Substring(0, 2);
+                string fileName = "index." + header + ".json";
+                if (DiskIO.IsFileExist(ContentLocation, fileName))
+                {
+                    temp = DiskIO.DeserializeVideoFolderFromFile(ContentLocation, fileName);
+                    temp.SetLocationTitle(this.location, this.title);
+                    if (temp.HasMovieWithID(_id))
+                    {
+                        retVal.Add(item.ToString(), temp.FindMovieWithID(_id));
+                    }
+                }
+            }
+            return retVal;
+        }
+
+        private MovieFile FindMovieWithID(int _id)
+        {
+            MovieFile retval = null;
+            foreach (MovieFile x in this.library)
+            {
+                if (x.id == _id)
+                {
+                    retval = x;
+                    break;
+                }
+            }
             return retval;
         }
     }

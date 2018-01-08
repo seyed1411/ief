@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSenarioMaker));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.btnNewProject = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddPlaylist = new System.Windows.Forms.ToolStripButton();
             this.btnAddMovie = new System.Windows.Forms.ToolStripButton();
@@ -112,7 +112,7 @@
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
+            this.btnNewProject,
             this.toolStripSeparator1,
             this.btnAddPlaylist,
             this.btnAddMovie,
@@ -132,19 +132,18 @@
             this.toolStrip1.Size = new System.Drawing.Size(820, 54);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
-            // toolStripButton1
+            // btnNewProject
             // 
-            this.toolStripButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton1.Image = global::IFEContentManagement.Properties.Resources.project;
-            this.toolStripButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(75, 51);
-            this.toolStripButton1.Text = "New Project";
-            this.toolStripButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click_1);
+            this.btnNewProject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnNewProject.Image = global::IFEContentManagement.Properties.Resources.project;
+            this.btnNewProject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnNewProject.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnNewProject.Name = "btnNewProject";
+            this.btnNewProject.Size = new System.Drawing.Size(75, 51);
+            this.btnNewProject.Text = "New Project";
+            this.btnNewProject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnNewProject.Click += new System.EventHandler(this.btnNewProject_Click);
             // 
             // toolStripSeparator1
             // 
@@ -275,7 +274,7 @@
             this.btnCloseProject.Size = new System.Drawing.Size(80, 51);
             this.btnCloseProject.Text = "Close Project";
             this.btnCloseProject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCloseProject.Click += new System.EventHandler(this.toolStripButton9_Click);
+            this.btnCloseProject.Click += new System.EventHandler(this.btnCloseProject_Click);
             // 
             // strip
             // 
@@ -374,7 +373,6 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Search";
             this.groupBox1.UseCompatibleTextRendering = true;
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // comboBox1
             // 
@@ -786,7 +784,6 @@
             this.Name = "frmSenarioMaker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Senario Maker";
-            this.Activated += new System.EventHandler(this.frmSenarioMaker_Activated);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmSenarioMaker_FormClosed);
             this.Load += new System.EventHandler(this.frmSenarioMaker_Load);
             this.toolStrip1.ResumeLayout(false);
@@ -822,7 +819,7 @@
         #endregion
 
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton btnNewProject;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnAddPlaylist;
         private System.Windows.Forms.ToolStripButton btnAddMovie;

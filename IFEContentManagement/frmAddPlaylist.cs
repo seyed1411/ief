@@ -70,13 +70,16 @@ namespace IFEContentManagement
 
         private void btnNewLang_Click(object sender, EventArgs e)
         {
-            string[] existlangs = new string[panelLangs.Controls.Count];
+            // fetch which additional langs already filled for current playlist
+            string[] existlangs = new string[nonEngAdditionalData.Count];
             int i = 0;
             foreach(var item in nonEngAdditionalData)
             {
                 existlangs[i++] = item.Key;
             }
-            
+            // if all additional langs already filled, no action occured
+            if (existlangs.Length == Enum.GetValues(typeof(Languages)).Length)
+                return;
             frmAddNewLanguage newDlg = new frmAddNewLanguage(!EnglishMoreDataExist(), existlangs);
             if (newDlg.ShowDialog(this) == DialogResult.OK)
             {
@@ -93,7 +96,7 @@ namespace IFEContentManagement
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            if (this.FormCompleted() && EnglishMoreDataExist())
+             if (this.FormCompleted() && EnglishMoreDataExist())
             {
 
                 this.playlistToComplete.SetPlaylist(txtDirectory.Text);
@@ -130,7 +133,7 @@ namespace IFEContentManagement
             }
             else
                 MessageBox.Show("Please fill Directory, Age, Genre and English Additional data first.","Warning",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
+       }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

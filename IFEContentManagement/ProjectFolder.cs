@@ -167,6 +167,7 @@ namespace IFEContentManagement
 
         internal MovieFile FindMovieWithID(int _id)
         {
+            
             MovieFile retval = null;
             foreach (MovieFile x in this.movies.library)
             {
@@ -335,6 +336,16 @@ namespace IFEContentManagement
         internal Dictionary<string, MusicPlaylist> ReadPlaylistNonEnglishData(int _id)
         {
             return this.playlists.ReadNonEnglishDataLibrary(_id);
+        }
+
+        internal Dictionary<string, MovieFile> ReadMovieNonEnglishData(int _id)
+        {
+            return this.movies.ReadNonEnglishDataLibrary(_id);
+        }
+
+        internal Dictionary<string, MovieFile> ReadAnnouncNonEnglishData(int _id)
+        {
+            return this.announces.ReadNonEnglishDataLibrary(_id);
         }
     }
 }

@@ -15,11 +15,16 @@ namespace IFEContentManagement
         public Dictionary<string, MovieFile> nonEngAdditionalData;
         public bool isNewMovie;
 
-        public frmAddMovie(MovieFile _movToComplete, bool _isNew)
+        public frmAddMovie(MovieFile _movToComplete, bool _isNew, Dictionary<string, MovieFile> _nonEngData)
         {
             InitializeComponent();
             movieToComplete = _movToComplete;
-            nonEngAdditionalData = new Dictionary<string, MovieFile>();
+            if (_nonEngData == null)
+            {
+                nonEngAdditionalData = new Dictionary<string, MovieFile>();
+            }
+            else
+                nonEngAdditionalData = _nonEngData;
             isNewMovie = _isNew;
         }
 
@@ -34,81 +39,66 @@ namespace IFEContentManagement
                 int index = cmbAge.FindString(movieToComplete.ageCategory);
                 cmbAge.SelectedIndex = index;
             }
+            else
+                cmbAge.SelectedIndex = 0;
             if (movieToComplete.genre != null)
                 foreach (string x in movieToComplete.genre)
                     lstGenres.SetSelected(lstGenres.FindString(x), true);
+            
+            // create non-english langs panel
+            UpdateLangsPanel();
+        }
+        
+        private void additionalLangRecord_RemoveButton_Click(object sender, LabelEditEventArgs e)
+        {
+            nonEngAdditionalData.Remove(e.Label);
+            UpdateLangsPanel();
+        }
 
+        private void additionalLangRecord_EditButton_Click(object sender, LabelEditEventArgs e)
+        {
+            MovieFile temp = nonEngAdditionalData[e.Label];
+            frmAddNewLanguage frmNewDlg = new frmAddNewLanguage(e.Label, temp.title, temp.artist, temp.description);
+            if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
+            {
+                temp.title = frmNewDlg.InsertedTitle;
+                temp.artist = frmNewDlg.InsertedArtists;
+                temp.description = frmNewDlg.InsertedDescription;
+            }
+            UpdateLangsPanel();
         }
 
         private void btnNewLang_Click(object sender, EventArgs e)
         {
-            if (this.FormCompleted())
+            // fetch which additional langs already filled for current playlist
+            string[] existlangs = new string[nonEngAdditionalData.Count];
+            int i = 0;
+            foreach (var item in nonEngAdditionalData)
             {
-                if (isNewMovie)
-                {
-                    frmAddNewLanguage frmNewDlg = new frmAddNewLanguage("English", movieToComplete.title, movieToComplete.artist, movieToComplete.description);
-                    if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
-                    {
-                        this.movieToComplete.title = frmNewDlg.InsertedTitle;
-                        this.movieToComplete.artist = frmNewDlg.InsertedArtists;
-                        this.movieToComplete.description = frmNewDlg.InsertedDescription;
-                    }
-                }
-                else
-                {
-                    frmAddNewLanguage frmNewDlg = new frmAddNewLanguage("English", movieToComplete.title, movieToComplete.artist, movieToComplete.description);
-                    if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
-                    {
-                        if (frmNewDlg.SelectedLanguage == "English")
-                        {
-                            this.movieToComplete.title = frmNewDlg.InsertedTitle;
-                            this.movieToComplete.artist = frmNewDlg.InsertedArtists;
-                            this.movieToComplete.description = frmNewDlg.InsertedDescription;
-                        }
-                        else
-                        {
-                            // in this condotion we should add new non-Eng language to the private list of playlist
-                            MovieFile m = new MovieFile();
-                            movieToComplete.CopyTo(m);
-                            m.title = frmNewDlg.InsertedTitle;
-                            m.artist = frmNewDlg.InsertedArtists;
-                            m.description = frmNewDlg.InsertedDescription;
-                            if (nonEngAdditionalData.ContainsKey(frmNewDlg.SelectedLanguage))
-                                nonEngAdditionalData.Remove(frmNewDlg.SelectedLanguage);
-                            nonEngAdditionalData.Add(frmNewDlg.SelectedLanguage, m);
-                        }
-                    }
-                }
+                existlangs[i++] = item.Key;
             }
-            else
-                MessageBox.Show("Please fill all of information filds.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            // if all additional langs already filled, no action occured
+            if (existlangs.Length == Enum.GetValues(typeof(Languages)).Length)
+                return;
+            frmAddNewLanguage newDlg = new frmAddNewLanguage(!EnglishMoreDataExist(), existlangs);
+            if (newDlg.ShowDialog(this) == DialogResult.OK)
+            {
+                MovieFile p = new MovieFile(movieToComplete.id);
+                p.title = newDlg.InsertedTitle;
+                p.artist = newDlg.InsertedArtists;
+                p.description = newDlg.InsertedDescription;
+                if (nonEngAdditionalData.ContainsKey(newDlg.SelectedLanguage))
+                    nonEngAdditionalData.Remove(newDlg.SelectedLanguage);
+                nonEngAdditionalData.Add(newDlg.SelectedLanguage, p);
+            }
+            UpdateLangsPanel();
         }
-
-        private bool FormCompleted()
-        {
-            if (txtMovieFile.Text == "" || txtCover.Text == "" ||
-                cmbAge.SelectedItem == null || lstGenres.SelectedItems == null)
-                return false;
-           
-            return true;
-        }
-
-        private bool MovieInfoComplete()
-        {
-            if (txtMovieFile.Text == "" || txtCover.Text == "" ||
-               cmbAge.SelectedItem == null || lstGenres.SelectedItems == null)
-                return false;
-            if (string.IsNullOrEmpty(movieToComplete.title)
-                || string.IsNullOrEmpty(movieToComplete.description)
-                || movieToComplete.artist.Length == 0)
-                return false;
-            return true;
-        }
-
+               
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            if (this.MovieInfoComplete())
+            if (this.FormCompleted() && EnglishMoreDataExist())
             {
+
                 this.movieToComplete.video.path = txtMovieFile.Text;
                 this.movieToComplete.trailer.path = txtTrailerFie.Text;
                 this.movieToComplete.cover = txtCover.Text;
@@ -120,7 +110,12 @@ namespace IFEContentManagement
                     str[i++] = lstGenres.GetItemText(x);
                 this.movieToComplete.genre = str;
                 this.movieToComplete.length = 0;//go back 
+                // apply english language
+                this.movieToComplete.title = nonEngAdditionalData["English"].title;
+                this.movieToComplete.artist = nonEngAdditionalData["English"].artist;
+                this.movieToComplete.description = nonEngAdditionalData["English"].description;
                 // apply for other languages
+                nonEngAdditionalData.Remove("English");
                 foreach (KeyValuePair<string, MovieFile> x in this.nonEngAdditionalData)
                 {
                     x.Value.id = this.movieToComplete.id;
@@ -139,7 +134,7 @@ namespace IFEContentManagement
                 this.DialogResult = DialogResult.OK;
             }
             else
-                MessageBox.Show("Please fill all of information filds.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please fill Video, Age, Genre and English Additional data first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -155,7 +150,7 @@ namespace IFEContentManagement
                 if (DiskIO.IsVideoFile(dlgBrowse.FileName))
                     break;
                 else
-                    MessageBox.Show("This folder contains no music file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("This file is not a valid video file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
             txtMovieFile.Text = dlgBrowse.FileName;
@@ -183,10 +178,46 @@ namespace IFEContentManagement
                 if (DiskIO.IsVideoFile(dlgBrowse.FileName))
                     break;
                 else
-                    MessageBox.Show("This folder contains no music file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("This file is not a valid video file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
             txtTrailerFie.Text = dlgBrowse.FileName;
+        }
+
+        // other methodes
+        private void UpdateLangsPanel()
+        {
+            panelLangs.Controls.Clear();
+            foreach (var item in nonEngAdditionalData)
+            {
+                EditRemoveAdditional additionalLangRecord = new EditRemoveAdditional(item.Key);
+                additionalLangRecord.Width = 300;
+                additionalLangRecord.EditButton_Click += additionalLangRecord_EditButton_Click;
+                additionalLangRecord.RemoveButton_Click += additionalLangRecord_RemoveButton_Click;
+                panelLangs.Controls.Add(additionalLangRecord);
+            }
+        }
+        private string GetFullLangName(string _abbr)
+        {
+            foreach (var item in Enum.GetValues(typeof(Languages)))
+            {
+                if (item.ToString().StartsWith(_abbr))
+                    return item.ToString();
+            }
+            return "";
+        }
+
+        private bool EnglishMoreDataExist()
+        {
+            return nonEngAdditionalData.ContainsKey("English");
+        }
+
+
+        private bool FormCompleted()
+        {
+            if (txtMovieFile.Text == "" || cmbAge.SelectedItem == null || lstGenres.SelectedItems == null)
+                return false;
+            return true;
         }
     }
 }

@@ -33,7 +33,6 @@
             this.btnInsert = new System.Windows.Forms.Button();
             this.btnNewLang = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.lblAdditionalExisted = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.lstGenres = new System.Windows.Forms.ListBox();
             this.cmbAge = new System.Windows.Forms.ComboBox();
@@ -49,13 +48,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbLanguage = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.panelLangs = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(25, 402);
+            this.btnCancel.Location = new System.Drawing.Point(12, 567);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(188, 32);
+            this.btnCancel.Size = new System.Drawing.Size(186, 32);
             this.btnCancel.TabIndex = 35;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -63,7 +63,7 @@
             // 
             // btnInsert
             // 
-            this.btnInsert.Location = new System.Drawing.Point(219, 402);
+            this.btnInsert.Location = new System.Drawing.Point(219, 567);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(188, 32);
             this.btnInsert.TabIndex = 34;
@@ -73,9 +73,9 @@
             // 
             // btnNewLang
             // 
-            this.btnNewLang.Location = new System.Drawing.Point(219, 362);
+            this.btnNewLang.Location = new System.Drawing.Point(12, 527);
             this.btnNewLang.Name = "btnNewLang";
-            this.btnNewLang.Size = new System.Drawing.Size(188, 32);
+            this.btnNewLang.Size = new System.Drawing.Size(395, 32);
             this.btnNewLang.TabIndex = 33;
             this.btnNewLang.Text = "New Language";
             this.btnNewLang.UseVisualStyleBackColor = true;
@@ -84,25 +84,15 @@
             // label7
             // 
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(20, 397);
+            this.label7.Location = new System.Drawing.Point(14, 562);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(388, 2);
+            this.label7.Size = new System.Drawing.Size(392, 2);
             this.label7.TabIndex = 32;
-            // 
-            // lblAdditionalExisted
-            // 
-            this.lblAdditionalExisted.AutoSize = true;
-            this.lblAdditionalExisted.Location = new System.Drawing.Point(22, 372);
-            this.lblAdditionalExisted.Name = "lblAdditionalExisted";
-            this.lblAdditionalExisted.Size = new System.Drawing.Size(191, 13);
-            this.lblAdditionalExisted.TabIndex = 31;
-            this.lblAdditionalExisted.Text = "No Additional Language Data Inserted.";
-            this.lblAdditionalExisted.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(20, 358);
+            this.label6.Location = new System.Drawing.Point(20, 313);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(388, 2);
             this.label6.TabIndex = 30;
@@ -125,7 +115,7 @@
             this.lstGenres.Location = new System.Drawing.Point(76, 160);
             this.lstGenres.Name = "lstGenres";
             this.lstGenres.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstGenres.Size = new System.Drawing.Size(331, 186);
+            this.lstGenres.Size = new System.Drawing.Size(331, 147);
             this.lstGenres.TabIndex = 29;
             // 
             // cmbAge
@@ -249,18 +239,29 @@
             this.label8.TabIndex = 36;
             this.label8.Text = "Language:";
             // 
+            // panelLangs
+            // 
+            this.panelLangs.AutoScroll = true;
+            this.panelLangs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.panelLangs.Location = new System.Drawing.Point(76, 320);
+            this.panelLangs.Name = "panelLangs";
+            this.panelLangs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.panelLangs.Size = new System.Drawing.Size(330, 198);
+            this.panelLangs.TabIndex = 38;
+            this.panelLangs.WrapContents = false;
+            // 
             // frmAddArticle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 446);
+            this.ClientSize = new System.Drawing.Size(414, 606);
+            this.Controls.Add(this.panelLangs);
             this.Controls.Add(this.cmbLanguage);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnInsert);
             this.Controls.Add(this.btnNewLang);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.lblAdditionalExisted);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.lstGenres);
             this.Controls.Add(this.cmbAge);
@@ -276,9 +277,9 @@
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(435, 485);
+            this.MaximumSize = new System.Drawing.Size(435, 645);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(435, 485);
+            this.MinimumSize = new System.Drawing.Size(425, 645);
             this.Name = "frmAddArticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Article";
@@ -294,7 +295,6 @@
         private System.Windows.Forms.Button btnInsert;
         private System.Windows.Forms.Button btnNewLang;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label lblAdditionalExisted;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ListBox lstGenres;
         private System.Windows.Forms.ComboBox cmbAge;
@@ -310,5 +310,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cmbLanguage;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.FlowLayoutPanel panelLangs;
     }
 }

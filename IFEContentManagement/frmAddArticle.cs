@@ -15,7 +15,7 @@ namespace IFEContentManagement
         public Dictionary<string, ArticleFile> nonEngAdditionalData;
         public bool isNewArticle;
 
-        public frmAddArticle(ArticleFile _artToComplete, bool _isNew)
+        public frmAddArticle(ArticleFile _artToComplete, bool _isNew, Dictionary<string, ArticleFile> _nonEngData)
         {
             InitializeComponent();
             articleToComplete = _artToComplete;

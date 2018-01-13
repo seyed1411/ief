@@ -179,6 +179,7 @@ namespace IFEContentManagement
 
             // create root folder
             DiskIO.CreateDirectory(newWorkArea);
+            DiskIO.DeleteAllFiles(newWorkArea);
             // create each playlist folder
             foreach(MusicPlaylist p in this.library)
             {
@@ -188,9 +189,9 @@ namespace IFEContentManagement
                 foreach(MusicFile file in p.GetMusicFilesInfo())
                 {
                     // add music file
-                    allFilesToCopy.Add(new FileCopier(file.file, playlistNewLocation + "\\" + file.title));
+                    allFilesToCopy.Add(new FileCopier(file.file, playlistNewLocation + "\\" + DiskIO.GetFileName(file.file)));
                     // change the file path to the new path for further library json saving
-                    file.file = p.id+ "\\" + file.title;
+                    file.file = p.id + "\\" + DiskIO.GetFileName(file.file);
                 }
                 // add playlist cover to copy
                 if (p.cover != "")

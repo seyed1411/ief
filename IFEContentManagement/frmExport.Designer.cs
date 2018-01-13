@@ -39,18 +39,22 @@
             this.rdbUseCurrent = new System.Windows.Forms.RadioButton();
             this.lblSize = new System.Windows.Forms.Label();
             this.btnExport = new System.Windows.Forms.Button();
+            this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnDeselectAll = new System.Windows.Forms.Button();
+            this.btnSelectEn = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSelectEn);
+            this.groupBox1.Controls.Add(this.btnDeselectAll);
+            this.groupBox1.Controls.Add(this.btnSelectAll);
             this.groupBox1.Controls.Add(this.chkLstLanguages);
-            this.groupBox1.Location = new System.Drawing.Point(17, 16);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(13, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(597, 263);
+            this.groupBox1.Size = new System.Drawing.Size(448, 214);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Languages";
@@ -58,10 +62,9 @@
             // chkLstLanguages
             // 
             this.chkLstLanguages.FormattingEnabled = true;
-            this.chkLstLanguages.Location = new System.Drawing.Point(8, 28);
-            this.chkLstLanguages.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chkLstLanguages.Location = new System.Drawing.Point(6, 23);
             this.chkLstLanguages.Name = "chkLstLanguages";
-            this.chkLstLanguages.Size = new System.Drawing.Size(580, 225);
+            this.chkLstLanguages.Size = new System.Drawing.Size(355, 184);
             this.chkLstLanguages.TabIndex = 0;
             // 
             // groupBox2
@@ -71,11 +74,9 @@
             this.groupBox2.Controls.Add(this.rdbChangeDir);
             this.groupBox2.Controls.Add(this.txtFile);
             this.groupBox2.Controls.Add(this.rdbUseCurrent);
-            this.groupBox2.Location = new System.Drawing.Point(17, 288);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(13, 234);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(597, 165);
+            this.groupBox2.Size = new System.Drawing.Size(448, 134);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Export Directory";
@@ -83,19 +84,17 @@
             // txtCurrentLoc
             // 
             this.txtCurrentLoc.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtCurrentLoc.Location = new System.Drawing.Point(33, 57);
-            this.txtCurrentLoc.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCurrentLoc.Location = new System.Drawing.Point(25, 46);
             this.txtCurrentLoc.Name = "txtCurrentLoc";
             this.txtCurrentLoc.ReadOnly = true;
-            this.txtCurrentLoc.Size = new System.Drawing.Size(448, 15);
+            this.txtCurrentLoc.Size = new System.Drawing.Size(336, 13);
             this.txtCurrentLoc.TabIndex = 28;
             // 
             // btnBrowseDir
             // 
-            this.btnBrowseDir.Location = new System.Drawing.Point(489, 123);
-            this.btnBrowseDir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseDir.Location = new System.Drawing.Point(367, 100);
             this.btnBrowseDir.Name = "btnBrowseDir";
-            this.btnBrowseDir.Size = new System.Drawing.Size(100, 26);
+            this.btnBrowseDir.Size = new System.Drawing.Size(75, 21);
             this.btnBrowseDir.TabIndex = 27;
             this.btnBrowseDir.Text = "Browse";
             this.btnBrowseDir.UseVisualStyleBackColor = true;
@@ -104,10 +103,9 @@
             // rdbChangeDir
             // 
             this.rdbChangeDir.AutoSize = true;
-            this.rdbChangeDir.Location = new System.Drawing.Point(8, 92);
-            this.rdbChangeDir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbChangeDir.Location = new System.Drawing.Point(6, 75);
             this.rdbChangeDir.Name = "rdbChangeDir";
-            this.rdbChangeDir.Size = new System.Drawing.Size(214, 21);
+            this.rdbChangeDir.Size = new System.Drawing.Size(162, 17);
             this.rdbChangeDir.TabIndex = 1;
             this.rdbChangeDir.TabStop = true;
             this.rdbChangeDir.Text = "Use Current Project Directory";
@@ -116,19 +114,17 @@
             // 
             // txtFile
             // 
-            this.txtFile.Location = new System.Drawing.Point(33, 123);
-            this.txtFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFile.Location = new System.Drawing.Point(25, 100);
             this.txtFile.Name = "txtFile";
-            this.txtFile.Size = new System.Drawing.Size(447, 22);
+            this.txtFile.Size = new System.Drawing.Size(336, 20);
             this.txtFile.TabIndex = 26;
             // 
             // rdbUseCurrent
             // 
             this.rdbUseCurrent.AutoSize = true;
-            this.rdbUseCurrent.Location = new System.Drawing.Point(8, 28);
-            this.rdbUseCurrent.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rdbUseCurrent.Location = new System.Drawing.Point(6, 23);
             this.rdbUseCurrent.Name = "rdbUseCurrent";
-            this.rdbUseCurrent.Size = new System.Drawing.Size(214, 21);
+            this.rdbUseCurrent.Size = new System.Drawing.Size(162, 17);
             this.rdbUseCurrent.TabIndex = 0;
             this.rdbUseCurrent.TabStop = true;
             this.rdbUseCurrent.Text = "Use Current Project Directory";
@@ -138,38 +134,65 @@
             // 
             this.lblSize.AutoSize = true;
             this.lblSize.ForeColor = System.Drawing.Color.Red;
-            this.lblSize.Location = new System.Drawing.Point(17, 462);
-            this.lblSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSize.Location = new System.Drawing.Point(13, 375);
             this.lblSize.Name = "lblSize";
-            this.lblSize.Size = new System.Drawing.Size(0, 17);
+            this.lblSize.Size = new System.Drawing.Size(0, 13);
             this.lblSize.TabIndex = 2;
             // 
             // btnExport
             // 
-            this.btnExport.Location = new System.Drawing.Point(448, 492);
-            this.btnExport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExport.Location = new System.Drawing.Point(336, 400);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(167, 37);
+            this.btnExport.Size = new System.Drawing.Size(125, 30);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "Export";
             this.btnExport.UseVisualStyleBackColor = true;
             this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
             // 
+            // btnSelectAll
+            // 
+            this.btnSelectAll.Location = new System.Drawing.Point(367, 23);
+            this.btnSelectAll.Name = "btnSelectAll";
+            this.btnSelectAll.Size = new System.Drawing.Size(75, 21);
+            this.btnSelectAll.TabIndex = 29;
+            this.btnSelectAll.Text = "Select All";
+            this.btnSelectAll.UseVisualStyleBackColor = true;
+            this.btnSelectAll.Click += new System.EventHandler(this.btnSelectAll_Click);
+            // 
+            // btnDeselectAll
+            // 
+            this.btnDeselectAll.Location = new System.Drawing.Point(367, 77);
+            this.btnDeselectAll.Name = "btnDeselectAll";
+            this.btnDeselectAll.Size = new System.Drawing.Size(75, 21);
+            this.btnDeselectAll.TabIndex = 30;
+            this.btnDeselectAll.Text = "Deselect All";
+            this.btnDeselectAll.UseVisualStyleBackColor = true;
+            this.btnDeselectAll.Click += new System.EventHandler(this.btnDeselectAll_Click);
+            // 
+            // btnSelectEn
+            // 
+            this.btnSelectEn.Location = new System.Drawing.Point(367, 50);
+            this.btnSelectEn.Name = "btnSelectEn";
+            this.btnSelectEn.Size = new System.Drawing.Size(75, 21);
+            this.btnSelectEn.TabIndex = 31;
+            this.btnSelectEn.Text = "Just English";
+            this.btnSelectEn.UseVisualStyleBackColor = true;
+            this.btnSelectEn.Click += new System.EventHandler(this.btnSelectEn_Click);
+            // 
             // frmExport
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 542);
+            this.ClientSize = new System.Drawing.Size(472, 447);
             this.Controls.Add(this.btnExport);
             this.Controls.Add(this.lblSize);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(646, 589);
+            this.MaximumSize = new System.Drawing.Size(488, 486);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(646, 589);
+            this.MinimumSize = new System.Drawing.Size(488, 486);
             this.Name = "frmExport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Export Project";
@@ -194,6 +217,9 @@
         private System.Windows.Forms.TextBox txtCurrentLoc;
         private System.Windows.Forms.Label lblSize;
         private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnSelectEn;
+        private System.Windows.Forms.Button btnDeselectAll;
+        private System.Windows.Forms.Button btnSelectAll;
 
     }
 }

@@ -49,9 +49,17 @@ namespace IFEContentManagement
         {
             return File.ReadAllText(_filePath);
         }
-        internal static void DeserializeObjectFromJSONFile(ref Object _obj, string _path, string _name)
+        internal static void DeleteAllFiles( string _fullPath)
         {
-            
+            DirectoryInfo dirInfo = new DirectoryInfo(_fullPath);
+            foreach (FileInfo file in dirInfo.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (DirectoryInfo dir in dirInfo.GetDirectories())
+            {
+                dir.Delete(true);
+            }
         }
 
         internal static AudioFolder DeserializeAudioFolderFromFile(string _path, string _name)
@@ -154,6 +162,11 @@ namespace IFEContentManagement
         internal static string GetFileTitle(string _path)
         {
             return Path.GetFileNameWithoutExtension(_path);
+        }
+
+        internal static string GetFileName(string _path)
+        {
+            return Path.GetFileName(_path);
         }
 
         internal static long GetFileSize(string _fullPath)

@@ -114,20 +114,21 @@ namespace IFEContentManagement
 
             // create root folder
             DiskIO.CreateDirectory(newWorkArea);
+            DiskIO.DeleteAllFiles(newWorkArea);
             foreach (MovieFile p in this.library)
             {
                 // create each movie folder
                 string movieNewLocation = newWorkArea + "\\" + p.id;
                 DiskIO.CreateDirectory(movieNewLocation);
                 // add video files to copy                
-                allFilesToCopy.Add(new FileCopier(p.video.path, movieNewLocation + "\\" + DiskIO.GetFileTitle(p.video.path)));
+                allFilesToCopy.Add(new FileCopier(p.video.path, movieNewLocation + "\\" + DiskIO.GetFileName(p.video.path)));
                 // change the file path to the new path for further library json saving
-                p.video.path = p.id + "\\" + DiskIO.GetFileTitle(p.video.path);
+                p.video.path = p.id + "\\" + DiskIO.GetFileName(p.video.path);
                 // add trailer if exist
                 if (!string.IsNullOrEmpty(p.trailer.path))
                 {
-                    allFilesToCopy.Add(new FileCopier(p.trailer.path, movieNewLocation + "\\" + DiskIO.GetFileTitle(p.trailer.path)));
-                    p.trailer.path = p.id + "\\" + DiskIO.GetFileTitle(p.trailer.path);
+                    allFilesToCopy.Add(new FileCopier(p.trailer.path, movieNewLocation + "\\" + DiskIO.GetFileName(p.trailer.path)));
+                    p.trailer.path = p.id + "\\" + DiskIO.GetFileName(p.trailer.path);
                 }
                 if (!string.IsNullOrEmpty(p.cover))
                 {
@@ -149,9 +150,9 @@ namespace IFEContentManagement
                     VideoFolder temp = DiskIO.DeserializeVideoFolderFromFile(ContentLocation, abbriv);
                     foreach (MovieFile p in temp.library)
                     {
-                        p.video.path = p.id + "\\" + DiskIO.GetFileTitle(p.video.path);
+                        p.video.path = p.id + "\\" + DiskIO.GetFileName(p.video.path);
                         if (!string.IsNullOrEmpty(p.trailer.path))
-                            p.trailer.path = p.id + "\\" + DiskIO.GetFileTitle(p.trailer.path);
+                            p.trailer.path = p.id + "\\" + DiskIO.GetFileName(p.trailer.path);
                         if (!string.IsNullOrEmpty(p.cover))
                             p.cover = p.id + "\\cover.jpg";
 

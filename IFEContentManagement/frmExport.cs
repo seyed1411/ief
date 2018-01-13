@@ -100,5 +100,30 @@ namespace IFEContentManagement
                 return retval;
             }
         }
+
+        private void btnSelectAll_Click(object sender, EventArgs e)
+        {
+            for(int i=0; i<chkLstLanguages.Items.Count;i++)
+            {
+                chkLstLanguages.SetItemChecked(i, true);
+            }
+        }
+
+        private void btnDeselectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < chkLstLanguages.Items.Count; i++)
+            {
+                chkLstLanguages.SetItemChecked(i, false);
+            }
+        }
+
+        private void btnSelectEn_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < chkLstLanguages.Items.Count; i++)
+            {
+                chkLstLanguages.SetItemChecked(i, false);
+            }
+            chkLstLanguages.SetItemChecked(0, true);
+        }
     }
 }

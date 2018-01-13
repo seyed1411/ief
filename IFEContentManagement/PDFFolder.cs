@@ -117,15 +117,16 @@ namespace IFEContentManagement
 
             // create root folder
             DiskIO.CreateDirectory(newWorkArea);
+            DiskIO.DeleteAllFiles(newWorkArea);
             foreach (ArticleFile p in this.library)
             {
                 // create each pdf folder
                 string pdfNewLocation = newWorkArea + "\\" + p.id;
                 DiskIO.CreateDirectory(pdfNewLocation);
                 // add pdf files to copy                
-                allFilesToCopy.Add(new FileCopier(p.file, pdfNewLocation + "\\" + DiskIO.GetFileTitle(p.file)));
+                allFilesToCopy.Add(new FileCopier(p.file, pdfNewLocation + "\\" + DiskIO.GetFileName(p.file)));
                 // change the file path to the new path for further library json saving
-                p.file = p.id + "\\" + DiskIO.GetFileTitle(p.file);
+                p.file = p.id + "\\" + DiskIO.GetFileName(p.file);
 
                 if (!string.IsNullOrEmpty(p.cover))
                 {
@@ -147,7 +148,7 @@ namespace IFEContentManagement
                     PDFFolder temp = DiskIO.DeserializePDFFolderFromFile(ContentLocation, abbriv);
                     foreach (ArticleFile p in temp.library)
                     {
-                        p.file = p.id + "\\" + DiskIO.GetFileTitle(p.file);
+                        p.file = p.id + "\\" + DiskIO.GetFileName(p.file);
                         if (!string.IsNullOrEmpty(p.cover))
                             p.cover = p.id + "\\cover.jpg";
 

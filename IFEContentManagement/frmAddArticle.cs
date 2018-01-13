@@ -19,8 +19,12 @@ namespace IFEContentManagement
         {
             InitializeComponent();
             articleToComplete = _artToComplete;
-            nonEngAdditionalData = new Dictionary<string, ArticleFile>();
-            isNewArticle = _isNew;
+            if (_nonEngData == null)
+            {
+                nonEngAdditionalData = new Dictionary<string, ArticleFile>();
+            }
+            else
+                nonEngAdditionalData = _nonEngData; isNewArticle = _isNew;
             foreach (var item in Enum.GetValues(typeof(Languages)))
             {
                 cmbLanguage.Items.Add(item);
@@ -45,75 +49,59 @@ namespace IFEContentManagement
             if (articleToComplete.genre != null)
                 foreach (string x in articleToComplete.genre)
                     lstGenres.SetSelected(lstGenres.FindString(x), true);
+            
+            // create non-english langs panel
+            UpdateLangsPanel();
+        }
+        
+        private void additionalLangRecord_RemoveButton_Click(object sender, LabelEditEventArgs e)
+        {
+            nonEngAdditionalData.Remove(e.Label);
+            UpdateLangsPanel();
+        }
 
+        private void additionalLangRecord_EditButton_Click(object sender, LabelEditEventArgs e)
+        {
+            ArticleFile temp = nonEngAdditionalData[e.Label];
+            frmAddNewLanguage frmNewDlg = new frmAddNewLanguage(e.Label, temp.title, temp.writer, temp.description);
+            if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
+            {
+                temp.title = frmNewDlg.InsertedTitle;
+                temp.writer = frmNewDlg.InsertedArtists;
+                temp.description = frmNewDlg.InsertedDescription;
+            }
+            UpdateLangsPanel();
         }
 
         private void btnNewLang_Click(object sender, EventArgs e)
         {
-            if (this.FormCompleted())
+            // fetch which additional langs already filled for current playlist
+            string[] existlangs = new string[nonEngAdditionalData.Count];
+            int i = 0;
+            foreach (var item in nonEngAdditionalData)
             {
-                if (isNewArticle)
-                {
-                    frmAddNewLanguage frmNewDlg = new frmAddNewLanguage("English", articleToComplete.title, articleToComplete.writer, articleToComplete.description);
-                    frmNewDlg.lblArtist.Text = "Artists:";
-                    if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
-                    {
-                        this.articleToComplete.title = frmNewDlg.InsertedTitle;
-                        this.articleToComplete.writer = frmNewDlg.InsertedArtists;
-                        this.articleToComplete.description = frmNewDlg.InsertedDescription;
-                    }
-                }
-                else
-                {
-                    frmAddNewLanguage frmNewDlg = new frmAddNewLanguage("English", articleToComplete.title, articleToComplete.writer, articleToComplete.description);
-                    if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
-                    {
-                        if (frmNewDlg.SelectedLanguage == "English")
-                        {
-                            this.articleToComplete.title = frmNewDlg.InsertedTitle;
-                            this.articleToComplete.writer = frmNewDlg.InsertedArtists;
-                            this.articleToComplete.description = frmNewDlg.InsertedDescription;
-                        }
-                        else
-                        {
-                            // in this condotion we should add new non-Eng language to the private list of playlist
-                            ArticleFile art = new ArticleFile(articleToComplete.id);
-                            articleToComplete.CopyTo(art);
-                            art.title = frmNewDlg.InsertedTitle;
-                            art.writer = frmNewDlg.InsertedArtists;
-                            art.description = frmNewDlg.InsertedDescription;
-                            if (nonEngAdditionalData.ContainsKey(frmNewDlg.SelectedLanguage))
-                                nonEngAdditionalData.Remove(frmNewDlg.SelectedLanguage);
-                            nonEngAdditionalData.Add(frmNewDlg.SelectedLanguage, art);
-                        }
-                    }
-                }
+                existlangs[i++] = item.Key;
             }
-            else
-                MessageBox.Show("Please fill all of information filds.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-        }
-
-        private bool FormCompleted()
-        {
-            if (txtFile.Text == "" || txtCover.Text == "" || txtYear.Text == "" || cmbAge.SelectedItem == null || lstGenres.SelectedItems == null)
-                return false;
-            return true;
-        }
-        private bool ArticleInfoComplete()
-        {
-            if (txtFile.Text == "" || txtCover.Text == "" ||
-               cmbAge.SelectedItem == null || lstGenres.SelectedItems == null)
-                return false;
-            if (string.IsNullOrEmpty(articleToComplete.title)
-                || string.IsNullOrEmpty(articleToComplete.description)
-                || articleToComplete.writer.Length == 0)
-                return false;
-            return true;
+            // if all additional langs already filled, no action occured
+            if (existlangs.Length == Enum.GetValues(typeof(Languages)).Length)
+                return;
+            frmAddNewLanguage newDlg = new frmAddNewLanguage(!EnglishMoreDataExist(), existlangs);
+            if (newDlg.ShowDialog(this) == DialogResult.OK)
+            {
+                ArticleFile p = new ArticleFile(articleToComplete.id);
+                p.title = newDlg.InsertedTitle;
+                p.writer = newDlg.InsertedArtists;
+                p.description = newDlg.InsertedDescription;
+                if (nonEngAdditionalData.ContainsKey(newDlg.SelectedLanguage))
+                    nonEngAdditionalData.Remove(newDlg.SelectedLanguage);
+                nonEngAdditionalData.Add(newDlg.SelectedLanguage, p);
+            }
+            UpdateLangsPanel();
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            if (this.ArticleInfoComplete())
+            if (this.FormCompleted() && EnglishMoreDataExist())
             {
 
                 this.articleToComplete.file = txtFile.Text;
@@ -127,7 +115,12 @@ namespace IFEContentManagement
                     str[i++] = lstGenres.GetItemText(x);
                 this.articleToComplete.genre = str;
 
+                // apply english language
+                this.articleToComplete.title = nonEngAdditionalData["English"].title;
+                this.articleToComplete.writer = nonEngAdditionalData["English"].writer;
+                this.articleToComplete.description = nonEngAdditionalData["English"].description;
                 // apply for other languages
+                nonEngAdditionalData.Remove("English");
                 foreach (KeyValuePair<string, ArticleFile> x in this.nonEngAdditionalData)
                 {
                     x.Value.id = this.articleToComplete.id;
@@ -145,7 +138,7 @@ namespace IFEContentManagement
                 this.DialogResult = DialogResult.OK;
             }
             else
-                MessageBox.Show("Please fill all of information filds.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Please fill File, Age, Genre and English Additional data first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -161,7 +154,7 @@ namespace IFEContentManagement
                 if (DiskIO.IsArticleFile(dlgBrowse.FileName))
                     break;
                 else
-                    MessageBox.Show("Selected file is not article (.pdf) file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Selected file is not an article (.pdf) file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
             txtFile.Text = dlgBrowse.FileName;
@@ -179,6 +172,42 @@ namespace IFEContentManagement
             }
             txtCover.Text = dlgOpen.FileName;
 
+        }
+
+        // other methodes
+        private void UpdateLangsPanel()
+        {
+            panelLangs.Controls.Clear();
+            foreach (var item in nonEngAdditionalData)
+            {
+                EditRemoveAdditional additionalLangRecord = new EditRemoveAdditional(item.Key);
+                additionalLangRecord.Width = 300;
+                additionalLangRecord.EditButton_Click += additionalLangRecord_EditButton_Click;
+                additionalLangRecord.RemoveButton_Click += additionalLangRecord_RemoveButton_Click;
+                panelLangs.Controls.Add(additionalLangRecord);
+            }
+        }
+        private string GetFullLangName(string _abbr)
+        {
+            foreach (var item in Enum.GetValues(typeof(Languages)))
+            {
+                if (item.ToString().StartsWith(_abbr))
+                    return item.ToString();
+            }
+            return "";
+        }
+
+        private bool EnglishMoreDataExist()
+        {
+            return nonEngAdditionalData.ContainsKey("English");
+        }
+
+
+        private bool FormCompleted()
+        {
+            if (txtFile.Text == "" || cmbAge.SelectedItem == null || lstGenres.SelectedItems == null)
+                return false;
+            return true;
         }
     }
 }

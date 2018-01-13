@@ -347,5 +347,21 @@ namespace IFEContentManagement
         {
             return this.announces.ReadNonEnglishDataLibrary(_id);
         }
+
+        internal Dictionary<string, ArticleFile> ReadArticleNonEnglishData(int _id)
+        {
+            return this.articles.ReadNonEnglishDataLibrary(_id);
+        }
+
+        internal bool IsEmpty()
+        {
+            if (this.playlists.library.Count == 0 &&
+                this.movies.library.Count == 0 &&
+                this.announces.library.Count == 0 &&
+                this.articles.library.Count == 0 &&
+                this.questions.surveys.Count == 0)
+                return true;
+            return false;
+        }
     }
 }

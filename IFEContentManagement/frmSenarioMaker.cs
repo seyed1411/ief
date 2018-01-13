@@ -169,7 +169,7 @@ namespace IFEContentManagement
         {
             int id = Program.currentProject.FindLastArticleID();
             ArticleFile newArticle = new ArticleFile(id);
-            frmAddArticle newArtDlg = new frmAddArticle(newArticle, true);
+            frmAddArticle newArtDlg = new frmAddArticle(newArticle, true, null);
             newArtDlg.Text = "Add Article";
             if (newArtDlg.ShowDialog(this) == DialogResult.OK)
             {
@@ -188,12 +188,12 @@ namespace IFEContentManagement
             {
                 int id = Convert.ToInt32(e.Node.Text);
                 ArticleFile existArt = Program.currentProject.FindArticleWithID(id);
-                frmAddArticle existArtDlg = new frmAddArticle(existArt, false);
+                // find all additional data for the given announcement id
+                Dictionary<string, ArticleFile> nonEngData = Program.currentProject.ReadArticleNonEnglishData(id);
+                frmAddArticle existArtDlg = new frmAddArticle(existArt, false, nonEngData);
                 existArtDlg.Text = "Edit Article";
                 if (existArtDlg.ShowDialog(this) == DialogResult.OK)
                 {
-                    //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
-                    //Program.currentProject.AddMovie(existMovie);
                     if (existArtDlg.nonEngAdditionalData.Count > 0)
                         Program.currentProject.SaveArticlesNonEnglishData(existArtDlg.nonEngAdditionalData);
                    this.ApplyChangesOnHardDrive();
@@ -233,6 +233,13 @@ namespace IFEContentManagement
 
         private void btnExport_Click(object sender, EventArgs e)
         {
+            // return if nothing added to project
+            if(Program.currentProject.IsEmpty())
+            {
+                MessageBox.Show("There is no content added to project. Please add some items first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+
+            }
             frmExport newExport = new frmExport();
             if(newExport.ShowDialog(this)==DialogResult.OK)
             {

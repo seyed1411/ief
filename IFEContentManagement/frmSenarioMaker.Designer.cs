@@ -39,8 +39,10 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.btnAddSurvey = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton6 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.playlistGeneresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.videoGenresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.articleGenresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.btnExport = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -121,8 +123,7 @@
             this.toolStripSeparator6,
             this.btnAddSurvey,
             this.toolStripSeparator2,
-            this.toolStripButton5,
-            this.toolStripButton6,
+            this.toolStripDropDownButton1,
             this.toolStripSeparator3,
             this.btnExport,
             this.toolStripSeparator5,
@@ -220,27 +221,41 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 54);
             // 
-            // toolStripButton5
+            // toolStripDropDownButton1
             // 
-            this.toolStripButton5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton5.Image = global::IFEContentManagement.Properties.Resources._04581;
-            this.toolStripButton5.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Size = new System.Drawing.Size(49, 51);
-            this.toolStripButton5.Text = "Modify";
-            this.toolStripButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.toolStripDropDownButton1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.playlistGeneresToolStripMenuItem,
+            this.videoGenresToolStripMenuItem,
+            this.articleGenresToolStripMenuItem});
+            this.toolStripDropDownButton1.Image = global::IFEContentManagement.Properties.Resources.genre;
+            this.toolStripDropDownButton1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
+            this.toolStripDropDownButton1.Size = new System.Drawing.Size(51, 51);
+            this.toolStripDropDownButton1.Text = "Genre";
+            this.toolStripDropDownButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             // 
-            // toolStripButton6
+            // playlistGeneresToolStripMenuItem
             // 
-            this.toolStripButton6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.toolStripButton6.Image = global::IFEContentManagement.Properties.Resources.Trash___Full;
-            this.toolStripButton6.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.toolStripButton6.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton6.Name = "toolStripButton6";
-            this.toolStripButton6.Size = new System.Drawing.Size(54, 51);
-            this.toolStripButton6.Text = "Remove";
-            this.toolStripButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.playlistGeneresToolStripMenuItem.Name = "playlistGeneresToolStripMenuItem";
+            this.playlistGeneresToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.playlistGeneresToolStripMenuItem.Text = "Playlist Generes";
+            this.playlistGeneresToolStripMenuItem.Click += new System.EventHandler(this.playlistGeneresToolStripMenuItem_Click);
+            // 
+            // videoGenresToolStripMenuItem
+            // 
+            this.videoGenresToolStripMenuItem.Name = "videoGenresToolStripMenuItem";
+            this.videoGenresToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.videoGenresToolStripMenuItem.Text = "Video Genres";
+            this.videoGenresToolStripMenuItem.Click += new System.EventHandler(this.videoGenresToolStripMenuItem_Click);
+            // 
+            // articleGenresToolStripMenuItem
+            // 
+            this.articleGenresToolStripMenuItem.Name = "articleGenresToolStripMenuItem";
+            this.articleGenresToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.articleGenresToolStripMenuItem.Text = "Article Genres";
+            this.articleGenresToolStripMenuItem.Click += new System.EventHandler(this.articleGenresToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -250,7 +265,7 @@
             // btnExport
             // 
             this.btnExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnExport.Image = global::IFEContentManagement.Properties.Resources._5376;
+            this.btnExport.Image = global::IFEContentManagement.Properties.Resources.export;
             this.btnExport.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnExport.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnExport.Name = "btnExport";
@@ -267,7 +282,7 @@
             // btnCloseProject
             // 
             this.btnCloseProject.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCloseProject.Image = global::IFEContentManagement.Properties.Resources._7051;
+            this.btnCloseProject.Image = global::IFEContentManagement.Properties.Resources.close;
             this.btnCloseProject.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.btnCloseProject.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnCloseProject.Name = "btnCloseProject";
@@ -825,8 +840,6 @@
         private System.Windows.Forms.ToolStripButton btnAddMovie;
         private System.Windows.Forms.ToolStripButton btnAddSurvey;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
-        private System.Windows.Forms.ToolStripButton toolStripButton6;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton btnExport;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
@@ -878,6 +891,10 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripProgressBar progBar;
+        private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem playlistGeneresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem videoGenresToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem articleGenresToolStripMenuItem;
 
     }
 }

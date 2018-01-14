@@ -350,5 +350,23 @@ namespace IFEContentManagement
             //treeProject.EndUpdate();
         }
 
+        private void playlistGeneresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageGenre newDlg = new frmManageGenre("Playlist");
+            newDlg.ShowDialog(this);
+        }
+
+        private void videoGenresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageGenre newDlg = new frmManageGenre("Videos");
+            newDlg.ShowDialog(this);
+        }
+
+        private void articleGenresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageGenre newDlg = new frmManageGenre("Articles");
+            newDlg.ShowDialog(this);
+        }
+
     }
 }

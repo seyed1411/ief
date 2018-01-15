@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace IFEContentManagement
@@ -40,9 +41,14 @@ namespace IFEContentManagement
             }
             else
                 cmbAge.SelectedIndex = 0;
+
+            //
+            lstGenres.Items.Clear();
+            lstGenres.Items.AddRange(GetAudioGenres());
             if (playlistToComplete.genre != null)
                 foreach (string x in playlistToComplete.genre)
-                    lstGenres.SetSelected(lstGenres.FindString(x), true);
+                    if (lstGenres.FindString(x) != -1)
+                        lstGenres.SetSelected(lstGenres.FindString(x), true);
 
             // create non-english langs panel
             UpdateLangsPanel();
@@ -169,6 +175,33 @@ namespace IFEContentManagement
         }
 
         // other methodes
+        private string[] GetAudioGenres()
+        {
+            string[] retval;
+            try
+            {
+                SQLiteConnection mConn;
+                SQLiteDataAdapter mAdapter;
+                DataTable mTable;
+                string mDbPath = Application.StartupPath + "/genres.db";
+
+                // If DB Not Exists, it will be created.
+                mConn = new SQLiteConnection("Data Source=" + mDbPath);
+                mConn.Open();
+                mAdapter = new SQLiteDataAdapter("SELECT Genre FROM [Audios]", mConn);
+                mTable = new DataTable(); // Don't forget initialize!
+                mAdapter.Fill(mTable);
+
+                retval = mTable.AsEnumerable().Select(x => x["Genre"].ToString()).ToArray();
+                mConn.Close();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Some Error in Genres fetch. Please review Audio genres database.\n" + e.Message, "Error", MessageBoxButtons.OK);
+                retval = new string[1] { "Pop" };
+            }
+            return retval;
+        }
         private void UpdateLangsPanel()
         {
             panelLangs.Controls.Clear();

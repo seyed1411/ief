@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSenarioMaker));
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.btnNewProject = new System.Windows.Forms.ToolStripButton();
@@ -54,61 +55,51 @@
             this.tabPlaylists = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.treePlaylists = new System.Windows.Forms.TreeView();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabMovies = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.treeMovies = new System.Windows.Forms.TreeView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabAnnounc = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.treeAnnounc = new System.Windows.Forms.TreeView();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.tabArticles = new System.Windows.Forms.TabPage();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.treeArticle = new System.Windows.Forms.TreeView();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabSurvey = new System.Windows.Forms.TabPage();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
             this.treeQuestions = new System.Windows.Forms.TreeView();
-            this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.mnuRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.mnuButEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuButRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.strip.SuspendLayout();
             this.tabs.SuspendLayout();
             this.tabPlaylists.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tabMovies.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.tabAnnounc.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox6.SuspendLayout();
-            this.tabPage4.SuspendLayout();
+            this.tabArticles.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabSurvey.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox10.SuspendLayout();
+            this.mnuRightClick.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -323,10 +314,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabs.Controls.Add(this.tabPlaylists);
-            this.tabs.Controls.Add(this.tabPage2);
-            this.tabs.Controls.Add(this.tabPage3);
-            this.tabs.Controls.Add(this.tabPage4);
-            this.tabs.Controls.Add(this.tabPage1);
+            this.tabs.Controls.Add(this.tabMovies);
+            this.tabs.Controls.Add(this.tabAnnounc);
+            this.tabs.Controls.Add(this.tabArticles);
+            this.tabs.Controls.Add(this.tabSurvey);
             this.tabs.Location = new System.Drawing.Point(12, 61);
             this.tabs.Name = "tabs";
             this.tabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -370,72 +361,19 @@
             this.treePlaylists.Name = "treePlaylists";
             this.treePlaylists.Size = new System.Drawing.Size(757, 250);
             this.treePlaylists.TabIndex = 0;
-            this.treePlaylists.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeProject_NodeMouseClick);
+            this.treePlaylists.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treePlaylists_NodeMouseClick);
             // 
-            // groupBox1
+            // tabMovies
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(7, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(770, 57);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search";
-            this.groupBox1.UseCompatibleTextRendering = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(701, 22);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(63, 21);
-            this.comboBox1.TabIndex = 3;
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(676, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(19, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "In:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(65, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(605, 20);
-            this.textBox1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Look For:";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.groupBox3);
-            this.tabPage2.Controls.Add(this.groupBox4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(788, 369);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Movies";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabMovies.Controls.Add(this.groupBox3);
+            this.tabMovies.Controls.Add(this.groupBox4);
+            this.tabMovies.Location = new System.Drawing.Point(4, 22);
+            this.tabMovies.Name = "tabMovies";
+            this.tabMovies.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMovies.Size = new System.Drawing.Size(788, 369);
+            this.tabMovies.TabIndex = 1;
+            this.tabMovies.Text = "Movies";
+            this.tabMovies.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
@@ -446,7 +384,7 @@
             this.groupBox3.Location = new System.Drawing.Point(7, 70);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox3.Size = new System.Drawing.Size(770, 253);
+            this.groupBox3.Size = new System.Drawing.Size(770, 293);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Working Stage";
@@ -459,16 +397,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeMovies.Location = new System.Drawing.Point(7, 37);
             this.treeMovies.Name = "treeMovies";
-            this.treeMovies.Size = new System.Drawing.Size(757, 210);
+            this.treeMovies.Size = new System.Drawing.Size(757, 250);
             this.treeMovies.TabIndex = 0;
-            this.treeMovies.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMovies_NodeMouseDoubleClick);
+            this.treeMovies.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeMovies_NodeMouseClick);
             // 
             // groupBox4
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox4.Controls.Add(this.comboBox2);
-            this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Controls.Add(this.textBox2);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Location = new System.Drawing.Point(7, 6);
@@ -480,32 +416,14 @@
             this.groupBox4.Text = "Search";
             this.groupBox4.UseCompatibleTextRendering = true;
             // 
-            // comboBox2
-            // 
-            this.comboBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(701, 22);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(63, 21);
-            this.comboBox2.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(676, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(19, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "In:";
-            // 
             // textBox2
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox2.Location = new System.Drawing.Point(65, 22);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(605, 20);
+            this.textBox2.Size = new System.Drawing.Size(699, 20);
             this.textBox2.TabIndex = 1;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label4
             // 
@@ -516,16 +434,16 @@
             this.label4.TabIndex = 0;
             this.label4.Text = "Look For:";
             // 
-            // tabPage3
+            // tabAnnounc
             // 
-            this.tabPage3.Controls.Add(this.groupBox5);
-            this.tabPage3.Controls.Add(this.groupBox6);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(788, 369);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Announcements";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabAnnounc.Controls.Add(this.groupBox5);
+            this.tabAnnounc.Controls.Add(this.groupBox6);
+            this.tabAnnounc.Location = new System.Drawing.Point(4, 22);
+            this.tabAnnounc.Name = "tabAnnounc";
+            this.tabAnnounc.Size = new System.Drawing.Size(788, 369);
+            this.tabAnnounc.TabIndex = 2;
+            this.tabAnnounc.Text = "Announcements";
+            this.tabAnnounc.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -536,7 +454,7 @@
             this.groupBox5.Location = new System.Drawing.Point(7, 70);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox5.Size = new System.Drawing.Size(770, 253);
+            this.groupBox5.Size = new System.Drawing.Size(770, 296);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Working Stage";
@@ -549,16 +467,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeAnnounc.Location = new System.Drawing.Point(7, 37);
             this.treeAnnounc.Name = "treeAnnounc";
-            this.treeAnnounc.Size = new System.Drawing.Size(757, 210);
+            this.treeAnnounc.Size = new System.Drawing.Size(757, 253);
             this.treeAnnounc.TabIndex = 0;
-            this.treeAnnounc.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeAnnounc_NodeMouseDoubleClick);
+            this.treeAnnounc.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeAnnounc_NodeMouseClick);
             // 
             // groupBox6
             // 
             this.groupBox6.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox6.Controls.Add(this.comboBox3);
-            this.groupBox6.Controls.Add(this.label5);
             this.groupBox6.Controls.Add(this.textBox3);
             this.groupBox6.Controls.Add(this.label6);
             this.groupBox6.Location = new System.Drawing.Point(7, 6);
@@ -570,32 +486,14 @@
             this.groupBox6.Text = "Search";
             this.groupBox6.UseCompatibleTextRendering = true;
             // 
-            // comboBox3
-            // 
-            this.comboBox3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(701, 22);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(63, 21);
-            this.comboBox3.TabIndex = 3;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(676, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(19, 13);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "In:";
-            // 
             // textBox3
             // 
             this.textBox3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox3.Location = new System.Drawing.Point(65, 22);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(605, 20);
+            this.textBox3.Size = new System.Drawing.Size(699, 20);
             this.textBox3.TabIndex = 1;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // label6
             // 
@@ -606,16 +504,16 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Look For:";
             // 
-            // tabPage4
+            // tabArticles
             // 
-            this.tabPage4.Controls.Add(this.groupBox7);
-            this.tabPage4.Controls.Add(this.groupBox8);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(788, 369);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Articles";
-            this.tabPage4.UseVisualStyleBackColor = true;
+            this.tabArticles.Controls.Add(this.groupBox7);
+            this.tabArticles.Controls.Add(this.groupBox8);
+            this.tabArticles.Location = new System.Drawing.Point(4, 22);
+            this.tabArticles.Name = "tabArticles";
+            this.tabArticles.Size = new System.Drawing.Size(788, 369);
+            this.tabArticles.TabIndex = 3;
+            this.tabArticles.Text = "Articles";
+            this.tabArticles.UseVisualStyleBackColor = true;
             // 
             // groupBox7
             // 
@@ -626,7 +524,7 @@
             this.groupBox7.Location = new System.Drawing.Point(7, 70);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox7.Size = new System.Drawing.Size(770, 253);
+            this.groupBox7.Size = new System.Drawing.Size(770, 296);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Working Stage";
@@ -639,16 +537,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeArticle.Location = new System.Drawing.Point(7, 37);
             this.treeArticle.Name = "treeArticle";
-            this.treeArticle.Size = new System.Drawing.Size(757, 210);
+            this.treeArticle.Size = new System.Drawing.Size(757, 253);
             this.treeArticle.TabIndex = 0;
-            this.treeArticle.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeArticle_NodeMouseDoubleClick);
+            this.treeArticle.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeArticle_NodeMouseClick);
             // 
             // groupBox8
             // 
             this.groupBox8.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox8.Controls.Add(this.comboBox4);
-            this.groupBox8.Controls.Add(this.label7);
             this.groupBox8.Controls.Add(this.textBox4);
             this.groupBox8.Controls.Add(this.label8);
             this.groupBox8.Location = new System.Drawing.Point(7, 6);
@@ -660,32 +556,14 @@
             this.groupBox8.Text = "Search";
             this.groupBox8.UseCompatibleTextRendering = true;
             // 
-            // comboBox4
-            // 
-            this.comboBox4.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(701, 22);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(63, 21);
-            this.comboBox4.TabIndex = 3;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(676, 25);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(19, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "In:";
-            // 
             // textBox4
             // 
             this.textBox4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox4.Location = new System.Drawing.Point(65, 22);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(605, 20);
+            this.textBox4.Size = new System.Drawing.Size(699, 20);
             this.textBox4.TabIndex = 1;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // label8
             // 
@@ -696,16 +574,15 @@
             this.label8.TabIndex = 0;
             this.label8.Text = "Look For:";
             // 
-            // tabPage1
+            // tabSurvey
             // 
-            this.tabPage1.Controls.Add(this.groupBox9);
-            this.tabPage1.Controls.Add(this.groupBox10);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(788, 369);
-            this.tabPage1.TabIndex = 4;
-            this.tabPage1.Text = "Surveys";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabSurvey.Controls.Add(this.groupBox9);
+            this.tabSurvey.Location = new System.Drawing.Point(4, 22);
+            this.tabSurvey.Name = "tabSurvey";
+            this.tabSurvey.Size = new System.Drawing.Size(788, 369);
+            this.tabSurvey.TabIndex = 4;
+            this.tabSurvey.Text = "Surveys";
+            this.tabSurvey.UseVisualStyleBackColor = true;
             // 
             // groupBox9
             // 
@@ -713,10 +590,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox9.Controls.Add(this.treeQuestions);
-            this.groupBox9.Location = new System.Drawing.Point(7, 70);
+            this.groupBox9.Location = new System.Drawing.Point(7, 14);
             this.groupBox9.Name = "groupBox9";
             this.groupBox9.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox9.Size = new System.Drawing.Size(770, 253);
+            this.groupBox9.Size = new System.Drawing.Size(770, 352);
             this.groupBox9.TabIndex = 9;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Working Stage";
@@ -729,62 +606,64 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeQuestions.Location = new System.Drawing.Point(7, 37);
             this.treeQuestions.Name = "treeQuestions";
-            this.treeQuestions.Size = new System.Drawing.Size(757, 210);
+            this.treeQuestions.Size = new System.Drawing.Size(757, 309);
             this.treeQuestions.TabIndex = 0;
-            this.treeQuestions.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeQuestions_NodeMouseDoubleClick);
+            this.treeQuestions.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeQuestions_NodeMouseClick);
             // 
-            // groupBox10
+            // mnuRightClick
             // 
-            this.groupBox10.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.mnuRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuButEdit,
+            this.mnuButRemove});
+            this.mnuRightClick.Name = "mnuRightClick";
+            this.mnuRightClick.Size = new System.Drawing.Size(145, 48);
+            // 
+            // mnuButEdit
+            // 
+            this.mnuButEdit.Name = "mnuButEdit";
+            this.mnuButEdit.Size = new System.Drawing.Size(144, 22);
+            this.mnuButEdit.Text = "Edit Item ...";
+            this.mnuButEdit.Click += new System.EventHandler(this.mnuButEdit_Click);
+            // 
+            // mnuButRemove
+            // 
+            this.mnuButRemove.Name = "mnuButRemove";
+            this.mnuButRemove.Size = new System.Drawing.Size(144, 22);
+            this.mnuButRemove.Text = "Remove Item";
+            this.mnuButRemove.Click += new System.EventHandler(this.mnuButRemove_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Look For:";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox10.Controls.Add(this.comboBox5);
-            this.groupBox10.Controls.Add(this.label9);
-            this.groupBox10.Controls.Add(this.textBox5);
-            this.groupBox10.Controls.Add(this.label10);
-            this.groupBox10.Location = new System.Drawing.Point(7, 6);
-            this.groupBox10.Name = "groupBox10";
-            this.groupBox10.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox10.Size = new System.Drawing.Size(770, 57);
-            this.groupBox10.TabIndex = 8;
-            this.groupBox10.TabStop = false;
-            this.groupBox10.Text = "Search";
-            this.groupBox10.UseCompatibleTextRendering = true;
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(7, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.groupBox1.Size = new System.Drawing.Size(770, 57);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search";
+            this.groupBox1.UseCompatibleTextRendering = true;
             // 
-            // comboBox5
+            // textBox1
             // 
-            this.comboBox5.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(701, 22);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(63, 21);
-            this.comboBox5.TabIndex = 3;
-            // 
-            // label9
-            // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(676, 25);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(19, 13);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "In:";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox5.Location = new System.Drawing.Point(65, 22);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(605, 20);
-            this.textBox5.TabIndex = 1;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(7, 25);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 13);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Look For:";
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(65, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(699, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // frmSenarioMaker
             // 
@@ -799,6 +678,7 @@
             this.Name = "frmSenarioMaker";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Senario Maker";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSenarioMaker_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmSenarioMaker_FormClosed);
             this.Load += new System.EventHandler(this.frmSenarioMaker_Load);
             this.toolStrip1.ResumeLayout(false);
@@ -808,24 +688,23 @@
             this.tabs.ResumeLayout(false);
             this.tabPlaylists.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
+            this.tabMovies.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
+            this.tabAnnounc.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
+            this.tabArticles.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
+            this.tabSurvey.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
-            this.groupBox10.ResumeLayout(false);
-            this.groupBox10.PerformLayout();
+            this.mnuRightClick.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -847,21 +726,14 @@
         private System.Windows.Forms.StatusStrip strip;
         private System.Windows.Forms.TabControl tabs;
         private System.Windows.Forms.TabPage tabPlaylists;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.TabPage tabMovies;
+        private System.Windows.Forms.TabPage tabAnnounc;
+        private System.Windows.Forms.TabPage tabArticles;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TreeView treePlaylists;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.TreeView treeMovies;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripButton btnAddAnnounc;
@@ -870,31 +742,28 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.TreeView treeAnnounc;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.TreeView treeArticle;
         private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabSurvey;
         private System.Windows.Forms.GroupBox groupBox9;
         private System.Windows.Forms.TreeView treeQuestions;
-        private System.Windows.Forms.GroupBox groupBox10;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripProgressBar progBar;
         private System.Windows.Forms.ToolStripDropDownButton toolStripDropDownButton1;
         private System.Windows.Forms.ToolStripMenuItem playlistGeneresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem videoGenresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem articleGenresToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip mnuRightClick;
+        private System.Windows.Forms.ToolStripMenuItem mnuButEdit;
+        private System.Windows.Forms.ToolStripMenuItem mnuButRemove;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
 
     }
 }

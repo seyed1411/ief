@@ -31,6 +31,8 @@ namespace IFEContentManagement
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
+            if (txtTitle.Text == "")
+                return;
             if (ProjectFolder.IsValidProjectDirectory(txtLocation.Text + "\\" + txtTitle.Text))
             {
                 if (MessageBox.Show("Folder with this name alredy exist in the path. Do you want to replace it?\nNote:All files and sub-folders will be deleted.", "Warning", MessageBoxButtons.YesNo,MessageBoxIcon.Question) != DialogResult.Yes)

@@ -90,7 +90,7 @@ namespace IFEContentManagement
             }
         }
 
-        private void RemoveArticleWithID(int _id)
+        public void RemoveArticleWithID(int _id)
         {
             foreach (ArticleFile p in library)
                 if (p.id == _id)
@@ -211,6 +211,26 @@ namespace IFEContentManagement
                 }
             }
             return retval;
+        }
+
+        internal void RemoveArticleNonEnglishData(int _id)
+        {
+            PDFFolder temp = new PDFFolder(this.location, this.title);
+            foreach (var item in Enum.GetValues(typeof(Languages)))
+            {
+                string header = item.ToString().Substring(0, 2);
+                string fileName = "index." + header + ".json";
+                if (DiskIO.IsFileExist(ContentLocation, fileName))
+                {
+                    temp = DiskIO.DeserializePDFFolderFromFile(ContentLocation, fileName);
+                    temp.SetLocationTitle(this.location, this.title);
+                    if (temp.HasArticleWithID(_id))
+                    {
+                        temp.RemoveArticleWithID(_id);
+                    }
+                    DiskIO.SaveAsJSONFile(temp, this.ContentLocation, fileName);
+                }
+            }
         }
     }
 }

@@ -73,21 +73,25 @@ namespace IFEContentManagement
             dlgOpen.Filter = "Mahan Content Management Files | *.mcm";
             if (dlgOpen.ShowDialog() == DialogResult.OK && !string.IsNullOrEmpty(dlgOpen.FileName))
             {
-                if(ProjectFolder.IsValidProjectDirectory(DiskIO.GetDirectoryName(dlgOpen.FileName)))
+                try
                 {
-                    //MessageBox.Show("sdadada");
-                    //try
-                    //{
-                         Program.currentProject = new ProjectFolder(dlgOpen.FileName);
-                         Program.mcmFile = dlgOpen.FileName;
-                    //}
-                    //catch (Exception exp)
-                    //{
-                      //  MessageBox.Show("Can not load existed project. Please review directory and .mcm file.\n" + "Details: " + exp.Message);
-                    //}
-                    frmSenarioMaker workDlg = new frmSenarioMaker(this);
-                    this.Hide();
-                    workDlg.Show();
+                    if (ProjectFolder.IsValidProjectDirectory(DiskIO.GetDirectoryName(dlgOpen.FileName)))
+                    {
+                        //MessageBox.Show("sdadada");
+
+                        Program.currentProject = new ProjectFolder(dlgOpen.FileName);
+                        Program.mcmFile = dlgOpen.FileName;
+
+                        frmSenarioMaker workDlg = new frmSenarioMaker(this);
+                        this.Hide();
+                        workDlg.Show();
+                    }
+                    else
+                        throw new Exception(".MCM File or project directory is not valid.");
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("Can not load existed project. Please review directory and .mcm file.\n" + "Details: " + exp.Message, "Loading Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

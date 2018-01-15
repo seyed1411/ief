@@ -87,7 +87,7 @@ namespace IFEContentManagement
             }
         }
 
-        private void RemoveMovieWithID(int _id)
+        public void RemoveMovieWithID(int _id)
         {
             foreach (MovieFile p in library)
                 if (p.id == _id)
@@ -213,6 +213,26 @@ namespace IFEContentManagement
                 }
             }
             return retval;
+        }
+
+        internal void RemoveMovieNonEnglishData(int _id)
+        {
+            VideoFolder temp = new VideoFolder(this.location, this.title);
+            foreach (var item in Enum.GetValues(typeof(Languages)))
+            {
+                string header = item.ToString().Substring(0, 2);
+                string fileName = "index." + header + ".json";
+                if (DiskIO.IsFileExist(ContentLocation, fileName))
+                {
+                    temp = DiskIO.DeserializeVideoFolderFromFile(ContentLocation, fileName);
+                    temp.SetLocationTitle(this.location, this.title);
+                    if (temp.HasMovieWithID(_id))
+                    {
+                        temp.RemoveMovieWithID(_id);
+                    }
+                    DiskIO.SaveAsJSONFile(temp, this.ContentLocation, fileName);
+                }
+            }
         }
     }
 }

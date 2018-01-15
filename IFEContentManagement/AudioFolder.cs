@@ -152,7 +152,7 @@ namespace IFEContentManagement
             return retval;
         }
 
-        private void RemovePlaylistWithID(int _id)
+        public void RemovePlaylistWithID(int _id)
         {
             foreach (MusicPlaylist p in library)
                 if (p.id == _id)
@@ -245,6 +245,26 @@ namespace IFEContentManagement
             return retval;
         }
 
-        
+
+
+        internal void RemovePlaylistNonEnglishData(int _id)
+        {
+            AudioFolder temp = new AudioFolder(this.location, this.title);
+            foreach (var item in Enum.GetValues(typeof(Languages)))
+            {
+                string header = item.ToString().Substring(0, 2);
+                string fileName = "index." + header + ".json";
+                if (DiskIO.IsFileExist(ContentLocation, fileName))
+                {
+                    temp = DiskIO.DeserializeAudioFolderFromFile(ContentLocation, fileName);
+                    temp.SetLocationTitle(this.location, this.title);
+                    if (temp.HasPlaylistWithID(_id))
+                    {
+                        temp.RemovePlaylistWithID(_id);
+                    }
+                    DiskIO.SaveAsJSONFile(temp, this.ContentLocation, fileName);
+                }
+            }
+        }
     }
 }

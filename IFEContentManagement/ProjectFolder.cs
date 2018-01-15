@@ -42,6 +42,7 @@ namespace IFEContentManagement
             string[] tempArr = mcmContent.Split(';');
             this.title = tempArr[0];
             this.location = tempArr[1];
+            
             playlists = new AudioFolder(ContentLocation, AUDIO_FOLDER_NAME);
             playlists = AudioFolder.SerializeFromJSON(ContentLocation,AUDIO_FOLDER_NAME, "index.en.json");
             movies = new VideoFolder(ContentLocation, VIDEO_FOLDER_NAME);
@@ -88,7 +89,11 @@ namespace IFEContentManagement
 
         internal int FindLastPlaylistID()
         {
-            return this.playlists.library.Count + 1;
+            int retval = 0;
+            for (int i = 1; i < int.MaxValue; i++)
+                if (!this.playlists.HasPlaylistWithID(i))
+                { retval = i; break; }
+            return retval;
         }
 
         internal void AddPlaylist(MusicPlaylist _newPlaylist)
@@ -145,7 +150,10 @@ namespace IFEContentManagement
 
         internal int FindLastMovieID()
         {
-            return this.movies.library.Count + 1;
+            int retval = 0;
+            for (int i = 1; i < int.MaxValue; i++)
+                if (!this.movies.HasMovieWithID(i))
+                { retval = i; break; } return retval;
         }
 
         internal void AddMovie(MovieFile _newMovie)
@@ -182,7 +190,10 @@ namespace IFEContentManagement
 
         internal int FindLastAnnouncID()
         {
-            return this.announces.library.Count + 1;
+            int retval = 0;
+            for (int i = 1; i < int.MaxValue; i++)
+                if (!this.announces.HasMovieWithID(i))
+                { retval = i; break; } return retval;
         }
 
         internal void AddAnnouncement(MovieFile _newMovie)
@@ -220,7 +231,10 @@ namespace IFEContentManagement
 
         internal int FindLastArticleID()
         {
-            return this.articles.library.Count + 1;
+            int retval = 0;
+            for (int i = 1; i < int.MaxValue; i++)
+                if (!this.articles.HasArticleWithID(i))
+                { retval = i; break; } return retval;
         }
 
         internal void AddArticle(ArticleFile _newArticle)
@@ -362,6 +376,35 @@ namespace IFEContentManagement
                 this.questions.surveys.Count == 0)
                 return true;
             return false;
+        }
+
+        internal void RemovePlaylistWithID(int _id)
+        {
+            this.playlists.RemovePlaylistWithID(_id);
+            this.playlists.RemovePlaylistNonEnglishData(_id);
+        }
+
+        internal void RemoveMovietWithID(int _id)
+        {
+            this.movies.RemoveMovieWithID(_id);
+            this.movies.RemoveMovieNonEnglishData(_id);
+        }
+
+        internal void RemoveAnnouncWithID(int _id)
+        {
+            this.announces.RemoveMovieWithID(_id);
+            this.announces.RemoveMovieNonEnglishData(_id);
+        }
+
+        internal void RemoveArticleWithID(int _id)
+        {
+            this.articles.RemoveArticleWithID(_id);
+            this.articles.RemoveArticleNonEnglishData(_id);
+        }
+
+        internal void RemoveSurveyWithIndex(int _index)
+        {
+            this.questions.surveys.RemoveAt(_index);
         }
     }
 }

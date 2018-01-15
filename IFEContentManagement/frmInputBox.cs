@@ -37,5 +37,14 @@ namespace IFEContentManagement
             Input = "";
             DialogResult = DialogResult.Cancel;
         }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar ==(char)( Keys.Enter))
+            {
+                Input = textBox1.Text;
+                DialogResult = DialogResult.OK;
+            }
+        }
     }
 }

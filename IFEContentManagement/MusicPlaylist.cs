@@ -11,11 +11,6 @@ namespace IFEContentManagement
         UNDER17,
         Uper18
     }
-    public enum GenereList
-    {
-        Pop,
-        Rock
-    }
     public enum Languages
     {
         English = 1,
@@ -34,7 +29,7 @@ namespace IFEContentManagement
 
         //uniq id of each playlist that enable us to integrate different langs of one playlist
         public int id;
-        //public string lannguage;
+        //public string language;
         public string playlist;
         public int num_tracks;
 

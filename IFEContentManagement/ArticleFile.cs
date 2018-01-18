@@ -9,7 +9,7 @@ namespace IFEContentManagement
     {
         //uniq id of each playlist that enable us to integrate different langs of one playlist
         public int id;
-        public string lannguage;
+        public string language;
         public string file;
         //public int num_tracks;
 
@@ -34,7 +34,7 @@ namespace IFEContentManagement
             _p.id = this.id;
             _p.file = this.file;
             _p.cover = this.cover;
-            _p.lannguage = this.lannguage;
+            _p.language = this.language;
             _p.ageCategory = this.ageCategory;
             _p.genre = this.genre;
             _p.title = this.title;

@@ -126,14 +126,14 @@ namespace IFEContentManagement
                 // add pdf files to copy                
                 allFilesToCopy.Add(new FileCopier(p.file, pdfNewLocation + "\\" + DiskIO.GetFileName(p.file)));
                 // change the file path to the new path for further library json saving
-                p.file = p.id + "\\" + DiskIO.GetFileName(p.file);
+                p.file = DiskIO.GetFileName(p.file);
 
                 if (!string.IsNullOrEmpty(p.cover))
                 {
                     // add video cover to copy
                     allFilesToCopy.Add(new FileCopier(p.cover, pdfNewLocation + "\\cover.jpg"));
                     // change the cover path to the new path for further library json saving
-                    p.cover = p.id + "\\cover.jpg";
+                    p.cover = "\\cover.jpg";
                 }
             }
             // save changed paths and music files into exported location
@@ -148,9 +148,9 @@ namespace IFEContentManagement
                     PDFFolder temp = DiskIO.DeserializePDFFolderFromFile(ContentLocation, abbriv);
                     foreach (ArticleFile p in temp.library)
                     {
-                        p.file = p.id + "\\" + DiskIO.GetFileName(p.file);
+                        p.file = DiskIO.GetFileName(p.file);
                         if (!string.IsNullOrEmpty(p.cover))
-                            p.cover = p.id + "\\cover.jpg";
+                            p.cover = "\\cover.jpg";
 
                     }
                     DiskIO.SaveAsJSONFile(temp, newWorkArea, abbriv);

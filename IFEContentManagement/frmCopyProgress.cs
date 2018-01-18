@@ -125,6 +125,12 @@ namespace IFEContentManagement
             if (docopy) mCopier.RunWorkerAsync();
             else mCopier.CancelAsync();
         }
+
+        private void frmCopyProgress_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult == DialogResult.Cancel)
+                e.Cancel = true;
+        }
     }
 
 }

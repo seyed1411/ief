@@ -100,6 +100,7 @@
             this.btnImportBrowse.TabIndex = 6;
             this.btnImportBrowse.Text = "Browse";
             this.btnImportBrowse.UseVisualStyleBackColor = true;
+            this.btnImportBrowse.Visible = false;
             // 
             // txtImportedLoc
             // 
@@ -109,6 +110,7 @@
             this.txtImportedLoc.Name = "txtImportedLoc";
             this.txtImportedLoc.Size = new System.Drawing.Size(425, 22);
             this.txtImportedLoc.TabIndex = 5;
+            this.txtImportedLoc.Visible = false;
             // 
             // chbImportProjData
             // 
@@ -120,6 +122,7 @@
             this.chbImportProjData.TabIndex = 7;
             this.chbImportProjData.Text = "Import another project data in new project";
             this.chbImportProjData.UseVisualStyleBackColor = true;
+            this.chbImportProjData.Visible = false;
             this.chbImportProjData.CheckedChanged += new System.EventHandler(this.chbImportProjData_CheckedChanged);
             // 
             // btnCreate

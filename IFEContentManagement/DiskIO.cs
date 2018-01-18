@@ -174,5 +174,13 @@ namespace IFEContentManagement
             FileInfo file = new FileInfo(_fullPath);
             return file.Length;
         }
+
+        internal static bool DriveHasFreeSpace(string _fullPath, long _size)
+        {
+            DriveInfo d = new DriveInfo(Path.GetPathRoot(_fullPath));
+            if (d.TotalFreeSpace > _size + 10485760) // consider additional 10Mb for confidence
+                return true;
+            return false;
+        }
     }
 }

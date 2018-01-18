@@ -9,7 +9,7 @@ namespace IFEContentManagement
     {
         //uniq id of each playlist that enable us to integrate different langs of one playlist
         public int id;
-        public VideoLanguages lannguage;
+        public VideoLanguages language;
         public VideoPathQual video;
         public VideoPathQual trailer;
         public int length;
@@ -27,7 +27,7 @@ namespace IFEContentManagement
 
         public MovieFile()
         {
-            lannguage = new VideoLanguages();
+            language = new VideoLanguages();
             video = new VideoPathQual();
             trailer = new VideoPathQual();
         }
@@ -39,7 +39,7 @@ namespace IFEContentManagement
         internal void CopyTo(MovieFile _m)
         {
             _m.id = this.id;
-            _m.lannguage.audio = this.lannguage.audio;
+            _m.language.audio = this.language.audio;
             _m.video.path = this.video.path;
             _m.video.quality = this.video.quality;
             _m.trailer.path = this.trailer.path;

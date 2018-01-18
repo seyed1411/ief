@@ -66,7 +66,8 @@
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Visible = false;
             // 
             // frmCopyProgress
             // 
@@ -85,6 +86,7 @@
             this.Name = "frmCopyProgress";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCopyProgress";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmCopyProgress_FormClosing);
             this.Load += new System.EventHandler(this.frmCopyProgress_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

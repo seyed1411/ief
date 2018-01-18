@@ -55,6 +55,9 @@
             this.tabPlaylists = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.treePlaylists = new System.Windows.Forms.TreeView();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabMovies = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.treeMovies = new System.Windows.Forms.TreeView();
@@ -79,14 +82,12 @@
             this.mnuRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnuButEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuButRemove = new System.Windows.Forms.ToolStripMenuItem();
-            this.label1 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.strip.SuspendLayout();
             this.tabs.SuspendLayout();
             this.tabPlaylists.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabMovies.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -99,7 +100,6 @@
             this.tabSurvey.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.mnuRightClick.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -229,6 +229,7 @@
             // 
             // playlistGeneresToolStripMenuItem
             // 
+            this.playlistGeneresToolStripMenuItem.Image = global::IFEContentManagement.Properties.Resources.music;
             this.playlistGeneresToolStripMenuItem.Name = "playlistGeneresToolStripMenuItem";
             this.playlistGeneresToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.playlistGeneresToolStripMenuItem.Text = "Playlist Generes";
@@ -236,6 +237,7 @@
             // 
             // videoGenresToolStripMenuItem
             // 
+            this.videoGenresToolStripMenuItem.Image = global::IFEContentManagement.Properties.Resources.announc;
             this.videoGenresToolStripMenuItem.Name = "videoGenresToolStripMenuItem";
             this.videoGenresToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.videoGenresToolStripMenuItem.Text = "Video Genres";
@@ -243,6 +245,7 @@
             // 
             // articleGenresToolStripMenuItem
             // 
+            this.articleGenresToolStripMenuItem.Image = global::IFEContentManagement.Properties.Resources.article;
             this.articleGenresToolStripMenuItem.Name = "articleGenresToolStripMenuItem";
             this.articleGenresToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
             this.articleGenresToolStripMenuItem.Text = "Article Genres";
@@ -363,6 +366,40 @@
             this.treePlaylists.TabIndex = 0;
             this.treePlaylists.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treePlaylists_NodeMouseClick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Location = new System.Drawing.Point(7, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.groupBox1.Size = new System.Drawing.Size(770, 57);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Search";
+            this.groupBox1.UseCompatibleTextRendering = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(65, 22);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(699, 20);
+            this.textBox1.TabIndex = 1;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Look For:";
+            // 
             // tabMovies
             // 
             this.tabMovies.Controls.Add(this.groupBox3);
@@ -424,6 +461,7 @@
             this.textBox2.Size = new System.Drawing.Size(699, 20);
             this.textBox2.TabIndex = 1;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.textBox2.Leave += new System.EventHandler(this.textBox2_Leave);
             // 
             // label4
             // 
@@ -494,6 +532,7 @@
             this.textBox3.Size = new System.Drawing.Size(699, 20);
             this.textBox3.TabIndex = 1;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.textBox3.Leave += new System.EventHandler(this.textBox3_Leave);
             // 
             // label6
             // 
@@ -564,6 +603,7 @@
             this.textBox4.Size = new System.Drawing.Size(699, 20);
             this.textBox4.TabIndex = 1;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.textBox4.Leave += new System.EventHandler(this.textBox4_Leave);
             // 
             // label8
             // 
@@ -632,39 +672,6 @@
             this.mnuButRemove.Text = "Remove Item";
             this.mnuButRemove.Click += new System.EventHandler(this.mnuButRemove_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Look For:";
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(7, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.groupBox1.Size = new System.Drawing.Size(770, 57);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Search";
-            this.groupBox1.UseCompatibleTextRendering = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(65, 22);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(699, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
             // frmSenarioMaker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -679,7 +686,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Senario Maker";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSenarioMaker_FormClosing);
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmSenarioMaker_FormClosed);
             this.Load += new System.EventHandler(this.frmSenarioMaker_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -688,6 +694,8 @@
             this.tabs.ResumeLayout(false);
             this.tabPlaylists.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabMovies.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -703,8 +711,6 @@
             this.tabSurvey.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.mnuRightClick.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

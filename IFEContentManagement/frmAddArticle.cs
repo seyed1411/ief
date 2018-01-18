@@ -25,37 +25,48 @@ namespace IFEContentManagement
                 nonEngAdditionalData = new Dictionary<string, ArticleFile>();
             }
             else
-                nonEngAdditionalData = _nonEngData; isNewArticle = _isNew;
+                nonEngAdditionalData = _nonEngData; 
+            isNewArticle = _isNew;
+            cmbLanguage.Items.Clear();
             foreach (var item in Enum.GetValues(typeof(Languages)))
-            {
-                cmbLanguage.Items.Add(item);
-            }
+            { cmbLanguage.Items.Add(item.ToString()); }
         }
 
         private void frmAddArticle_Load(object sender, EventArgs e)
         {
-            txtFile.Text = articleToComplete.file;
-            txtCover.Text = articleToComplete.cover;
-            txtYear.Text = articleToComplete.year == 0 ? "" : articleToComplete.year.ToString();
-            if (articleToComplete.ageCategory != null)
+            try
             {
-                int index = cmbAge.FindString(articleToComplete.ageCategory);
-                cmbAge.SelectedIndex = index;
+                txtFile.Text = articleToComplete.file;
+                txtCover.Text = articleToComplete.cover;
+                txtYear.Text = articleToComplete.year == 0 ? "" : articleToComplete.year.ToString();
+                if (articleToComplete.ageCategory != null)
+                {
+                    int index = cmbAge.FindString(articleToComplete.ageCategory);
+                    cmbAge.SelectedIndex = index;
+                }
+                else
+                    cmbAge.SelectedIndex = 0;
+                if (!string.IsNullOrEmpty(articleToComplete.language))
+                {
+                    int index = cmbLanguage.FindString(articleToComplete.language);
+                    cmbLanguage.SelectedIndex = index;
+                }
+                else
+                    cmbLanguage.SelectedIndex = 0;
+                lstGenres.Items.Clear();
+                lstGenres.Items.AddRange(GetArticleGenres());
+                if (articleToComplete.genre != null)
+                    foreach (string x in articleToComplete.genre)
+                        if (lstGenres.FindString(x) != -1)
+                            lstGenres.SetSelected(lstGenres.FindString(x), true);
+
+                // create non-english langs panel
+                UpdateLangsPanel();
             }
-            if (articleToComplete.lannguage != null)
+            catch (Exception exp)
             {
-                int index = cmbLanguage.FindString(articleToComplete.lannguage);
-                cmbLanguage.SelectedIndex = index;
+                Program.ShowExceptionData(exp);
             }
-            lstGenres.Items.Clear();
-            lstGenres.Items.AddRange(GetArticleGenres());
-            if (articleToComplete.genre != null)
-                foreach (string x in articleToComplete.genre)
-                    if (lstGenres.FindString(x) != -1)
-                        lstGenres.SetSelected(lstGenres.FindString(x), true);
-            
-            // create non-english langs panel
-            UpdateLangsPanel();
         }
         
         private void additionalLangRecord_RemoveButton_Click(object sender, LabelEditEventArgs e)
@@ -66,83 +77,106 @@ namespace IFEContentManagement
 
         private void additionalLangRecord_EditButton_Click(object sender, LabelEditEventArgs e)
         {
-            ArticleFile temp = nonEngAdditionalData[e.Label];
-            frmAddNewLanguage frmNewDlg = new frmAddNewLanguage(e.Label, temp.title, temp.writer, temp.description);
-            if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                temp.title = frmNewDlg.InsertedTitle;
-                temp.writer = frmNewDlg.InsertedArtists;
-                temp.description = frmNewDlg.InsertedDescription;
+                ArticleFile temp = nonEngAdditionalData[e.Label];
+                frmAddNewLanguage frmNewDlg = new frmAddNewLanguage(e.Label, temp.title, temp.writer, temp.description);
+                if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    temp.title = frmNewDlg.InsertedTitle;
+                    temp.writer = frmNewDlg.InsertedArtists;
+                    temp.description = frmNewDlg.InsertedDescription;
+                }
+                UpdateLangsPanel();
             }
-            UpdateLangsPanel();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnNewLang_Click(object sender, EventArgs e)
         {
-            // fetch which additional langs already filled for current playlist
-            string[] existlangs = new string[nonEngAdditionalData.Count];
-            int i = 0;
-            foreach (var item in nonEngAdditionalData)
+            try
             {
-                existlangs[i++] = item.Key;
+                // fetch which additional langs already filled for current playlist
+                string[] existlangs = new string[nonEngAdditionalData.Count];
+                int i = 0;
+                foreach (var item in nonEngAdditionalData)
+                {
+                    existlangs[i++] = item.Key;
+                }
+                // if all additional langs already filled, no action occurred
+                if (existlangs.Length == Enum.GetValues(typeof(Languages)).Length)
+                    return;
+                frmAddNewLanguage newDlg = new frmAddNewLanguage(!EnglishMoreDataExist(), existlangs);
+                if (newDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    ArticleFile p = new ArticleFile(articleToComplete.id);
+                    p.title = newDlg.InsertedTitle;
+                    p.writer = newDlg.InsertedArtists;
+                    p.description = newDlg.InsertedDescription;
+                    if (nonEngAdditionalData.ContainsKey(newDlg.SelectedLanguage))
+                        nonEngAdditionalData.Remove(newDlg.SelectedLanguage);
+                    nonEngAdditionalData.Add(newDlg.SelectedLanguage, p);
+                }
+                UpdateLangsPanel();
             }
-            // if all additional langs already filled, no action occured
-            if (existlangs.Length == Enum.GetValues(typeof(Languages)).Length)
-                return;
-            frmAddNewLanguage newDlg = new frmAddNewLanguage(!EnglishMoreDataExist(), existlangs);
-            if (newDlg.ShowDialog(this) == DialogResult.OK)
+            catch (Exception exp)
             {
-                ArticleFile p = new ArticleFile(articleToComplete.id);
-                p.title = newDlg.InsertedTitle;
-                p.writer = newDlg.InsertedArtists;
-                p.description = newDlg.InsertedDescription;
-                if (nonEngAdditionalData.ContainsKey(newDlg.SelectedLanguage))
-                    nonEngAdditionalData.Remove(newDlg.SelectedLanguage);
-                nonEngAdditionalData.Add(newDlg.SelectedLanguage, p);
+                Program.ShowExceptionData(exp);
             }
-            UpdateLangsPanel();
         }
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-            if (this.FormCompleted() && EnglishMoreDataExist())
+            try
             {
-
-                this.articleToComplete.file = txtFile.Text;
-                this.articleToComplete.cover = txtCover.Text;
-                this.articleToComplete.year = Convert.ToInt32(txtYear.Text);
-                this.articleToComplete.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
-                this.articleToComplete.lannguage = cmbLanguage.Items[cmbLanguage.SelectedIndex].ToString();
-                string[] str = new string[lstGenres.SelectedItems.Count];
-                int i = 0;
-                foreach (object x in lstGenres.SelectedItems)
-                    str[i++] = lstGenres.GetItemText(x);
-                this.articleToComplete.genre = str;
-
-                // apply english language
-                this.articleToComplete.title = nonEngAdditionalData["English"].title;
-                this.articleToComplete.writer = nonEngAdditionalData["English"].writer;
-                this.articleToComplete.description = nonEngAdditionalData["English"].description;
-                // apply for other languages
-                nonEngAdditionalData.Remove("English");
-                foreach (KeyValuePair<string, ArticleFile> x in this.nonEngAdditionalData)
+                if (this.FormCompleted() && EnglishMoreDataExist())
                 {
-                    x.Value.id = this.articleToComplete.id;
-                    x.Value.file = txtFile.Text;
-                    x.Value.cover = txtCover.Text;
-                    x.Value.year = Convert.ToInt32(txtYear.Text);
-                    x.Value.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
-                    x.Value.lannguage = cmbLanguage.Items[cmbLanguage.SelectedIndex].ToString();
-                    str = new string[lstGenres.SelectedItems.Count];
-                    i = 0;
-                    foreach (object obj in lstGenres.SelectedItems)
-                        str[i++] = lstGenres.GetItemText(obj);
-                    x.Value.genre = str;
+
+                    this.articleToComplete.file = txtFile.Text;
+                    this.articleToComplete.cover = txtCover.Text;
+                    if (txtYear.Text != "")
+                        this.articleToComplete.year = Convert.ToInt32(txtYear.Text);
+                    this.articleToComplete.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
+                    this.articleToComplete.language = cmbLanguage.Items[cmbLanguage.SelectedIndex].ToString();
+                    string[] str = new string[lstGenres.SelectedItems.Count];
+                    int i = 0;
+                    foreach (object x in lstGenres.SelectedItems)
+                        str[i++] = lstGenres.GetItemText(x);
+                    this.articleToComplete.genre = str;
+
+                    // apply english language
+                    this.articleToComplete.title = nonEngAdditionalData["English"].title;
+                    this.articleToComplete.writer = nonEngAdditionalData["English"].writer;
+                    this.articleToComplete.description = nonEngAdditionalData["English"].description;
+                    // apply for other languages
+                    nonEngAdditionalData.Remove("English");
+                    foreach (KeyValuePair<string, ArticleFile> x in this.nonEngAdditionalData)
+                    {
+                        x.Value.id = this.articleToComplete.id;
+                        x.Value.file = txtFile.Text;
+                        x.Value.cover = txtCover.Text;
+                        if (txtYear.Text != "")
+                            x.Value.year = Convert.ToInt32(txtYear.Text);
+                        x.Value.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
+                        x.Value.language = cmbLanguage.Items[cmbLanguage.SelectedIndex].ToString();
+                        str = new string[lstGenres.SelectedItems.Count];
+                        i = 0;
+                        foreach (object obj in lstGenres.SelectedItems)
+                            str[i++] = lstGenres.GetItemText(obj);
+                        x.Value.genre = str;
+                    }
+                    this.DialogResult = DialogResult.OK;
                 }
-                this.DialogResult = DialogResult.OK;
+                else
+                    MessageBox.Show("Please fill File, Age, Genre and English Additional data first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            else
-                MessageBox.Show("Please fill File, Age, Genre and English Additional data first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -152,30 +186,47 @@ namespace IFEContentManagement
 
         private void btnBrowseDir_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlgBrowse = new OpenFileDialog();
-            while (dlgBrowse.ShowDialog() == DialogResult.OK)
+            try
             {
-                if (DiskIO.IsArticleFile(dlgBrowse.FileName))
-                    break;
-                else
-                    MessageBox.Show("Selected file is not an article (.pdf) file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                OpenFileDialog dlgBrowse = new OpenFileDialog();
+                while (dlgBrowse.ShowDialog() == DialogResult.OK)
+                {
+                    if (DiskIO.IsArticleFile(dlgBrowse.FileName))
+                    {
+                        txtFile.Text = dlgBrowse.FileName;
+                        break;
+                    }
+                    else
+                        MessageBox.Show("Selected file is not an article (.pdf) file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+                }
             }
-            txtFile.Text = dlgBrowse.FileName;
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnBrowseCov_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlgOpen = new OpenFileDialog();
-            while (dlgOpen.ShowDialog() == DialogResult.OK)
+            try
             {
-                if (DiskIO.IsImageFile(dlgOpen.FileName))
-                    break;
-                else
-                    MessageBox.Show("Selected file is not an image file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                OpenFileDialog dlgOpen = new OpenFileDialog();
+                while (dlgOpen.ShowDialog() == DialogResult.OK)
+                {
+                    if (DiskIO.IsImageFile(dlgOpen.FileName))
+                    {
+                        txtCover.Text = dlgOpen.FileName;
+                        break;
+                    }
+                    else
+                        MessageBox.Show("Selected file is not an image file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
-            txtCover.Text = dlgOpen.FileName;
-
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         // other methodes
@@ -240,5 +291,7 @@ namespace IFEContentManagement
                 return false;
             return true;
         }
+
+       
     }
 }

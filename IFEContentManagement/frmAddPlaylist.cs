@@ -31,27 +31,32 @@ namespace IFEContentManagement
 
         private void frmAddPlaylist_Load(object sender, EventArgs e)
         {
-            txtDirectory.Text = playlistToComplete.playlist;
-            txtCover.Text = playlistToComplete.cover;
-            txtYear.Text = playlistToComplete.year == 0 ? "" : playlistToComplete.year.ToString();
-            if (playlistToComplete.ageCategory != null)
+            try
             {
-                int index = cmbAge.FindString(playlistToComplete.ageCategory);
-                cmbAge.SelectedIndex = index;
+                txtDirectory.Text = playlistToComplete.playlist;
+                txtCover.Text = playlistToComplete.cover;
+                txtYear.Text = playlistToComplete.year == 0 ? "" : playlistToComplete.year.ToString();
+                if (playlistToComplete.ageCategory != null)
+                {
+                    int index = cmbAge.FindString(playlistToComplete.ageCategory);
+                    cmbAge.SelectedIndex = index;
+                }
+                else
+                    cmbAge.SelectedIndex = 0;
+                lstGenres.Items.Clear();
+                lstGenres.Items.AddRange(GetAudioGenres());
+                if (playlistToComplete.genre != null)
+                    foreach (string x in playlistToComplete.genre)
+                        if (lstGenres.FindString(x) != -1)
+                            lstGenres.SetSelected(lstGenres.FindString(x), true);
+
+                // create non-english langs panel
+                UpdateLangsPanel();
             }
-            else
-                cmbAge.SelectedIndex = 0;
-
-            //
-            lstGenres.Items.Clear();
-            lstGenres.Items.AddRange(GetAudioGenres());
-            if (playlistToComplete.genre != null)
-                foreach (string x in playlistToComplete.genre)
-                    if (lstGenres.FindString(x) != -1)
-                        lstGenres.SetSelected(lstGenres.FindString(x), true);
-
-            // create non-english langs panel
-            UpdateLangsPanel();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void additionalLangRecord_RemoveButton_Click(object sender, LabelEditEventArgs e)
@@ -62,83 +67,104 @@ namespace IFEContentManagement
 
         private void additionalLangRecord_EditButton_Click(object sender, LabelEditEventArgs e)
         {
-            MusicPlaylist temp = nonEngAdditionalData[e.Label];
-            frmAddNewLanguage frmNewDlg = new frmAddNewLanguage(e.Label, temp.title, temp.artist, temp.description);
-            if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
-            {              
-                temp.title = frmNewDlg.InsertedTitle;
-                temp.artist = frmNewDlg.InsertedArtists;
-                temp.description = frmNewDlg.InsertedDescription;
+            try
+            {
+                MusicPlaylist temp = nonEngAdditionalData[e.Label];
+                frmAddNewLanguage frmNewDlg = new frmAddNewLanguage(e.Label, temp.title, temp.artist, temp.description);
+                if (frmNewDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    temp.title = frmNewDlg.InsertedTitle;
+                    temp.artist = frmNewDlg.InsertedArtists;
+                    temp.description = frmNewDlg.InsertedDescription;
+                }
+                UpdateLangsPanel();
             }
-            UpdateLangsPanel();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
         
 
         private void btnNewLang_Click(object sender, EventArgs e)
         {
-            // fetch which additional langs already filled for current playlist
-            string[] existlangs = new string[nonEngAdditionalData.Count];
-            int i = 0;
-            foreach(var item in nonEngAdditionalData)
+            try
             {
-                existlangs[i++] = item.Key;
+                // fetch which additional langs already filled for current playlist
+                string[] existlangs = new string[nonEngAdditionalData.Count];
+                int i = 0;
+                foreach (var item in nonEngAdditionalData)
+                {
+                    existlangs[i++] = item.Key;
+                }
+                // if all additional langs already filled, no action occurred
+                if (existlangs.Length == Enum.GetValues(typeof(Languages)).Length)
+                    return;
+                frmAddNewLanguage newDlg = new frmAddNewLanguage(!EnglishMoreDataExist(), existlangs);
+                if (newDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    MusicPlaylist p = new MusicPlaylist(playlistToComplete.id);
+                    p.title = newDlg.InsertedTitle;
+                    p.artist = newDlg.InsertedArtists;
+                    p.description = newDlg.InsertedDescription;
+                    if (nonEngAdditionalData.ContainsKey(newDlg.SelectedLanguage))
+                        nonEngAdditionalData.Remove(newDlg.SelectedLanguage);
+                    nonEngAdditionalData.Add(newDlg.SelectedLanguage, p);
+                }
+                UpdateLangsPanel();
             }
-            // if all additional langs already filled, no action occured
-            if (existlangs.Length == Enum.GetValues(typeof(Languages)).Length)
-                return;
-            frmAddNewLanguage newDlg = new frmAddNewLanguage(!EnglishMoreDataExist(), existlangs);
-            if (newDlg.ShowDialog(this) == DialogResult.OK)
+            catch (Exception exp)
             {
-                MusicPlaylist p = new MusicPlaylist(playlistToComplete.id);
-                p.title = newDlg.InsertedTitle;
-                p.artist = newDlg.InsertedArtists;
-                p.description = newDlg.InsertedDescription;
-                if (nonEngAdditionalData.ContainsKey(newDlg.SelectedLanguage))
-                    nonEngAdditionalData.Remove(newDlg.SelectedLanguage);
-                nonEngAdditionalData.Add(newDlg.SelectedLanguage, p);
+                Program.ShowExceptionData(exp);
             }
-            UpdateLangsPanel();
         }        
 
         private void btnInsert_Click(object sender, EventArgs e)
         {
-             if (this.FormCompleted() && EnglishMoreDataExist())
+            try
             {
-
-                this.playlistToComplete.SetPlaylist(txtDirectory.Text);
-                this.playlistToComplete.cover = txtCover.Text;
-                this.playlistToComplete.year =txtYear.Text==""?0:  Convert.ToInt32(txtYear.Text);
-                this.playlistToComplete.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
-                string[] str = new string[lstGenres.SelectedItems.Count];
-                int i = 0;
-                foreach (object x in lstGenres.SelectedItems)
-                    str[i++] = lstGenres.GetItemText(x);
-                this.playlistToComplete.genre = str;
-                this.playlistToComplete.num_tracks = DiskIO.GetFilesNumber(this.playlistToComplete.playlist, "*.mp3");
-                // apply english language
-                this.playlistToComplete.title = nonEngAdditionalData["English"].title;
-                this.playlistToComplete.artist = nonEngAdditionalData["English"].artist;
-                this.playlistToComplete.description = nonEngAdditionalData["English"].description;
-                // apply for other languages
-                nonEngAdditionalData.Remove("English");
-                foreach (KeyValuePair<string, MusicPlaylist> x in this.nonEngAdditionalData)
+                if (this.FormCompleted() && EnglishMoreDataExist())
                 {
-                    x.Value.id = this.playlistToComplete.id;
-                    x.Value.SetPlaylist(txtDirectory.Text);
-                    x.Value.cover = txtCover.Text;
-                    x.Value.year = txtYear.Text == "" ? 0 : Convert.ToInt32(txtYear.Text);
-                    x.Value.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
-                    str = new string[lstGenres.SelectedItems.Count];
-                    i = 0;
-                    foreach (object obj in lstGenres.SelectedItems)
-                        str[i++] = lstGenres.GetItemText(obj);
-                    x.Value.genre = str;
-                    x.Value.num_tracks = DiskIO.GetFilesNumber(this.playlistToComplete.playlist, "*.mp3");
+
+                    this.playlistToComplete.SetPlaylist(txtDirectory.Text);
+                    this.playlistToComplete.cover = txtCover.Text;
+                    this.playlistToComplete.year = txtYear.Text == "" ? 0 : Convert.ToInt32(txtYear.Text);
+                    this.playlistToComplete.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
+                    string[] str = new string[lstGenres.SelectedItems.Count];
+                    int i = 0;
+                    foreach (object x in lstGenres.SelectedItems)
+                        str[i++] = lstGenres.GetItemText(x);
+                    this.playlistToComplete.genre = str;
+                    this.playlistToComplete.num_tracks = DiskIO.GetFilesNumber(this.playlistToComplete.playlist, "*.mp3");
+                    // apply english language
+                    this.playlistToComplete.title = nonEngAdditionalData["English"].title;
+                    this.playlistToComplete.artist = nonEngAdditionalData["English"].artist;
+                    this.playlistToComplete.description = nonEngAdditionalData["English"].description;
+                    // apply for other languages
+                    nonEngAdditionalData.Remove("English");
+                    foreach (KeyValuePair<string, MusicPlaylist> x in this.nonEngAdditionalData)
+                    {
+                        x.Value.id = this.playlistToComplete.id;
+                        x.Value.SetPlaylist(txtDirectory.Text);
+                        x.Value.cover = txtCover.Text;
+                        x.Value.year = txtYear.Text == "" ? 0 : Convert.ToInt32(txtYear.Text);
+                        x.Value.ageCategory = cmbAge.Items[cmbAge.SelectedIndex].ToString();
+                        str = new string[lstGenres.SelectedItems.Count];
+                        i = 0;
+                        foreach (object obj in lstGenres.SelectedItems)
+                            str[i++] = lstGenres.GetItemText(obj);
+                        x.Value.genre = str;
+                        x.Value.num_tracks = DiskIO.GetFilesNumber(this.playlistToComplete.playlist, "*.mp3");
+                    }
+                    this.DialogResult = DialogResult.OK;
                 }
-                this.DialogResult = DialogResult.OK;
+                else
+                    MessageBox.Show("Please fill Directory, Age, Genre and English Additional data first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            else
-                MessageBox.Show("Please fill Directory, Age, Genre and English Additional data first.","Warning",MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
        }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -148,30 +174,47 @@ namespace IFEContentManagement
 
         private void btnBrowseDir_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog dlgBrowse = new FolderBrowserDialog();
-            while (dlgBrowse.ShowDialog() == DialogResult.OK)
+            try
             {
-                if (DiskIO.DirectoryHasMusicFile(dlgBrowse.SelectedPath))
-                    break;
-                else
-                    MessageBox.Show("This folder contains no music file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                FolderBrowserDialog dlgBrowse = new FolderBrowserDialog();
+                while (dlgBrowse.ShowDialog() == DialogResult.OK)
+                {
+                    if (DiskIO.DirectoryHasMusicFile(dlgBrowse.SelectedPath))
+                    {
+                        txtDirectory.Text = dlgBrowse.SelectedPath;
+                        break;
+                    }
+                    else
+                        MessageBox.Show("This folder contains no music file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+                }
             }
-            txtDirectory.Text = dlgBrowse.SelectedPath;
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnBrowseCov_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dlgOpen = new OpenFileDialog();
-            while (dlgOpen.ShowDialog() == DialogResult.OK)
+            try
             {
-                if (DiskIO.IsImageFile(dlgOpen.FileName))
-                    break;
-                else
-                    MessageBox.Show("This file is not an image file. Please Select another.", "Warning", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                OpenFileDialog dlgOpen = new OpenFileDialog();
+                while (dlgOpen.ShowDialog() == DialogResult.OK)
+                {
+                    if (DiskIO.IsImageFile(dlgOpen.FileName))
+                    {
+                        txtCover.Text = dlgOpen.FileName;
+                        break;
+                    }
+                    else
+                        MessageBox.Show("This file is not an image file. Please Select another.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
             }
-            txtCover.Text = dlgOpen.FileName;
-
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         // other methodes

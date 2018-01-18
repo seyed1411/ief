@@ -53,10 +53,9 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(16, 698);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnCancel.Location = new System.Drawing.Point(12, 567);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(248, 39);
+            this.btnCancel.Size = new System.Drawing.Size(186, 32);
             this.btnCancel.TabIndex = 35;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -64,10 +63,9 @@
             // 
             // btnInsert
             // 
-            this.btnInsert.Location = new System.Drawing.Point(292, 698);
-            this.btnInsert.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnInsert.Location = new System.Drawing.Point(219, 567);
             this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(251, 39);
+            this.btnInsert.Size = new System.Drawing.Size(188, 32);
             this.btnInsert.TabIndex = 34;
             this.btnInsert.Text = "Insert";
             this.btnInsert.UseVisualStyleBackColor = true;
@@ -75,10 +73,9 @@
             // 
             // btnNewLang
             // 
-            this.btnNewLang.Location = new System.Drawing.Point(16, 649);
-            this.btnNewLang.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnNewLang.Location = new System.Drawing.Point(12, 527);
             this.btnNewLang.Name = "btnNewLang";
-            this.btnNewLang.Size = new System.Drawing.Size(527, 39);
+            this.btnNewLang.Size = new System.Drawing.Size(395, 32);
             this.btnNewLang.TabIndex = 33;
             this.btnNewLang.Text = "New Language";
             this.btnNewLang.UseVisualStyleBackColor = true;
@@ -87,25 +84,22 @@
             // label7
             // 
             this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(19, 692);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(14, 562);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(523, 2);
+            this.label7.Size = new System.Drawing.Size(392, 2);
             this.label7.TabIndex = 32;
             // 
             // label6
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Location = new System.Drawing.Point(27, 385);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(20, 313);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(517, 2);
+            this.label6.Size = new System.Drawing.Size(388, 2);
             this.label6.TabIndex = 30;
             // 
             // lstGenres
             // 
             this.lstGenres.FormattingEnabled = true;
-            this.lstGenres.ItemHeight = 16;
             this.lstGenres.Items.AddRange(new object[] {
             "Comedy",
             "Drama",
@@ -118,11 +112,10 @@
             "Satire",
             "Tragedy",
             "Tragicomedy"});
-            this.lstGenres.Location = new System.Drawing.Point(101, 197);
-            this.lstGenres.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstGenres.Location = new System.Drawing.Point(76, 160);
             this.lstGenres.Name = "lstGenres";
             this.lstGenres.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstGenres.Size = new System.Drawing.Size(440, 180);
+            this.lstGenres.Size = new System.Drawing.Size(331, 147);
             this.lstGenres.TabIndex = 29;
             // 
             // cmbAge
@@ -133,26 +126,23 @@
             "Under 13",
             "Between 13 and 17",
             "Above 18"});
-            this.cmbAge.Location = new System.Drawing.Point(101, 156);
-            this.cmbAge.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbAge.Location = new System.Drawing.Point(76, 127);
             this.cmbAge.Name = "cmbAge";
-            this.cmbAge.Size = new System.Drawing.Size(440, 25);
+            this.cmbAge.Size = new System.Drawing.Size(331, 21);
             this.cmbAge.TabIndex = 28;
             // 
             // txtYear
             // 
-            this.txtYear.Location = new System.Drawing.Point(101, 86);
-            this.txtYear.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtYear.Location = new System.Drawing.Point(76, 70);
             this.txtYear.Name = "txtYear";
-            this.txtYear.Size = new System.Drawing.Size(440, 22);
+            this.txtYear.Size = new System.Drawing.Size(331, 20);
             this.txtYear.TabIndex = 27;
             // 
             // btnBrowseCov
             // 
-            this.btnBrowseCov.Location = new System.Drawing.Point(439, 48);
-            this.btnBrowseCov.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseCov.Location = new System.Drawing.Point(329, 39);
             this.btnBrowseCov.Name = "btnBrowseCov";
-            this.btnBrowseCov.Size = new System.Drawing.Size(100, 26);
+            this.btnBrowseCov.Size = new System.Drawing.Size(75, 21);
             this.btnBrowseCov.TabIndex = 26;
             this.btnBrowseCov.Text = "Browse";
             this.btnBrowseCov.UseVisualStyleBackColor = true;
@@ -160,19 +150,17 @@
             // 
             // txtCover
             // 
-            this.txtCover.Location = new System.Drawing.Point(101, 50);
-            this.txtCover.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtCover.Location = new System.Drawing.Point(76, 41);
             this.txtCover.Name = "txtCover";
             this.txtCover.ReadOnly = true;
-            this.txtCover.Size = new System.Drawing.Size(332, 22);
+            this.txtCover.Size = new System.Drawing.Size(250, 20);
             this.txtCover.TabIndex = 25;
             // 
             // btnBrowseDir
             // 
-            this.btnBrowseDir.Location = new System.Drawing.Point(439, 15);
-            this.btnBrowseDir.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnBrowseDir.Location = new System.Drawing.Point(329, 12);
             this.btnBrowseDir.Name = "btnBrowseDir";
-            this.btnBrowseDir.Size = new System.Drawing.Size(100, 26);
+            this.btnBrowseDir.Size = new System.Drawing.Size(75, 21);
             this.btnBrowseDir.TabIndex = 24;
             this.btnBrowseDir.Text = "Browse";
             this.btnBrowseDir.UseVisualStyleBackColor = true;
@@ -180,60 +168,54 @@
             // 
             // txtFile
             // 
-            this.txtFile.Location = new System.Drawing.Point(101, 17);
-            this.txtFile.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtFile.Location = new System.Drawing.Point(76, 14);
             this.txtFile.Name = "txtFile";
             this.txtFile.ReadOnly = true;
-            this.txtFile.Size = new System.Drawing.Size(332, 22);
+            this.txtFile.Size = new System.Drawing.Size(250, 20);
             this.txtFile.TabIndex = 23;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 198);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(12, 161);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 17);
+            this.label5.Size = new System.Drawing.Size(44, 13);
             this.label5.TabIndex = 22;
             this.label5.Text = "Genres:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 161);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(12, 131);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 17);
+            this.label4.Size = new System.Drawing.Size(29, 13);
             this.label4.TabIndex = 21;
             this.label4.Text = "Age:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 91);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(12, 74);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(42, 17);
+            this.label3.Size = new System.Drawing.Size(32, 13);
             this.label3.TabIndex = 20;
             this.label3.Text = "Year:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 58);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(12, 47);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(49, 17);
+            this.label2.Size = new System.Drawing.Size(38, 13);
             this.label2.TabIndex = 19;
             this.label2.Text = "Cover:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 22);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(12, 18);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 17);
+            this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 18;
             this.label1.Text = "File:";
             // 
@@ -243,19 +225,17 @@
             this.cmbLanguage.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
             this.cmbLanguage.Items.AddRange(new object[] {
             ""});
-            this.cmbLanguage.Location = new System.Drawing.Point(101, 121);
-            this.cmbLanguage.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cmbLanguage.Location = new System.Drawing.Point(76, 98);
             this.cmbLanguage.Name = "cmbLanguage";
-            this.cmbLanguage.Size = new System.Drawing.Size(440, 25);
+            this.cmbLanguage.Size = new System.Drawing.Size(331, 21);
             this.cmbLanguage.TabIndex = 37;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 126);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(12, 102);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(76, 17);
+            this.label8.Size = new System.Drawing.Size(58, 13);
             this.label8.TabIndex = 36;
             this.label8.Text = "Language:";
             // 
@@ -263,19 +243,18 @@
             // 
             this.panelLangs.AutoScroll = true;
             this.panelLangs.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.panelLangs.Location = new System.Drawing.Point(101, 394);
-            this.panelLangs.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panelLangs.Location = new System.Drawing.Point(76, 320);
             this.panelLangs.Name = "panelLangs";
             this.panelLangs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.panelLangs.Size = new System.Drawing.Size(440, 244);
+            this.panelLangs.Size = new System.Drawing.Size(330, 198);
             this.panelLangs.TabIndex = 38;
             this.panelLangs.WrapContents = false;
             // 
             // frmAddArticle
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(552, 748);
+            this.ClientSize = new System.Drawing.Size(416, 602);
             this.Controls.Add(this.panelLangs);
             this.Controls.Add(this.cmbLanguage);
             this.Controls.Add(this.label8);
@@ -297,11 +276,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(570, 795);
+            this.MaximumSize = new System.Drawing.Size(432, 653);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(570, 795);
+            this.MinimumSize = new System.Drawing.Size(432, 597);
             this.Name = "frmAddArticle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Article";

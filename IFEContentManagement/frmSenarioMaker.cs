@@ -36,11 +36,7 @@ namespace IFEContentManagement
         {
             UpdateTreesPresentation();
         }
-        private void frmSenarioMaker_FormClosed(object sender, FormClosedEventArgs e)
-        {
-
-
-        }
+        
         private void btnNewProject_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to close project:  " + Program.currentProject.GetTitle() + "  ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -56,218 +52,319 @@ namespace IFEContentManagement
 
         private void btnAddPlaylist_Click(object sender, EventArgs e)
         {
-            int id = Program.currentProject.FindLastPlaylistID();
-            MusicPlaylist newPlaylist = new MusicPlaylist(id);
-            frmAddPlaylist newPllstDlg = new frmAddPlaylist(newPlaylist, true, null);
-            if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                Program.currentProject.AddPlaylist(newPlaylist);
-                if (newPllstDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SavePlaylistsNonEnglishData(newPllstDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive();
+                int id = Program.currentProject.FindLastPlaylistID();
+                MusicPlaylist newPlaylist = new MusicPlaylist(id);
+                frmAddPlaylist newPllstDlg = new frmAddPlaylist(newPlaylist, true, null);
+                if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    Program.currentProject.AddPlaylist(newPlaylist);
+                    if (newPllstDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SavePlaylistsNonEnglishData(newPllstDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
-
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void EditPlaylistWithID(string _id)
         {
-            int id = Convert.ToInt32(_id);
-            // find current playist in memory
-            MusicPlaylist existPlaylist = Program.currentProject.FindPlaylistWithID(id);
-            //find all additional data for the given playlist id
-            Dictionary<string, MusicPlaylist> nonEngData = Program.currentProject.ReadPlaylistNonEnglishData(id);
-            frmAddPlaylist newPllstDlg = new frmAddPlaylist(existPlaylist, false, nonEngData);
-            newPllstDlg.Text = "Edit Playlist";
-            if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                if (newPllstDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SavePlaylistsNonEnglishData(newPllstDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive();
+                int id = Convert.ToInt32(_id);
+                // find current playist in memory
+                MusicPlaylist existPlaylist = Program.currentProject.FindPlaylistWithID(id);
+                //find all additional data for the given playlist id
+                Dictionary<string, MusicPlaylist> nonEngData = Program.currentProject.ReadPlaylistNonEnglishData(id);
+                frmAddPlaylist newPllstDlg = new frmAddPlaylist(existPlaylist, false, nonEngData);
+                newPllstDlg.Text = "Edit Playlist";
+                if (newPllstDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (newPllstDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SavePlaylistsNonEnglishData(newPllstDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
-            int id = Program.currentProject.FindLastMovieID();
-            MovieFile newMovie = new MovieFile(id);
-            frmAddMovie newMovDlg = new frmAddMovie(newMovie, true, null);
-            if (newMovDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                Program.currentProject.AddMovie(newMovie);
-                if (newMovDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SaveMoviesNonEnglishData(newMovDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive();
+                int id = Program.currentProject.FindLastMovieID();
+                MovieFile newMovie = new MovieFile(id);
+                frmAddMovie newMovDlg = new frmAddMovie(newMovie, true, null);
+                if (newMovDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    Program.currentProject.AddMovie(newMovie);
+                    if (newMovDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SaveMoviesNonEnglishData(newMovDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void EditMovieWithId(string _id)
         {
-            int id = Convert.ToInt32(_id);
-            // find current movie in memory
-            MovieFile existMov = Program.currentProject.FindMovieWithID(id);
-            // find all additional data for the given movie id
-            Dictionary<string, MovieFile> nonEngData = Program.currentProject.ReadMovieNonEnglishData(id);
-            frmAddMovie newMovDlg = new frmAddMovie(existMov, false, nonEngData);
-            newMovDlg.Text = "Edit Movie";
-            if (newMovDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                if (newMovDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SaveMoviesNonEnglishData(newMovDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive();
+                int id = Convert.ToInt32(_id);
+                // find current movie in memory
+                MovieFile existMov = Program.currentProject.FindMovieWithID(id);
+                // find all additional data for the given movie id
+                Dictionary<string, MovieFile> nonEngData = Program.currentProject.ReadMovieNonEnglishData(id);
+                frmAddMovie newMovDlg = new frmAddMovie(existMov, false, nonEngData);
+                newMovDlg.Text = "Edit Movie";
+                if (newMovDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (newMovDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SaveMoviesNonEnglishData(newMovDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnAddAnnounc_Click(object sender, EventArgs e)
         {
-            int id = Program.currentProject.FindLastAnnouncID();
-            MovieFile newMovie = new MovieFile(id);
-            frmAddMovie newAnnDlg = new frmAddMovie(newMovie, true, null);
-            newAnnDlg.Text = "Add Announcement";
-            if (newAnnDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                Program.currentProject.AddAnnouncement(newMovie);
-                if (newAnnDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SaveAnnouncesNonEnglishData(newAnnDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive();
+                int id = Program.currentProject.FindLastAnnouncID();
+                MovieFile newMovie = new MovieFile(id);
+                frmAddMovie newAnnDlg = new frmAddMovie(newMovie, true, null);
+                newAnnDlg.Text = "Add Announcement";
+                if (newAnnDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    Program.currentProject.AddAnnouncement(newMovie);
+                    if (newAnnDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SaveAnnouncesNonEnglishData(newAnnDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void EditAnnounceWithID(string _id)
         {
-            int id = Convert.ToInt32(_id);
-            // find current announcement in memory
-            MovieFile existAnn = Program.currentProject.FindAnnouncWithID(id);
-            // find all additional data for the given announcement id
-            Dictionary<string, MovieFile> nonEngData = Program.currentProject.ReadAnnouncNonEnglishData(id);
-            frmAddMovie existAnnDlg = new frmAddMovie(existAnn, false, nonEngData);
-            existAnnDlg.Text = "Edit Announcement";
-            if (existAnnDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                if (existAnnDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SaveAnnouncesNonEnglishData(existAnnDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive(); ;
+                int id = Convert.ToInt32(_id);
+                // find current announcement in memory
+                MovieFile existAnn = Program.currentProject.FindAnnouncWithID(id);
+                // find all additional data for the given announcement id
+                Dictionary<string, MovieFile> nonEngData = Program.currentProject.ReadAnnouncNonEnglishData(id);
+                frmAddMovie existAnnDlg = new frmAddMovie(existAnn, false, nonEngData);
+                existAnnDlg.Text = "Edit Announcement";
+                if (existAnnDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (existAnnDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SaveAnnouncesNonEnglishData(existAnnDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive(); ;
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnAddArticle_Click(object sender, EventArgs e)
         {
-            int id = Program.currentProject.FindLastArticleID();
-            ArticleFile newArticle = new ArticleFile(id);
-            frmAddArticle newArtDlg = new frmAddArticle(newArticle, true, null);
-            newArtDlg.Text = "Add Article";
-            if (newArtDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
-                Program.currentProject.AddArticle(newArticle);
-                if (newArtDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SaveArticlesNonEnglishData(newArtDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive();
+                int id = Program.currentProject.FindLastArticleID();
+                ArticleFile newArticle = new ArticleFile(id);
+                frmAddArticle newArtDlg = new frmAddArticle(newArticle, true, null);
+                newArtDlg.Text = "Add Article";
+                if (newArtDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    //newPlaylist.id = Program.currentProject.FindLastPlaylistID();
+                    Program.currentProject.AddArticle(newArticle);
+                    if (newArtDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SaveArticlesNonEnglishData(newArtDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void EditArticleWithID(string _id)
         {
-            int id = Convert.ToInt32(_id);
-            ArticleFile existArt = Program.currentProject.FindArticleWithID(id);
-            // find all additional data for the given announcement id
-            Dictionary<string, ArticleFile> nonEngData = Program.currentProject.ReadArticleNonEnglishData(id);
-            frmAddArticle existArtDlg = new frmAddArticle(existArt, false, nonEngData);
-            existArtDlg.Text = "Edit Article";
-            if (existArtDlg.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                if (existArtDlg.nonEngAdditionalData.Count > 0)
-                    Program.currentProject.SaveArticlesNonEnglishData(existArtDlg.nonEngAdditionalData);
-                this.ApplyChangesOnHardDrive();
+                int id = Convert.ToInt32(_id);
+                ArticleFile existArt = Program.currentProject.FindArticleWithID(id);
+                // find all additional data for the given announcement id
+                Dictionary<string, ArticleFile> nonEngData = Program.currentProject.ReadArticleNonEnglishData(id);
+                frmAddArticle existArtDlg = new frmAddArticle(existArt, false, nonEngData);
+                existArtDlg.Text = "Edit Article";
+                if (existArtDlg.ShowDialog(this) == DialogResult.OK)
+                {
+                    if (existArtDlg.nonEngAdditionalData.Count > 0)
+                        Program.currentProject.SaveArticlesNonEnglishData(existArtDlg.nonEngAdditionalData);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnAddSurvey_Click(object sender, EventArgs e)
         {
-            frmAddSurvey newAddServey = new frmAddSurvey();
-            if (newAddServey.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                Program.currentProject.AddSurvey(newAddServey.QuestionCollection);
-                this.ApplyChangesOnHardDrive();
+                frmAddSurvey newAddServey = new frmAddSurvey();
+                if (newAddServey.ShowDialog(this) == DialogResult.OK)
+                {
+                    Program.currentProject.AddSurvey(newAddServey.QuestionCollection);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
-
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void EditSurveyWithID(int _index)
         {
-            int index = _index;
-            Dictionary<string, QuestionCollection> toEdit = Program.currentProject.GetSurvey(index);
-            frmAddSurvey newAddServey = new frmAddSurvey(toEdit);
-            newAddServey.Text = "Edit Survey";
-            if (newAddServey.ShowDialog(this) == DialogResult.OK)
+            try
             {
-                //Program.currentProject.AddSurvey(newAddServey.QuestionCollection);
-                this.ApplyChangesOnHardDrive();
+                int index = _index;
+                Dictionary<string, QuestionCollection> toEdit = Program.currentProject.GetSurvey(index);
+                frmAddSurvey newAddServey = new frmAddSurvey(toEdit);
+                newAddServey.Text = "Edit Survey";
+                if (newAddServey.ShowDialog(this) == DialogResult.OK)
+                {
+                    //Program.currentProject.AddSurvey(newAddServey.QuestionCollection);
+                    this.ApplyChangesOnHardDrive();
+                }
+                this.UpdateTreesPresentation();
             }
-            this.UpdateTreesPresentation();
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            // return if nothing added to project
-            if (Program.currentProject.IsEmpty())
+            try
             {
-                MessageBox.Show("There is no content added to project. Please add some items first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                // return if nothing added to project
+                if (Program.currentProject.IsEmpty())
+                {
+                    MessageBox.Show("There is no content added to project. Please add some items first.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
 
+                }
+                frmExport newExport = new frmExport();
+                if (newExport.ShowDialog(this) == DialogResult.OK)
+                {
+                    Program.currentProject = new ProjectFolder(Program.mcmFile);
+                }
             }
-            frmExport newExport = new frmExport();
-            if (newExport.ShowDialog(this) == DialogResult.OK)
+            catch (Exception exp)
             {
-                Program.currentProject = new ProjectFolder(Program.mcmFile);
+                Program.ShowExceptionData(exp);
             }
         }
 
         private void playlistGeneresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmManageGenre newDlg = new frmManageGenre("Audios");
-            newDlg.ShowDialog(this);
+            try
+            {
+                frmManageGenre newDlg = new frmManageGenre("Audios");
+                newDlg.ShowDialog(this);
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void videoGenresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmManageGenre newDlg = new frmManageGenre("Videos");
-            newDlg.ShowDialog(this);
+            try
+            {
+                frmManageGenre newDlg = new frmManageGenre("Videos");
+                newDlg.ShowDialog(this);
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void articleGenresToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmManageGenre newDlg = new frmManageGenre("Articles");
-            newDlg.ShowDialog(this);
+            try
+            {
+                frmManageGenre newDlg = new frmManageGenre("Articles");
+                newDlg.ShowDialog(this);
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void frmSenarioMaker_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to close project:  " + Program.currentProject.GetTitle() + "  ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            try
             {
-                this.parent.Show();
-                this.Hide();
-                Program.currentProject = null;
-                Program.mcmFile = null;
-                this.Dispose();
+                if (MessageBox.Show("Are you sure you want to close project:  " + Program.currentProject.GetTitle() + "  ?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    this.parent.Show();
+                    this.Hide();
+                    Program.currentProject = null;
+                    Program.mcmFile = null;
+                    this.Dispose();
+                }
+                else
+                    e.Cancel = true;
             }
-            else
-                e.Cancel = true;
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         // other methods
         private void ApplyChangesOnHardDrive()
         {
-
-
             lblStatus.Text = "Saving Playlists...";
             Program.currentProject.SavePlaylistData();
             progBar.PerformStep();
@@ -364,26 +461,31 @@ namespace IFEContentManagement
             }
             treeQuestions.Nodes.Add(root);
             treeQuestions.ExpandAll();
-            //treeProject.EndUpdate();
         }
 
         private void mnuButEdit_Click(object sender, EventArgs e)
         {
-            string nodeId = ExtractIDFromNodeLabel(this.RightclickedItemLabel);
-            if (nodeId != null)
+            try
             {
-                if (tabs.SelectedTab == tabPlaylists)
-                    EditPlaylistWithID(nodeId);
-                else if (tabs.SelectedTab == tabMovies)
-                    EditMovieWithId(nodeId);
-                else if (tabs.SelectedTab == tabAnnounc)
-                    EditAnnounceWithID(nodeId);
-                else if (tabs.SelectedTab == tabArticles)
-                    EditAnnounceWithID(nodeId);
-                else if (tabs.SelectedTab == tabSurvey)
-                    EditSurveyWithID(Convert.ToInt32(RightclickedItemLabel));
+                string nodeId = ExtractIDFromNodeLabel(this.RightclickedItemLabel);
+                if (nodeId != null)
+                {
+                    if (tabs.SelectedTab == tabPlaylists)
+                        EditPlaylistWithID(nodeId);
+                    else if (tabs.SelectedTab == tabMovies)
+                        EditMovieWithId(nodeId);
+                    else if (tabs.SelectedTab == tabAnnounc)
+                        EditAnnounceWithID(nodeId);
+                    else if (tabs.SelectedTab == tabArticles)
+                        EditAnnounceWithID(nodeId);
+                    else if (tabs.SelectedTab == tabSurvey)
+                        EditSurveyWithID(Convert.ToInt32(RightclickedItemLabel));
+                }
             }
-
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private string ExtractIDFromNodeLabel(string _label)
@@ -399,78 +501,120 @@ namespace IFEContentManagement
 
         private void mnuButRemove_Click(object sender, EventArgs e)
         {
-            string nodeId = ExtractIDFromNodeLabel(this.RightclickedItemLabel);
-            if (nodeId != null)
+            try
             {
-                if (tabs.SelectedTab == tabPlaylists)
-                    RemovePlaylistWithID(nodeId);
-                else if (tabs.SelectedTab == tabMovies)
-                    RemoveMovieWithId(nodeId);
-                else if (tabs.SelectedTab == tabAnnounc)
-                    RemoveAnnounceWithID(nodeId);
-                else if (tabs.SelectedTab == tabArticles)
-                    RemoveArticleWithID(nodeId);
-                else if (tabs.SelectedTab == tabSurvey)
-                    RemoveSurveyWithIndex(Convert.ToInt32(RightclickedItemLabel));
+                string nodeId = ExtractIDFromNodeLabel(this.RightclickedItemLabel);
+                if (nodeId != null)
+                {
+                    if (tabs.SelectedTab == tabPlaylists)
+                        RemovePlaylistWithID(nodeId);
+                    else if (tabs.SelectedTab == tabMovies)
+                        RemoveMovieWithId(nodeId);
+                    else if (tabs.SelectedTab == tabAnnounc)
+                        RemoveAnnounceWithID(nodeId);
+                    else if (tabs.SelectedTab == tabArticles)
+                        RemoveArticleWithID(nodeId);
+                    else if (tabs.SelectedTab == tabSurvey)
+                        RemoveSurveyWithIndex(Convert.ToInt32(RightclickedItemLabel));
+                }
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
             }
         }
 
         private void RemoveSurveyWithIndex(int _index)
         {
-            if (MessageBox.Show("Are you sure you want to delete survey number: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                // find current playist in memory
-                Program.currentProject.RemoveSurveyWithIndex(_index);
-                this.ApplyChangesOnHardDrive();
-                this.UpdateTreesPresentation();
+                if (MessageBox.Show("Are you sure you want to delete survey number: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // find current playist in memory
+                    Program.currentProject.RemoveSurveyWithIndex(_index);
+                    this.ApplyChangesOnHardDrive();
+                    this.UpdateTreesPresentation();
+                }
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
             }
         }
 
         private void RemoveArticleWithID(string _id)
         {
-            if (MessageBox.Show("Are you sure you want to delete article: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                // find current playist in memory
-                int id = Convert.ToInt32(_id);
-                Program.currentProject.RemoveArticleWithID(id);
-                this.ApplyChangesOnHardDrive();
-                this.UpdateTreesPresentation();
+                if (MessageBox.Show("Are you sure you want to delete article: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // find current playist in memory
+                    int id = Convert.ToInt32(_id);
+                    Program.currentProject.RemoveArticleWithID(id);
+                    this.ApplyChangesOnHardDrive();
+                    this.UpdateTreesPresentation();
+                }
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
             }
         }
 
         private void RemoveAnnounceWithID(string _id)
         {
-            if (MessageBox.Show("Are you sure you want to delete announcement: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                // find current playist in memory
-                int id = Convert.ToInt32(_id);
-                Program.currentProject.RemoveAnnouncWithID(id);
-                this.ApplyChangesOnHardDrive();
-                this.UpdateTreesPresentation();
+                if (MessageBox.Show("Are you sure you want to delete announcement: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // find current playist in memory
+                    int id = Convert.ToInt32(_id);
+                    Program.currentProject.RemoveAnnouncWithID(id);
+                    this.ApplyChangesOnHardDrive();
+                    this.UpdateTreesPresentation();
+                }
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
             }
         }
 
         private void RemoveMovieWithId(string _id)
         {
-            if (MessageBox.Show("Are you sure you want to delete movie: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                // find current playist in memory
-                int id = Convert.ToInt32(_id);
-                Program.currentProject.RemoveMovietWithID(id);
-                this.ApplyChangesOnHardDrive();
-                this.UpdateTreesPresentation();
+                if (MessageBox.Show("Are you sure you want to delete movie: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // find current playist in memory
+                    int id = Convert.ToInt32(_id);
+                    Program.currentProject.RemoveMovietWithID(id);
+                    this.ApplyChangesOnHardDrive();
+                    this.UpdateTreesPresentation();
+                }
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
             }
         }
 
         private void RemovePlaylistWithID(string _id)
         {
-            if (MessageBox.Show("Are you sure you want to delete playlist: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            try
             {
-                // find current playist in memory
-                int id = Convert.ToInt32(_id);
-                Program.currentProject.RemovePlaylistWithID(id);
-                this.ApplyChangesOnHardDrive();
-                this.UpdateTreesPresentation();
+                if (MessageBox.Show("Are you sure you want to delete playlist: " + RightclickedItemLabel, "Delete Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // find current playist in memory
+                    int id = Convert.ToInt32(_id);
+                    Program.currentProject.RemovePlaylistWithID(id);
+                    this.ApplyChangesOnHardDrive();
+                    this.UpdateTreesPresentation();
+                }
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
             }
         }
 
@@ -551,79 +695,135 @@ namespace IFEContentManagement
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            foreach (TreeNode node in treePlaylists.Nodes[0].Nodes)
+            try
             {
-                MusicPlaylist toSearch = Program.currentProject.FindPlaylistWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
-                if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                if (textBox1.Text != "")
                 {
-                    treePlaylists.Nodes[0].Nodes.Clear();
-                    treePlaylists.Nodes[0].Nodes.Add(node);
-                    return;
+                    foreach (TreeNode node in treePlaylists.Nodes[0].Nodes)
+                    {
+                        MusicPlaylist toSearch = Program.currentProject.FindPlaylistWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
+                        if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                        {
+                            treePlaylists.Nodes[0].Nodes.Clear();
+                            treePlaylists.Nodes[0].Nodes.Add(node);
+                            return;
+                        }
+                    }
                 }
+                UpdateTreesPresentation();
+                return;
             }
-            UpdateTreesPresentation();
-            return;
-
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            foreach (TreeNode node in treeMovies.Nodes[0].Nodes)
+            try
             {
-                MovieFile toSearch = Program.currentProject.FindMovieWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
-                if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                if (textBox2.Text != "")
                 {
-                    treePlaylists.Nodes[0].Nodes.Clear();
-                    treePlaylists.Nodes[0].Nodes.Add(node);
-                    return;
+                    foreach (TreeNode node in treeMovies.Nodes[0].Nodes)
+                    {
+                        MovieFile toSearch = Program.currentProject.FindMovieWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
+                        if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                        {
+                            treeMovies.Nodes[0].Nodes.Clear();
+                            treeMovies.Nodes[0].Nodes.Add(node);
+                            return;
+                        }
+                    }
                 }
+                UpdateTreesPresentation();
+                return;
             }
-            UpdateTreesPresentation();
-            return;
-
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            foreach (TreeNode node in treeAnnounc.Nodes[0].Nodes)
+            try
             {
-                MovieFile toSearch = Program.currentProject.FindMovieWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
-                if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                if (textBox3.Text != "")
                 {
-                    treePlaylists.Nodes[0].Nodes.Clear();
-                    treePlaylists.Nodes[0].Nodes.Add(node);
-                    return;
+                    foreach (TreeNode node in treeAnnounc.Nodes[0].Nodes)
+                    {
+                        MovieFile toSearch = Program.currentProject.FindAnnouncWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
+                        if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                        {
+                            treeAnnounc.Nodes[0].Nodes.Clear();
+                            treeAnnounc.Nodes[0].Nodes.Add(node);
+                            return;
+                        }
+                    }
                 }
+                UpdateTreesPresentation();
+                return;
             }
-            UpdateTreesPresentation();
-            return;
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
 
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
-            foreach (TreeNode node in treeArticle.Nodes[0].Nodes)
+            try
             {
-                ArticleFile toSearch = Program.currentProject.FindArticleWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
-                if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
-                    toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                if (textBox4.Text != "")
                 {
-                    treePlaylists.Nodes[0].Nodes.Clear();
-                    treePlaylists.Nodes[0].Nodes.Add(node);
-                    return;
+                    foreach (TreeNode node in treeArticle.Nodes[0].Nodes)
+                    {
+                        ArticleFile toSearch = Program.currentProject.FindArticleWithID(Convert.ToInt32(ExtractIDFromNodeLabel(node.Text)));
+                        if (toSearch.description.ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.id.ToString().ToLower().Contains(textBox1.Text.ToLower()) ||
+                            toSearch.title.ToLower().Contains(textBox1.Text.ToLower()))
+                        {
+                            treeArticle.Nodes[0].Nodes.Clear();
+                            treeArticle.Nodes[0].Nodes.Add(node);
+                            return;
+                        }
+                    }
                 }
-            }
                 UpdateTreesPresentation();
                 return;
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
-            
-        
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            textBox1.Text = "";
+        }
+
+        private void textBox2_Leave(object sender, EventArgs e)
+        {
+            textBox2.Text = "";
+        }
+
+        private void textBox3_Leave(object sender, EventArgs e)
+        {
+            textBox3.Text = "";
+        }
+
+        private void textBox4_Leave(object sender, EventArgs e)
+        {
+            textBox4.Text = "";
+        }
     }
 }

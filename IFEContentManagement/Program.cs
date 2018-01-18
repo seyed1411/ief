@@ -28,5 +28,10 @@ namespace IFEContentManagement
             Application.Run();
             //Application.Run(new Form1());            
         }
+
+        internal static void ShowExceptionData(Exception exp)
+        {
+            MessageBox.Show("Unknown Error has been occurred. .\n" + "Details: " + exp.Source + " - " + exp.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
     }
 }

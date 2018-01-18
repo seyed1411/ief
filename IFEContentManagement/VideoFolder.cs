@@ -123,19 +123,19 @@ namespace IFEContentManagement
                 // add video files to copy                
                 allFilesToCopy.Add(new FileCopier(p.video.path, movieNewLocation + "\\" + DiskIO.GetFileName(p.video.path)));
                 // change the file path to the new path for further library json saving
-                p.video.path = p.id + "\\" + DiskIO.GetFileName(p.video.path);
+                p.video.path = DiskIO.GetFileName(p.video.path);
                 // add trailer if exist
                 if (!string.IsNullOrEmpty(p.trailer.path))
                 {
                     allFilesToCopy.Add(new FileCopier(p.trailer.path, movieNewLocation + "\\" + DiskIO.GetFileName(p.trailer.path)));
-                    p.trailer.path = p.id + "\\" + DiskIO.GetFileName(p.trailer.path);
+                    p.trailer.path = DiskIO.GetFileName(p.trailer.path);
                 }
                 if (!string.IsNullOrEmpty(p.cover))
                 {
                     // add video cover to copy
                     allFilesToCopy.Add(new FileCopier(p.cover, movieNewLocation + "\\cover.jpg"));
                     // change the cover path to the new path for further library json saving
-                    p.cover = p.id + "\\cover.jpg";
+                    p.cover = "\\cover.jpg";
                 }
             }
             // save changed paths and music files into exported location
@@ -150,11 +150,11 @@ namespace IFEContentManagement
                     VideoFolder temp = DiskIO.DeserializeVideoFolderFromFile(ContentLocation, abbriv);
                     foreach (MovieFile p in temp.library)
                     {
-                        p.video.path = p.id + "\\" + DiskIO.GetFileName(p.video.path);
+                        p.video.path ="\\" + DiskIO.GetFileName(p.video.path);
                         if (!string.IsNullOrEmpty(p.trailer.path))
-                            p.trailer.path = p.id + "\\" + DiskIO.GetFileName(p.trailer.path);
+                            p.trailer.path = "\\" + DiskIO.GetFileName(p.trailer.path);
                         if (!string.IsNullOrEmpty(p.cover))
-                            p.cover = p.id + "\\cover.jpg";
+                            p.cover = "\\cover.jpg";
 
                     }
                     DiskIO.SaveAsJSONFile(temp, newWorkArea, abbriv);

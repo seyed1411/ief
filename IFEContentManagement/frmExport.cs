@@ -28,23 +28,31 @@ namespace IFEContentManagement
         private void btnBrowseDir_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog dlgBrowse = new FolderBrowserDialog();
-
-            txtFile.Text = dlgBrowse.SelectedPath;
+            if (dlgBrowse.ShowDialog() == DialogResult.OK)
+                txtFile.Text = dlgBrowse.SelectedPath;
         }
 
         private void frmExport_Load(object sender, EventArgs e)
         {
-            foreach (var item in Enum.GetValues(typeof(Languages)))
+            try
             {
-                chkLstLanguages.Items.Add(item);
-            }
-            chkLstLanguages.SetItemChecked(0, true);
-            txtCurrentLoc.Text = Program.currentProject.ContentLocation;
+                foreach (var item in Enum.GetValues(typeof(Languages)))
+                {
+                    chkLstLanguages.Items.Add(item);
+                }
+                chkLstLanguages.SetItemChecked(0, true);
+                txtCurrentLoc.Text = Program.currentProject.ContentLocation;
+                txtFile.Enabled = btnBrowseDir.Enabled = false;
 
-            int numOfFiles = 0;
-            long filesVolume = Program.currentProject.GetAllFilesVolume(out numOfFiles);
-            string volStr = HumanPresentVolume(filesVolume);
-            lblSize.Text = numOfFiles.ToString() + "  files (About " + volStr + " ) must be copied.";
+                int numOfFiles = 0;
+                long filesVolume = Program.currentProject.GetAllFilesVolume(out numOfFiles);
+                string volStr = HumanPresentVolume(filesVolume);
+                lblSize.Text = numOfFiles.ToString() + "  files (About " + volStr + " ) must be copied.";
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
+            }
         }
 
         private string HumanPresentVolume(long _volToByte)
@@ -63,14 +71,33 @@ namespace IFEContentManagement
 
         private void btnExport_Click(object sender, EventArgs e)
         {
-            if (DiskIO.IsValidPath(this.SelectedExportPath) && SelectedLanguages!= null)
+            try
             {
-                FileCopier[] allCopy=Program.currentProject.ExportTo(SelectedExportPath,SelectedLanguages);
-                frmCopyProgress progressDlg = new frmCopyProgress(allCopy);
-                if (progressDlg.ShowDialog(this) == DialogResult.OK)
+                if (DiskIO.IsValidPath(this.SelectedExportPath) && SelectedLanguages != null)
                 {
-                    this.DialogResult = DialogResult.OK;
+                    int i;
+                    if (DiskIO.DriveHasFreeSpace(SelectedExportPath, Program.currentProject.GetAllFilesVolume(out i)))
+                    {
+                        FileCopier[] allCopy = Program.currentProject.ExportTo(SelectedExportPath, SelectedLanguages);
+                        frmCopyProgress progressDlg = new frmCopyProgress(allCopy);
+                        if (progressDlg.ShowDialog(this) == DialogResult.OK)
+                        {
+                            this.DialogResult = DialogResult.OK;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("There is no enough free space in selected drive. Please choose another location.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
+                else
+                {
+                    MessageBox.Show("Please choose proper location for export.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            catch (Exception exp)
+            {
+                Program.ShowExceptionData(exp);
             }
             
         }

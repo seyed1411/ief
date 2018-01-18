@@ -191,16 +191,16 @@ namespace IFEContentManagement
                     // add music file
                     allFilesToCopy.Add(new FileCopier(file.file, playlistNewLocation + "\\" + DiskIO.GetFileName(file.file)));
                     // change the file path to the new path for further library json saving
-                    file.file = p.id + "\\" + DiskIO.GetFileName(file.file);
+                    file.file = DiskIO.GetFileName(file.file);
                 }
                 // add playlist cover to copy
                 if (p.cover != "")
                 {
                     allFilesToCopy.Add(new FileCopier(p.cover, playlistNewLocation + "\\cover.jpg"));
                     // change the cover path to the new path for further library json saving
-                    p.cover = p.id + "\\cover.jpg";
+                    p.cover ="\\cover.jpg";
                 }
-                p.playlist = p.id + "\\index.m3u";
+                p.playlist = "\\index.m3u";
             }
             // save changed paths and music files into exported location
             this.SavePlaylistLibraryAtLocation(newWorkArea, "index.en.json");
@@ -214,9 +214,9 @@ namespace IFEContentManagement
                     AudioFolder temp = DiskIO.DeserializeAudioFolderFromFile(ContentLocation ,abbriv);
                     foreach(MusicPlaylist x in temp.library)
                     {
-                        x.playlist = x.id + "\\index.m3u";
+                        x.playlist ="\\index.m3u";
                         if (x.cover != "")
-                            x.cover = x.id + "\\cover.jpg";
+                            x.cover ="\\cover.jpg";
                     }
                     DiskIO.SaveAsJSONFile(temp, newWorkArea, abbriv);
                 }

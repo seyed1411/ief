@@ -45,7 +45,6 @@
             this.lblSoftName.TabIndex = 0;
             this.lblSoftName.Text = "IFE Content Management";
             this.lblSoftName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblSoftName.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnNewProject
             // 

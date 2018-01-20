@@ -31,7 +31,7 @@ namespace IFEContentManagement
                 if (res == DialogResult.OK)
                 {
                     Program.currentProject = new ProjectFolder(newProjWin.SelectedTitle, newProjWin.SeletedFolder);
-                    Program.mcmFile = newProjWin.SeletedFolder + "\\" + newProjWin.SelectedTitle + "\\.mcm";
+                    Program.mcmFile = newProjWin.SeletedFolder + "\\" + newProjWin.SelectedTitle + "\\"+newProjWin.SelectedTitle+".mcm";
                     Program.currentProject.CreateNewProjectDirectories();
 
 

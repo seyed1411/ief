@@ -9,10 +9,10 @@ namespace IFEContentManagement
     {
         public string file;
         public string title;
-        public int length; // to second
+        public string length; // as timespan
 
         public MusicFile() { }
-        public MusicFile(string _fileName, string _fileTitle, int _length)
+        public MusicFile(string _fileName, string _fileTitle, string _length)
         {
             file = _fileName;
             title = _fileTitle;

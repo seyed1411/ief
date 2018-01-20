@@ -291,10 +291,10 @@ namespace IFEContentManagement
 
                 }
                 frmExport newExport = new frmExport();
-                if (newExport.ShowDialog(this) == DialogResult.OK)
-                {
+                newExport.ShowDialog(this);
+                // after finishing
                     Program.currentProject = new ProjectFolder(Program.mcmFile);
-                }
+                
             }
             catch (Exception exp)
             {
